@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Java Console Sim [java servlet app on codenvy+GAE]</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="screen">Loading...</div>
+    <script>
+// see console for exceptions eg json parse errors
+$(document).ready(function() {
+  var statedata = 'fred';
+  
+  // new console is first init
+  $.getJSON('/demo', function(data, status) {
+    $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>");
+    statedata = data.statedata;
+    alert(statedata);
+  });
+  
+  $(document).keypress(function(event){
+    var userdata = event.which;
+      $.post('/demo', {userdata:userdata, statedata:statedata}, function(data, status) {
+        //alert(data+"\n"+status);
+        $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>"); // app sends print or println equivalents
+        statedata = data.statedata;
+        alert(statedata);
+      }, "json");
+  });
+  
+});
+    </script>
+  </body>
+</html>

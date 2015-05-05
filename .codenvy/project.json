@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"mixinTypes":[],"builders":{"configs":{}},"runners":{"configs":{}},"type":"blank","attributes":{}}
+=======
+{"mixinTypes":[],"builders":{"configs":{},"default":"maven"},"runners":{"configs":{"project://Copy%20of%20Google%20App%20Engine%20SDK%201.9%20%20%20Java%207":{"ram":1000,"variables":{"configurationType":"java/web"},"options":{}}},"default":"system:/java/web/gae1914"},"type":"GAEJava","attributes":{"languageVersion":["1.6"],"language":["java"]}}
+>>>>>>> 0eb1ec6fbbb3a0b6babdd150efeffc52efa68473
