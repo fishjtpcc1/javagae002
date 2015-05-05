@@ -10,7 +10,7 @@ public class DemoServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
     throws IOException {
-    String oldState = "";
+    String oldState = "newgame";
     String input = "";
     String newState = updateState(oldState,input);
     resp.setContentType("text/plain");
@@ -29,15 +29,45 @@ public class DemoServlet extends HttpServlet {
 
   private String updateState(String oldState, String input){
     String newState;
-    switch (input) {
-      case "1":
-        newState = "[1]Your fish, Sir.<br>1:trifle 2:cheese";
+    switch (oldState) {
+      case "fish":
+        switch (input) {
+          case "1":
+            newState = "trifle";
+            break;
+          case "2":
+            newState = "cheese";
+            break;
+          default:
+            newState = "que!?";
+            break;
+        }
         break;
-      case "2":
-        newState = "[2]Your chicken, Sir.<br>1:trifle 2:cheese";
+      case "chicken":
+        switch (input) {
+          case "1":
+            newState = "jelly";
+            break;
+          case "2":
+            newState = "cake";
+            break;
+          default:
+            newState = "que!?";
+            break;
+        }
         break;
       default:
-        newState = "[NEW GAME]<br>1:fish 2:chicken";
+        switch (input) {
+          case "1":
+            newState = "fish";
+            break;
+          case "2":
+            newState = "chicken";
+            break;
+          default:
+            newState = "que!?";
+            break;
+        }
         break;
     }
     return newState;
