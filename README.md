@@ -18,4 +18,5 @@ know: both github and codenvy manage ssh keys at account [ie the lead human code
 * TODO: test if it runs out of the box now
 
 ##### push-to-deploy from github directly to gae:
-does committing this make magic happen??
+does committing this in github make magic happen??: nope!
+edit done in codenvy and committed and pushed...
