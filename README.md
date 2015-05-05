@@ -11,4 +11,4 @@ edit in codenvy: git.commit: [github is not updated] git.remotes.push: [github=c
 
 cloneing a codenvy workspace stored as a github repo:
 * create blank project: git.init repo: remotes.add with ssh url from github sidebar: [merge error but repos appears aok]
-* do something new eg this: commit: push: 
+* do something new eg this: commit: push: [success]
