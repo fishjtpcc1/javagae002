@@ -7,14 +7,61 @@ public class DemoServlet extends HttpServlet {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   
+  private class Model {
+    public String screen = "";
+    public String state = "";
+    
+    public Model Model(String state, String input) {
+      switch (state) {
+        case "fish":
+          switch (input) {
+            case "1":
+              this.state = "trifle";
+              break;
+            case "2":
+              this.state = "cheese";
+              break;
+            default:
+              this.state = "que!?";
+              break;
+          }
+          break;
+        case "chicken":
+          switch (input) {
+            case "1":
+              this.state = "jelly";
+              break;
+            case "2":
+              this.state = "cake";
+              break;
+            default:
+              this.state = "que!?";
+              break;
+          }
+          break;
+        default:
+          switch (input) {
+            case "1":
+              this.state = "fish";
+              break;
+            case "2":
+              this.state = "chicken";
+              break;
+            default:
+              this.state = "que!?";
+              break;
+          }
+          break;
+      }
+      return this;
+    }
+
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
     throws IOException {
-    String oldState = "newgame";
-    String input = "";
-    String newState = updateState(oldState,input);
+    Model m = new Model("newgame","");
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + newState + "<br>What now, Sir?\", \"statedata\": \""+newState+"\" }");
+    resp.getWriter().println("{ \"screen\": \"" + m.screen + "<br>What now, Sir?\", \"statedata\": \""+m.state+"\" }");
   }
 
   @Override
@@ -22,55 +69,9 @@ public class DemoServlet extends HttpServlet {
     throws IOException {
     String oldState = req.getParameter("statedata");
     String input = req.getParameter("userdata");
-    String newState = updateState(oldState,input);
+    Model m = new Model(oldState,input);
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + newState + "<br>What now, Sir?\", \"statedata\": \""+newState+"\" }");
+    resp.getWriter().println("{ \"screen\": \"" + m.screen + "<br>What now, Sir?\", \"statedata\": \""+m.state+"\" }");
   }
 
-  private String updateState(String oldState, String input){
-    String newState;
-    switch (oldState) {
-      case "fish":
-        switch (input) {
-          case "1":
-            newState = "trifle";
-            break;
-          case "2":
-            newState = "cheese";
-            break;
-          default:
-            newState = "que!?";
-            break;
-        }
-        break;
-      case "chicken":
-        switch (input) {
-          case "1":
-            newState = "jelly";
-            break;
-          case "2":
-            newState = "cake";
-            break;
-          default:
-            newState = "que!?";
-            break;
-        }
-        break;
-      default:
-        switch (input) {
-          case "1":
-            newState = "fish";
-            break;
-          case "2":
-            newState = "chicken";
-            break;
-          default:
-            newState = "que!?";
-            break;
-        }
-        break;
-    }
-    return newState;
-  }
-  
 }
