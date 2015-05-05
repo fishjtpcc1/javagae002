@@ -16,3 +16,6 @@ know: both github and codenvy manage ssh keys at account [ie the lead human code
 * create blank project: git.init repo: remotes.add with ssh url from github sidebar: [merge error but repos appears aok]
 * do something new eg this: commit: push: [success]
 * TODO: test if it runs out of the box now
+
+##### push-to-deploy from github directly to gae:
+does committing this make magic happen??
