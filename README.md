@@ -23,4 +23,5 @@ edit done in codenvy and committed and pushed...
 edit done in c9 after deleting local repos and git init https://github.com/fishjtpcc1/JTPGAE001.git
 now attempting push to github to trigger gcloud to refresh and trigger rebuild [due to push event broadcasting perhaps?]... fail
 deleted repo and recreated with git clone [to set config correctly for origin alias] https://github.com/fishjtpcc1/JTPGAE001.git: edit this and push with git push [to origin]...fail - github is sending webhook notifications aok but gcloud aint listenin
-this edit does after jenkins job set to point to github not gcloud...
+this edit done after jenkins job set to point to github not gcloud... success! - ergo ditch gcloud repo and edit in github and/or in a local[cloud hosted] machine like codenvy or c9
+
