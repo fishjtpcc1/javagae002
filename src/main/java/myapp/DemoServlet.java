@@ -22,9 +22,10 @@ public class DemoServlet extends HttpServlet {
               this.state = "cheese";
               break;
             default:
-              this.state = "que!?";
+              this.state = state;
               break;
           }
+          this.screen = "Would Sir wish to have the bill now!?";
           break;
         case "chicken":
           switch (input) {
@@ -35,20 +36,24 @@ public class DemoServlet extends HttpServlet {
               this.state = "cake";
               break;
             default:
-              this.state = "que!?";
+              this.state = state;
               break;
           }
+          this.screen = "Would Sir wish to have the bill now!?";
           break;
         default:
           switch (input) {
             case "1":
               this.state = "fish";
+              this.screen = "And what would Sir wish for desert!? 1: trifle 2: cheese?";
               break;
             case "2":
               this.state = "chicken";
+              this.screen = "And what would Sir wish for desert!? 1: jelly 2: cake?";
               break;
             default:
-              this.state = "que!?";
+              this.state = state;
+              this.screen = "que!?";
               break;
           }
           break;
