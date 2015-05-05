@@ -11,7 +11,7 @@ public class DemoServlet extends HttpServlet {
     public String screen = "";
     public String state = "";
     
-    public Model Model(String state, String input) {
+    public Model(String state, String input) {
       switch (state) {
         case "fish":
           switch (input) {
@@ -53,8 +53,8 @@ public class DemoServlet extends HttpServlet {
           }
           break;
       }
-      return this;
     }
+  }
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
