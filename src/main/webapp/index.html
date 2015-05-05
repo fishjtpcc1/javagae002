@@ -13,9 +13,9 @@ $(document).ready(function() {
   
   // new console is first init
   $.getJSON('/demo', function(data, status) {
-    $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>");
+    $('#screen').html("<p>"+data.screen+"</p>");
     statedata = data.statedata;
-    alert(statedata);
+    console.log(statedata);
   });
   
   $(document).keypress(function(event){
@@ -24,7 +24,7 @@ $(document).ready(function() {
         //alert(data+"\n"+status);
         $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>"); // app sends print or println equivalents
         statedata = data.statedata;
-        alert(statedata);
+        console.log(statedata);
       }, "json");
   });
   
