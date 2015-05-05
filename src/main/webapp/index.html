@@ -19,7 +19,7 @@ $(document).ready(function() {
   });
   
   $(document).keypress(function(event){
-    var userdata = event.which;
+    var userdata = String.fromCharCode(event.which);
       $.post('/demo', {userdata:userdata, statedata:statedata}, function(data, status) {
         //alert(data+"\n"+status);
         $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>"); // app sends print or println equivalents
