@@ -23,6 +23,7 @@ public class DemoServlet extends HttpServlet {
           switch (input) {
             case "":
               // first use - no input
+              this.state = "newgame";
               this.screen = "Hello, Sir! Welcome to Julian's Fish and Chicken Restaurant. My Name is Manuel - I'll be your waiter today. Please come in and I wiil find you a very special table that's perfect for you - I know just what Sir would like...<br>:)?";
               break;
             default:
