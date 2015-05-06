@@ -62,6 +62,7 @@ public class DemoServlet extends HttpServlet {
           this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for pud?<br>1. Cake<br>2. Jelly<br>:)?";
           break;
         case "hungryforpud":
+          this.bill = bill;
           switch (input) {
             case "1":
               this.state = "cake";
@@ -90,6 +91,7 @@ public class DemoServlet extends HttpServlet {
           this.screen = "[(BILL + MINT)]<br>Your bill Sir<br>Total = £" + this.bill + ".00 (service is not included)<br>:)?[enter amount paid]";
           break;
         case "billdue":
+          this.bill = bill;
           try {
             int paid = Integer.parseInt(input);
             if (paid >= this.bill) {
