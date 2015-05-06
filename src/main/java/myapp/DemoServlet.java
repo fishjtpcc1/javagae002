@@ -88,7 +88,7 @@ public class DemoServlet extends HttpServlet {
           break;
         case "billdue":
           try {
-            int paid = input.valueOf();
+            int paid = Integer(input).intValue();
             if (paid >= this.bill) {
               this.state = "gameover";
               this.screen = "[MANUAL IS PUTTING ON SIR'S COAT]<br>Thank yoy, Sir. Goodbye.<br>[game over]";
