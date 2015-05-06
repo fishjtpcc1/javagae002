@@ -1,5 +1,6 @@
 package myapp;
 
+import java.lang.IllegalArgumentException;
 import java.io.IOException;
 import javax.servlet.http.*;
 
@@ -13,7 +14,6 @@ public class DemoServlet extends HttpServlet {
   private class Model {
     public String screen = "";
     public String state = "";
-    public String state = "";
     public int bill = 0;
     
     public Model(String oldState, int bill, String input) {
@@ -23,7 +23,7 @@ public class DemoServlet extends HttpServlet {
           switch (input) {
             case "":
               // first use - no input
-              this.screen = "Hello, Sir! Welcome to Julian's Fish and Chicken Restaurant. My Name is Manuael - I'll be your waiter today. Please come in and I wiil find you a very special table that's perfect for you - I know just what Sir would like...<br>:)?";
+              this.screen = "Hello, Sir! Welcome to Julian's Fish and Chicken Restaurant. My Name is Manuel - I'll be your waiter today. Please come in and I wiil find you a very special table that's perfect for you - I know just what Sir would like...<br>:)?";
               break;
             default:
               // any key pressed
@@ -91,7 +91,7 @@ public class DemoServlet extends HttpServlet {
             int paid = Integer(input).intValue();
             if (paid >= this.bill) {
               this.state = "gameover";
-              this.screen = "[MANUAL IS PUTTING ON SIR'S COAT]<br>Thank yoy, Sir. Goodbye.<br>[game over]";
+              this.screen = "[MANUEL IS PUTTING ON SIR'S COAT]<br>Thank you, Sir. Goodbye.<br>[game over]";
             } else {
               this.screen = "Que?";
             }
@@ -106,19 +106,20 @@ public class DemoServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
     throws IOException {
-    Model m = new Model("newgame","");
+    Model m = new Model("newgame",0,"");
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + m.screen + "\", \"statedata\": \""+m.state+"\" }");
+    resp.getWriter().println("{ \"screen\": \"" + m.screen + "\", \"bill\": + m.bill + ", \"statedata\": \"" + m.state + "\" }");
   }
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp)
-    throws IOException {
+    throws IOException, IllegalArgumentException {
     String oldState = req.getParameter("statedata");
+    int bill = Integer(req.getParameter("bill")).intValue();
     String input = req.getParameter("userdata");
-    Model m = new Model(oldState,input);
+    Model m = new Model(oldState,bill,input);
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + m.screen + "\", \"statedata\": \""+m.state+"\" }");
+    resp.getWriter().println("{ \"screen\": \"" + m.screen + "\", \"bill\": + m.bill + ", \"statedata\": \"" + m.state + "\" }");
   }
 
 }
