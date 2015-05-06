@@ -108,7 +108,7 @@ public class DemoServlet extends HttpServlet {
     throws IOException {
     Model m = new Model("newgame",0,"");
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + m.screen + "\", \"bill\": + m.bill + ", \"statedata\": \"" + m.state + "\" }");
+    resp.getWriter().println("{ \"screen\": \"" + m.screen + "\", \"bill\": " + m.bill + ", \"statedata\": \"" + m.state + "\" }");
   }
 
   @Override
@@ -119,7 +119,7 @@ public class DemoServlet extends HttpServlet {
     String input = req.getParameter("userdata");
     Model m = new Model(oldState,bill,input);
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + m.screen + "\", \"bill\": + m.bill + ", \"statedata\": \"" + m.state + "\" }");
+    resp.getWriter().println("{ \"screen\": \"" + m.screen + "\", \"bill\": " + m.bill + ", \"statedata\": \"" + m.state + "\" }");
   }
 
 }
