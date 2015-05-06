@@ -3,6 +3,9 @@ package myapp;
 import java.io.IOException;
 import javax.servlet.http.*;
 
+/**
+ * julian's fish and chicken restaurant
+ */
 public class DemoServlet extends HttpServlet {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
@@ -10,51 +13,90 @@ public class DemoServlet extends HttpServlet {
   private class Model {
     public String screen = "";
     public String state = "";
+    public String state = "";
+    public int bill = 0;
     
-    public Model(String state, String input) {
-      switch (state) {
-        case "fish":
+    public Model(String oldState, int bill, String input) {
+      switch (oldState) {
+        case "newgame":
+          this.bill = 0;
           switch (input) {
-            case "1":
-              this.state = "trifle";
-              break;
-            case "2":
-              this.state = "cheese";
+            case "":
+              // first use - no input
+              this.screen = "Hello, Sir! Welcome to Julian's Fish and Chicken Restaurant. My Name is Manuael - I'll be your waiter today. Please come in and I wiil find you a very special table that's perfect for you - I know just what Sir would like...<br>:)?";
               break;
             default:
-              this.state = state;
+              // any key pressed
+              this.state = "hungryformains";
+              this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for mains?<br>1. Fish<br>2. Chicken<br>:)?";
               break;
           }
-          this.screen = "Would Sir wish to have the bill now!?";
-          break;
-        case "chicken":
-          switch (input) {
-            case "1":
-              this.state = "jelly";
-              break;
-            case "2":
-              this.state = "cake";
-              break;
-            default:
-              this.state = state;
-              break;
-          }
-          this.screen = "Would Sir wish to have the bill now!?";
-          break;
-        default:
+           break;
+        case "hungryformains":
           switch (input) {
             case "1":
               this.state = "fish";
-              this.screen = "And what would Sir wish for desert!? 1: trifle 2: cheese?";
+              this.screen = "(FISH)<br>Enjoy your meal, Sir.[any key to call Manuel]";
               break;
             case "2":
               this.state = "chicken";
-              this.screen = "And what would Sir wish for desert!? 1: jelly 2: cake?";
+              this.screen = "(CHICKEN)<br>Enjoy your meal, Sir.[any key to call Manuel]";
               break;
             default:
-              this.state = state;
-              this.screen = "que!?";
+              this.screen = "Que?";
               break;
+          }
+          break;
+        case "fish":
+          this.bill = bill + 2;
+          // any key
+          this.state = "hungryforpud";
+          this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for pud?<br>1. Cake<br>2. Jelly<br>:)?";
+          break;
+        case "chicken":
+          this.bill = bill + 3;
+          // any key
+          this.state = "hungryforpud";
+          this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for pud?<br>1. Cake<br>2. Jelly<br>:)?";
+          break;
+        case "hungryforpud":
+          switch (input) {
+            case "1":
+              this.state = "cake";
+              this.screen = "(FLUFFY CAKE)<br>Enjoy your meal, Sir.[any key to call Manuel]";
+              break;
+            case "2":
+              this.state = "jelly";
+              this.screen = "(WOBBLY JELLY)<br>Enjoy your meal, Sir.[any key to call Manuel]";
+              break;
+            default:
+              this.screen = "Que?";
+              break;
+          }
+          break;
+        case "cake":
+          this.bill = bill + 2;
+          // any key
+          this.state = "billdue";
+          this.screen = "[(BILL + MINT)]<br>Your bill Sir<br>Total = £" + this.bill + ".00 (service is not included)<br>:)?[enter amount paid]";
+          break;
+        case "jelly":
+          this.bill = bill + 1;
+          // any key
+          this.state = "billdue";
+          this.screen = "[(BILL + MINT)]<br>Your bill Sir<br>Total = £" + this.bill + ".00 (service is not included)<br>:)?[enter amount paid]";
+          break;
+        case "billdue":
+          try {
+            int paid = input.valueOf();
+            if (paid >= this.bill) {
+              this.state = "gameover";
+              this.screen = "[MANUAL IS PUTTING ON SIR'S COAT]<br>Thank yoy, Sir. Goodbye.<br>[game over]";
+            } else {
+              this.screen = "Que?";
+            }
+          } catch (Exception e) {
+            this.screen = "Que?";
           }
           break;
       }
