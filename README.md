@@ -1,7 +1,13 @@
 # JTPGAE001
-connected to codenvy (hopefully)
 
 this is a proto project inspired by the difficulty in writing educational java console apps with full read/write capabilities in the cloud.
+
+#### what we want:
+* cloneme on all cloud apps (one click and you've got the whole internet-thumping shebang with you as lead human for all its future lifetime)
+
+#### what we've got is:
+
+a brief history of one lone developer's disappointingly unseamless cloud building experiences...
 
 ##### getting codenvy and github accounts to play nicely:
 know: both github and codenvy manage ssh keys at account [ie the lead human coder] level
