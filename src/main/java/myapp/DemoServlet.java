@@ -1,6 +1,6 @@
 package myapp;
 
-import java.lang.IllegalArgumentException;
+import java.lang.NumberFormatException;
 import java.io.IOException;
 import javax.servlet.http.*;
 
@@ -88,14 +88,14 @@ public class DemoServlet extends HttpServlet {
           break;
         case "billdue":
           try {
-            int paid = Integer(input).intValue();
+            int paid = Integer.parseInt(input);
             if (paid >= this.bill) {
               this.state = "gameover";
               this.screen = "[MANUEL IS PUTTING ON SIR'S COAT]<br>Thank you, Sir. Goodbye.<br>[game over]";
             } else {
               this.screen = "Que?";
             }
-          } catch (Exception e) {
+          } catch (NumberFormatException e) {
             this.screen = "Que?";
           }
           break;
@@ -113,9 +113,9 @@ public class DemoServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp)
-    throws IOException, IllegalArgumentException {
+    throws IOException, NumberFormatException {
     String oldState = req.getParameter("statedata");
-    int bill = Integer(req.getParameter("bill")).intValue();
+    int bill = Integer.parseInt(req.getParameter("bill"));
     String input = req.getParameter("userdata");
     Model m = new Model(oldState,bill,input);
     resp.setContentType("text/plain");
