@@ -82,13 +82,13 @@ public class DemoServlet extends HttpServlet {
           this.bill = bill + 2;
           // any key
           this.state = "billdue";
-          this.screen = "[(BILL + MINT)]<br>Your bill Sir<br>Total = £" + this.bill + ".00 (service is not included)<br>:)?[enter amount paid]";
+          this.screen = "(BILL + MINT)<br>Your bill Sir<br>Total = £" + this.bill + ".00 (service is not included)<br>:)?[enter amount paid]";
           break;
         case "jelly":
           this.bill = bill + 1;
           // any key
           this.state = "billdue";
-          this.screen = "[(BILL + MINT)]<br>Your bill Sir<br>Total = £" + this.bill + ".00 (service is not included)<br>:)?[enter amount paid]";
+          this.screen = "(BILL + MINT)<br>Your bill Sir<br>Total = £" + this.bill + ".00 (service is not included)<br>:)?[enter amount paid]";
           break;
         case "billdue":
           this.bill = bill;
