@@ -44,6 +44,7 @@ public class DemoServlet extends HttpServlet {
               this.screen = "(CHICKEN)<br>Enjoy your meal, Sir.[any key to call Manuel]";
               break;
             default:
+              this.state = "hungryformains";
               this.screen = "Que?";
               break;
           }
@@ -71,6 +72,7 @@ public class DemoServlet extends HttpServlet {
               this.screen = "(WOBBLY JELLY)<br>Enjoy your meal, Sir.[any key to call Manuel]";
               break;
             default:
+              this.state = "hungryforpud";
               this.screen = "Que?";
               break;
           }
@@ -94,9 +96,11 @@ public class DemoServlet extends HttpServlet {
               this.state = "gameover";
               this.screen = "[MANUEL IS PUTTING ON SIR'S COAT]<br>Thank you, Sir. Goodbye.<br>[game over]";
             } else {
+              this.state = "billdue";
               this.screen = "Que?";
             }
           } catch (NumberFormatException e) {
+            this.state = "billdue";
             this.screen = "Que?";
           }
           break;
