@@ -27,8 +27,8 @@
   <artifactId>javaGAE001</artifactId>
 
   <properties>
-      <appengine.app.version>1</appengine.app.version><!-- my app-in-runner version as shown in gae versions -->
-      <appengine.target.version>1.9.18</appengine.target.version><!-- appengine plugin version NOT my app version!! -->
+    <appengine.app.version>1</appengine.app.version><!-- my app-in-runner version as shown in gae versions -->
+    <appengine.target.version>1.9.18</appengine.target.version><!-- appengine plugin version NOT my app version!! -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
