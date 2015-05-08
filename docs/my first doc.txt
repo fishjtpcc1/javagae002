@@ -1,0 +1,7 @@
+this is my first doc.
+
+i did this working in the branch office "docs"
+
+for good folder org reasons, i put my new content in a folder called docs (not to be confused witht he branch "docs" - I could have called the foolder "reports" or not put the content in a special folder at all!)
+
+the end.
