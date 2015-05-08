@@ -6,6 +6,7 @@ import javax.servlet.http.*;
 
 /**
  * julian's fish and chicken restaurant
+ * design: nil-persistence architecture: statedata does round trip on each request.
  */
 public class DemoServlet extends HttpServlet {
   
@@ -29,7 +30,7 @@ public class DemoServlet extends HttpServlet {
             default:
               // any key pressed
               this.state = "hungryformains";
-              this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for mains?<br>1. Fish<br>2. Chicken<br>:)?";
+              this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for mains?<br>1. Fish £2<br>2. Chicken £3<br>:)?";
               break;
           }
            break;
@@ -53,13 +54,13 @@ public class DemoServlet extends HttpServlet {
           this.bill = bill + 2;
           // any key
           this.state = "hungryforpud";
-          this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for pud?<br>1. Cake<br>2. Jelly<br>:)?";
+          this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for pud?<br>1. Cake £2<br>2. Jelly £1<br>:)?";
           break;
         case "chicken":
           this.bill = bill + 3;
           // any key
           this.state = "hungryforpud";
-          this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for pud?<br>1. Cake<br>2. Jelly<br>:)?";
+          this.screen = "[SIR AT HIS TABLE]<br>And what would Sir like for pud?<br>1. Cake £2<br>2. Jelly £1<br>:)?";
           break;
         case "hungryforpud":
           this.bill = bill;
@@ -95,10 +96,10 @@ public class DemoServlet extends HttpServlet {
           try {
             int paid = Integer.parseInt(input);
             if (paid >= this.bill) {
-              String manuelsSecretComment = "Grrrrr!! [MANUEL SNIFFS BACK DERISING CHEAPSKATE-SIR AS HE EXITS...]";
-              if (paid > this.bill) manuelsSecretComment = "[MANUEL VERY HAPPILY PUTS HIS £" + (paid - this.bill) + " TIP IN HIS TOP POCKET AS HE WALKS BACK TO THE OTHER TABLES...]";
+              String manuelsSecretComment = "[MANUEL SNIFFS, DERISING THE CHEAPSKATE-SIR AS HE EXITS...]";
+              if (paid > this.bill) manuelsSecretComment = "[MANUEL PUTS HIS £" + (paid - this.bill) + " TIP IN HIS TOP POCKET AND THINKS VERY NICE THOUGHTS ABOUT SIR, AS HE WALKS BACK TO THE OTHER TABLES...]";
               this.state = "gameover";
-              this.screen = "[MANUEL IS PUTTING ON SIR'S COAT]<br>Thank you, Sir. Goodbye.<br>[game over]<br>"+manuelsSecretComment;
+              this.screen = "[MANUEL IS PUTTING ON SIR'S COAT]<br>Thank you, Sir. Goodbye.<br>"+manuelsSecretComment+"<br>[game over]";
             } else {
               this.state = "billdue";
               this.screen = "Que?";
