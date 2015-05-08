@@ -24,7 +24,7 @@ public class DemoServlet extends HttpServlet {
             case "":
               // first use - no input
               this.state = "newgame";
-              this.screen = "Hello, Sir! Welcome to Julian's Fish and Chicken Restaurant. My Name is Manuel - I'll be your waiter today. Please come in and I wiil find you a very special table that's perfect for you - I know just what Sir would like...<br>:)?";
+              this.screen = "[SIR AT THE RESTAURANT ENTRANCE]<br>Welcome to Julian's Fish and Chicken Restaurant. My Name is Manuel - I'll be your waiter today Sir. I'll find you your most special table...<br>[press any key]";
               break;
             default:
               // any key pressed
@@ -37,11 +37,11 @@ public class DemoServlet extends HttpServlet {
           switch (input) {
             case "1":
               this.state = "fish";
-              this.screen = "(FISH)<br>Enjoy your meal, Sir.[any key to call Manuel]";
+              this.screen = "(FISH)<br>Enjoy your meal, Sir.<br>[any key to call Manuel]";
               break;
             case "2":
               this.state = "chicken";
-              this.screen = "(CHICKEN)<br>Enjoy your meal, Sir.[any key to call Manuel]";
+              this.screen = "(CHICKEN)<br>Enjoy your meal, Sir.<br>[any key to call Manuel]";
               break;
             default:
               this.state = "hungryformains";
@@ -66,11 +66,11 @@ public class DemoServlet extends HttpServlet {
           switch (input) {
             case "1":
               this.state = "cake";
-              this.screen = "(FLUFFY CAKE)<br>Enjoy your meal, Sir.[any key to call Manuel]";
+              this.screen = "(FLUFFY CAKE)<br>Enjoy your meal, Sir.<br>[any key to call Manuel]";
               break;
             case "2":
               this.state = "jelly";
-              this.screen = "(WOBBLY JELLY)<br>Enjoy your meal, Sir.[any key to call Manuel]";
+              this.screen = "(WOBBLY JELLY)<br>Enjoy your meal, Sir.<br>[any key to call Manuel]";
               break;
             default:
               this.state = "hungryforpud";
@@ -95,8 +95,10 @@ public class DemoServlet extends HttpServlet {
           try {
             int paid = Integer.parseInt(input);
             if (paid >= this.bill) {
+              String manuelsSecretComment = "Grrrrr!! [MANUEL SNIFFS BACK DERISING CHEAPSKATE-SIR AS HE EXITS...]";
+              if (paid > this.bill) manuelsSecretComment = "[MANUEL VERY HAPPILY PUTS HIS £" + (paid - this.bill) + " TIP IN HIS TOP POCKET AS HE WALKS BACK TO THE OTHER TABLES...]";
               this.state = "gameover";
-              this.screen = "[MANUEL IS PUTTING ON SIR'S COAT]<br>Thank you, Sir. Goodbye.<br>[game over]";
+              this.screen = "[MANUEL IS PUTTING ON SIR'S COAT]<br>Thank you, Sir. Goodbye.<br>[game over]<br>"+manuelsSecretComment;
             } else {
               this.state = "billdue";
               this.screen = "Que?";
