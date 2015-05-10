@@ -5,4 +5,6 @@ this is a proto project inspired by the difficulty in writing educational java c
 ## structure overview
 
     no javadocs - light comment in source files
+    no wiki - simple orientation copy in readme
     
+
