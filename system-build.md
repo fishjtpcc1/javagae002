@@ -36,28 +36,28 @@ jenkins-vm completion script:
     # get bitnami-image name
     gcloud compute images list --project bitnami-launchpad | grep jenkins
     # create a running admin account on jenkins vm (note you will be jenkins admin user un:user pw:as-set-here) 
-    $ PASSWORD=<password>                # 12 or more chars, with letters and numbers
-    $ PROJECT_ID=<project-id>
-    $ BITNAMI_IMAGE=<bitnami-image>      # e.g. bitnami-jenkins-1-606-0-linux-debian-7-x86-64
-    $ gcloud compute \
-    instances create bitnami-jenkins \
-    --project ${PROJECT_ID} \
-    --image-project bitnami-launchpad \
-    --image ${BITNAMI_IMAGE} \
-    --zone us-central1-a \
-    --machine-type n1-standard-1 \
-    --metadata "bitnami-base-password=${PASSWORD}" \
-             "bitnami-default-user=user" \
-             "bitnami-key=jenkins" \
-             "bitnami-name=Jenkins" \
-             "bitnami-url=//bitnami.com/stack/jenkins" \
-             "bitnami-description=Jenkins." \
-             "startup-script-url=https://dl.google.com/dl/jenkins/p2dsetup/setup-script.sh" \
-    --scopes "https://www.googleapis.com/auth/userinfo.email" \
-           "https://www.googleapis.com/auth/devstorage.full_control" \
-           "https://www.googleapis.com/auth/projecthosting" \
-           "https://www.googleapis.com/auth/appengine.admin" \
-    --tags "bitnami-launchpad"
+    PASSWORD=<password>                # 12 or more chars, with letters and numbers
+    PROJECT_ID=<project-id>
+    BITNAMI_IMAGE=<bitnami-image>      # e.g. bitnami-jenkins-1-606-0-linux-debian-7-x86-64
+    gcloud compute \
+        instances create bitnami-jenkins \
+        --project ${PROJECT_ID} \
+        --image-project bitnami-launchpad \
+        --image ${BITNAMI_IMAGE} \
+        --zone us-central1-a \
+        --machine-type n1-standard-1 \
+        --metadata "bitnami-base-password=${PASSWORD}" \
+                 "bitnami-default-user=user" \
+                 "bitnami-key=jenkins" \
+                 "bitnami-name=Jenkins" \
+                 "bitnami-url=//bitnami.com/stack/jenkins" \
+                 "bitnami-description=Jenkins." \
+                 "startup-script-url=https://dl.google.com/dl/jenkins/p2dsetup/setup-script.sh" \
+        --scopes "https://www.googleapis.com/auth/userinfo.email" \
+               "https://www.googleapis.com/auth/devstorage.full_control" \
+               "https://www.googleapis.com/auth/projecthosting" \
+               "https://www.googleapis.com/auth/appengine.admin" \
+        --tags "bitnami-launchpad"
     # follow returned link to authorize
     
 
