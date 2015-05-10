@@ -6,16 +6,17 @@ Instructions to build this lifecycle's system platform.
 
 to make a system platform having:
 
+    local-terminal (a linux machine eg cloud9 vm)
     librarian (a live remote git core repo eg a github repo)
-    builder (a gcloud compute engine jenkins+java+maven vm job) "jenkins-vm-job001"
+    tier2 builder (a gcloud compute engine jenkins+java+maven vm job) "jenkins-vm-job001"
     tier2 runner (a gae project) "gae-project"
 
     
 starting with:
 
+    local-terminal (a linux machine eg cloud9 vm)
     librarian [name=lifecycle name]
     gae-project [name=lifecycle name]
-    local-terminal (a linux machine eg cloud9 vm)
   
 
 human method:
