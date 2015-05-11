@@ -15,28 +15,37 @@ to make a system platform having:
 starting with:
 
     local-terminal (a linux machine eg cloud9 vm)
-    librarian [name=lifecycle name]
+    librarian [name=lifecycle name] // NOTE: complete clone steps inc global renaming and merge down to master before building the jenkins-vm to prevent premature deployment
     gae-project [name=lifecycle name]
   
 
 human method:
 
     in gae-project:
-        make base jenkins-vm (authorize use of google compute engine in gae-project)
+        authorize use of google compute engine api in gae-project.apis...
     in local-terminal:
-        issue the jenkins-vm completion script and follow resulting link to authorize the new running machine
+        make base jenkins-vm
+            issue the jenkins-vm completion script
+    in gae-project:
+        set allow http
+            do a first-time follow of resulting ce instances.jenkins-vm.extIP link
     in jenkins-vm:
-        issue the jenkins-vm-job001 completion script
-	
+        login as user:user pw:<password>
+        create new job with the jenkins-vm-job001 completion script
+
 
 jenkins-vm completion script:
 
     # to download and install gcloud sdk
     curl https://sdk.cloud.google.com | bash
-    # get bitnami-image name
+    # reboot to complete
+    # to auth
+    gcloud auth login
+    # follow link to get vcode and enter toi complete
+    # to get bitnami-image name
     gcloud compute images list --project bitnami-launchpad | grep jenkins
     # create a running admin account on jenkins vm (note you will be jenkins admin user un:user pw:as-set-here) 
-    PASSWORD=<password>                # 12 or more chars, with letters and numbers
+    PASSWORD=<password>                # 12 or more chars, with letters and numbers - 8 works
     PROJECT_ID=<project-id>
     BITNAMI_IMAGE=<bitnami-image>      # e.g. bitnami-jenkins-1-606-0-linux-debian-7-x86-64
     gcloud compute \
@@ -58,21 +67,20 @@ jenkins-vm completion script:
                "https://www.googleapis.com/auth/projecthosting" \
                "https://www.googleapis.com/auth/appengine.admin" \
         --tags "bitnami-launchpad"
-    # follow returned link to authorize
-    
+
 
 jenkins-vm-job001 completion script:
 
-    // create new job with option:
+    name: job001
+    desc: continuously build and deploy from master to gae-project
     from template: freestyle project
-    // configure with:
     jenkins toolset (run restriction) = cloud-dev-java
     source manager: git
     source location: <core repos url>
     branch: */master
     source credentials: blank
     build trigger: poll H/5 * * * *
-    build, test, and deploy execution steps: mvn gcloud:deploy // ie all in one go for java+maven
+    build, test, and deploy execution steps (exe shell): mvn gcloud:deploy // ie all in one go for java+maven
   	
 
 References:
