@@ -6,7 +6,7 @@
     blame: https://github.com/fishjtpcc1
 
 
-## product lifecycle overview of javagae002
+## product lifecycle vision of javagae002
 
     id card:
         name: javagae002
@@ -18,7 +18,7 @@
         designer: https://github.com/fishjtpcc1
         user: open
     robots:
-        tier2-runner builder:  
+        tier2-runner builder: http://104.197.74.87/jenkins/job/job001/ user:user pw:SECRETJPW
     producer's products:
         issues: https://github.com/fishjtpcc1/javagae002/issues
         releases: as-is informal via https://github.com/fishjtpcc1/javagae002 (master)
@@ -33,3 +33,9 @@
 ## this repository contents
 as found
 
+
+## how to clone this lifecycle
+
+    follow system-build.md
+
+** Your lifecycle is now open for business!**
