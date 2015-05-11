@@ -24,7 +24,7 @@
         releases: as-is informal via https://github.com/fishjtpcc1/javagae002 (master)
         core repo: https://github.com/fishjtpcc1/javagae002.git (intuitive structure, doc-in-code)
     runnable images:
-        dev: 
+        dev: http://direct-keel-94208.appspot.com/ (dev)
         acceptance: 
         as-released:
             owner-consumed: 
