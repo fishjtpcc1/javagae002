@@ -4,7 +4,7 @@ Instructions to build this lifecycle's system platform.
 
 ---
 
-to make a system platform having:
+to make a running system platform having:
 
     local-terminal (a linux machine eg cloud9 vm)
     librarian (a live remote git core repo eg a github repo)

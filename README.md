@@ -6,7 +6,7 @@
     blame: https://github.com/fishjtpcc1
 
 
-## product lifecycle overview of javagae002
+## product lifecycle vision of javagae002
 
     id card:
         name: javagae002
@@ -33,3 +33,36 @@
 ## this repository contents
 as found
 
+
+## how to clone this lifecycle
+
+to make a running (clone) system platform having:
+
+    local-terminal (a linux machine eg cloud9 vm)
+    librarian (a live remote git core repo eg a github repo)
+    tier2 builder (a gcloud compute engine jenkins+java+maven vm job) "jenkins-vm-job001"
+    tier2 runner (a gae project) "gae-project"
+    
+starting with:
+
+    local-terminal (a linux machine eg cloud9 vm)
+    template librarian [name=donor lifecycle name]
+    gcloud account
+
+
+human method:
+
+    in gcloud:
+        make a new project: get NEWGAEPID
+    in local-terminal:
+        invent a new lifecycle vision
+            clone template to local-terminal
+            modify the vision above inc unique name=NEWNAME and gae-pid=NEWGAEPID (global search and replace)
+    in core repo host (eg github):
+        make a new lifecycle container "clone" with name=NEWNAME
+    in local-terminal:
+        push to clone
+    follow system-build.md
+
+
+** Your lifecycle is now open for business!**
