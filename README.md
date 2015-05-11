@@ -18,7 +18,7 @@
         designer: https://github.com/fishjtpcc1
         user: open
     robots:
-        tier2-runner builder: http://104.197.74.87/jenkins/job/job001/
+        tier2-runner builder: http://104.197.74.87/jenkins/job/job001/ user:user pw:SECRETJPW
     producer's products:
         issues: https://github.com/fishjtpcc1/javagae002/issues
         releases: as-is informal via https://github.com/fishjtpcc1/javagae002 (master)
@@ -36,33 +36,6 @@ as found
 
 ## how to clone this lifecycle
 
-to make a running (clone) system platform having:
-
-    local-terminal (a linux machine eg cloud9 vm)
-    librarian (a live remote git core repo eg a github repo)
-    tier2 builder (a gcloud compute engine jenkins+java+maven vm job) "jenkins-vm-job001"
-    tier2 runner (a gae project) "gae-project"
-    
-starting with:
-
-    local-terminal (a linux machine eg cloud9 vm)
-    template librarian [name=donor lifecycle name]
-    gcloud account
-
-
-human method:
-
-    in gcloud:
-        make a new project: get NEWGAEPID
-    in local-terminal:
-        invent a new lifecycle vision
-            clone template to local-terminal
-            modify the vision above inc unique name=NEWNAME and gae-pid=NEWGAEPID (global search and replace)
-    in core repo host (eg github):
-        make a new lifecycle container "clone" with name=NEWNAME
-    in local-terminal:
-        push to clone
     follow system-build.md
-
 
 ** Your lifecycle is now open for business!**
