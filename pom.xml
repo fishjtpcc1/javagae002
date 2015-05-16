@@ -27,7 +27,7 @@
   <artifactId>ascsp1</artifactId><!-- try to make consistent with java package naming -->
 
   <properties>
-    <appengine.app.version>master</appengine.app.version><!-- my app-in-runner version as shown in gae versions -->
+    <appengine.app.version>overridden</appengine.app.version><!-- my app-in-runner version as shown in gae versions overridden in deploy-->
     <appengine.target.version>1.9.18</appengine.target.version><!-- appengine plugin version NOT my app version!! -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -76,9 +76,7 @@
         <groupId>com.google.appengine</groupId>
         <artifactId>gcloud-maven-plugin</artifactId>
         <version>0.9.58.v20150505</version>
-        <configuration>
-          <version>${appengine.app.version}</version><!-- not sure is appengine-web.xml is needed anymore with gcloud in use here!? -->
-        </configuration>
+        <!-- configuration.version done in deploy job now -->
        </plugin>
     </plugins>
   </build>
