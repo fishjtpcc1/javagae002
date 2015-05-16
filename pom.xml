@@ -27,7 +27,7 @@
   <artifactId>ascsp1</artifactId><!-- try to make consistent with java package naming -->
 
   <properties>
-    <appengine.app.version>master</appengine.app.version><!-- my app-in-runner version as shown in gae versions -->
+    <appengine.app.version>dev</appengine.app.version><!-- my app-in-runner version as shown in gae versions -->
     <appengine.target.version>1.9.18</appengine.target.version><!-- appengine plugin version NOT my app version!! -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
