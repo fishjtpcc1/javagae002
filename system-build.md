@@ -36,7 +36,7 @@ human method:
             do a first-time follow of resulting ce instances.jenkins-vm.extIP link
     in jenkins-vm:
         login as user:user pw:SECRETJPW
-        create new job with the jenkins-vm-job001 completion script // note jenkins will fail until clone is merged
+        for each factory, create new job with the jenkins-vm-BRANCH-build completion script // note jenkins will fail until clone is merged
         get JENKINSURL to complete vision
     in local-terminal:
         clone template to local-terminal
@@ -85,15 +85,15 @@ jenkins-vm completion script:
         --tags "bitnami-launchpad"
 
 
-jenkins-vm-job001 completion script:
+jenkins-vm-BRANCH-build completion script:
 
-    name: job001
+    name: BRANCH-build
     desc: continuously build and deploy from master to gae-project
     from template: freestyle project
     jenkins toolset (run restriction) = cloud-dev-java
     source manager: git
     source location: COREREPOURL
-    branch: */master
+    branch: */BRANCH
     source credentials: blank
     build trigger: poll H/5 * * * *
     build, test, and deploy execution steps (exe shell): mvn gcloud:deploy // ie all in one go for java+maven
