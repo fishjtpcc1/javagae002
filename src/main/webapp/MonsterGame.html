@@ -22,10 +22,8 @@ $(document).ready(function() {
         case "read":
           $(document).keypress(function(event){
               //alert(event.which);
-              $(document).keypress(function(event){
-                // nothing
-              });
-             handle(event.which);
+              $(document).off("keypress");
+              handle(event.which);
           });
           break;
       }
