@@ -15,14 +15,17 @@ $(document).ready(function() {
   function handle(input) {
     $.post('/tier2', {input:input}, function(data, status) {
       //alert(data+"\n"+status);
-      $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>"); // app sends print or println equivalents
       console.log(data);
+      $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>"); // app sends print or println equivalents
       
-      // read()
-      $(document).keypress(function(event){
-          alert(event.which);
-          handle(event.which);
-      });
+      switch (data.method) {
+        case "read":
+          $(document).keypress(function(event){
+              alert(event.which);
+              handle(event.which);
+          });
+          break;
+      }
       
     }, "json");
   }
