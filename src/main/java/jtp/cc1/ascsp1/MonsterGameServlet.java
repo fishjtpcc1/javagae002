@@ -1,6 +1,5 @@
 package jtp.cc1.ascsp1;
 
-import java.lang.NumberFormatException;
 import java.io.IOException;
 import javax.servlet.http.*;
 
@@ -10,12 +9,12 @@ import javax.servlet.http.*;
  * Receives i/o from tier1 html consolesim via ajax
  * uses session to store running game
  */
-public class MonsterGameServlet extends HttpServlet throws java.io.IOException {
+public class MonsterGameServlet extends HttpServlet {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   
   @Override
-  public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     resp.setContentType("text/plain");
     resp.getWriter().println("{ \"screen\": \"" + "men at work" + "\" }");
   }
