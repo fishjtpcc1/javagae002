@@ -21,8 +21,11 @@ $(document).ready(function() {
       switch (data.method) {
         case "read":
           $(document).keypress(function(event){
-              alert(event.which);
-              handle(event.which);
+              //alert(event.which);
+              $(document).keypress(function(event){
+                // nothing
+              });
+             handle(event.which);
           });
           break;
       }
