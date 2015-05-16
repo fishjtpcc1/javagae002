@@ -1,4 +1,4 @@
-package ascsp1;
+package jtp.cc1.ascsp1;
 
 import java.lang.NumberFormatException;
 import java.io.IOException;
