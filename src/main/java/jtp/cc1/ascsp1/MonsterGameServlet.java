@@ -9,7 +9,7 @@ import javax.servlet.http.*;
  * Based on Julian's fish and chicken restaurant
  * Receives i/o from tier1 html consolesim via ajax
  */
-public class MasterGameServlet extends HttpServlet {
+public class MonsterGameServlet extends HttpServlet {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   
