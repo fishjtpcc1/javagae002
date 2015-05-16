@@ -10,7 +10,7 @@ import javax.servlet.http.*;
  * Receives i/o from tier1 html consolesim via ajax
  * uses session to store running game
  */
-public class MonsterGameServlet extends HttpServlet {
+public class MonsterGameServlet extends HttpServlet throws java.io.IOException {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   
