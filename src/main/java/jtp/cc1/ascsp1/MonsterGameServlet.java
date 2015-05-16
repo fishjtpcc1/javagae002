@@ -1,14 +1,15 @@
-package myapp;
+package ascsp1;
 
 import java.lang.NumberFormatException;
 import java.io.IOException;
 import javax.servlet.http.*;
 
 /**
- * julian's fish and chicken restaurant
- * design: nil-persistence architecture: statedata does round trip on each request.
+ * MonsterGameServlet
+ * Based on Julian's fish and chicken restaurant
+ * Receives i/o from tier1 html consolesim via ajax
  */
-public class DemoServlet extends HttpServlet {
+public class MasterGameServlet extends HttpServlet {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   

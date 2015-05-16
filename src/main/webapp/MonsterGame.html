@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Julian's Monster Game</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div><a href="https://github.com/fishjtpcc1/javagae002">source origin</a></div>
+    <div id="screen">Loading...</div>
+    <script>
+    /** this *is* the console in this javaservlet architecture */
+// see console for exceptions eg json parse errors
+$(document).ready(function() {
+  var bill = '0';
+  var statedata = 'fred';
+  
+  // new console is first init
+  $.getJSON('/demo', function(data, status) {
+    $('#screen').html("<p>"+data.screen+"</p>");
+    statedata = data.statedata;
+    console.log(data);
+  });
+  
+  $(document).keypress(function(event){
+    var userdata = String.fromCharCode(event.which);
+      $.post('/tier2', {userdata:userdata, bill:bill, statedata:statedata}, function(data, status) {
+        //alert(data+"\n"+status);
+        $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>"); // app sends print or println equivalents
+        bill = data.bill;
+        statedata = data.statedata;
+        console.log(data);
+      }, "json");
+  });
+  
+});
+    </script>
+  </body>
+</html>
