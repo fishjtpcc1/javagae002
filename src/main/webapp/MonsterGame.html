@@ -16,7 +16,7 @@ $(document).ready(function() {
   var statedata = 'fred';
   
   // new console is first init
-  $.getJSON('/demo', function(data, status) {
+  $.getJSON('/tier2', function(data, status) {
     $('#screen').html("<p>"+data.screen+"</p>");
     statedata = data.statedata;
     console.log(data);
