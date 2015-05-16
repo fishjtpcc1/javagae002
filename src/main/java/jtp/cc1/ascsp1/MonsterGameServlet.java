@@ -29,9 +29,10 @@ public class MonsterGameServlet extends HttpServlet {
     }
     String input = req.getParameter("input");
     String method = "readln";
-    mySession.getAttribute("theGame").data += input + " ";
+    TheGame myGame = mySession.getAttribute("theGame");
+    myGame.data += input + " ";
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + "you said:" + input + "<br>theGame:" + mySession.getAttribute("theGame").data + "\", \"method\": \"" + method + "\" }");
+    resp.getWriter().println("{ \"screen\": \"" + "you said:" + input + "<br>theGame:" + myGame.data + "\", \"method\": \"" + method + "\" }");
   }
 
 }
