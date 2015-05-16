@@ -14,8 +14,8 @@ public class MonsterGameServlet extends HttpServlet {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
 
   class TheGame {
-    String data = "";
-    void TheGame() {
+    public String data = "";
+    public void TheGame() {
       this.data = "newgame ";
     }
   }
