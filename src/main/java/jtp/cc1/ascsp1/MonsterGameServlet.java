@@ -25,7 +25,7 @@ public class MonsterGameServlet extends HttpServlet {
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     HttpSession mySession = req.getSession();
     if (mySession.isNew()) {
-      mySession.setAttribute("theGame") = new TheGame();
+      mySession.setAttribute("theGame", new TheGame());
     }
     String input = req.getParameter("input");
     String method = "readln";
