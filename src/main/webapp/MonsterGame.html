@@ -26,6 +26,19 @@ $(document).ready(function() {
               handle(event.which);
           });
           break;
+        case "readln":
+          var text = "";
+          $(document).keypress(function(event){
+              //alert(event.which);
+              if (event.which == 13) {
+                // end of line
+                $(document).off("keypress");
+                handle(text);
+              } else {
+                text += String.fromCharCode(event.which);
+              }
+          });
+          break;
       }
       
     }, "json");
