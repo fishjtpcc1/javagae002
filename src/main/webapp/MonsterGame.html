@@ -7,7 +7,7 @@
   </head>
   <body>
     <div><a href="https://github.com/fishjtpcc1/javagae002">source origin</a></div>
-    <div id="screen">Loading...</div>
+    <div id="screen"></div>
     <script>
 /** this *is* the console in this javaservlet architecture */
 // see console for exceptions eg json parse errors
@@ -17,11 +17,15 @@ $(document).ready(function() {
       //alert(data+"\n"+status);
       $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>"); // app sends print or println equivalents
       console.log(data);
+      
+      // read()
+      $(document).keypress(function(event){
+          alert(event.which);
+          handle(event.which);
+      });
+      
     }, "json");
   }
-  $(document).keypress(function(event){
-      alert(event.keypress);
-  });
   handle(null); // to init  
 });
     </script>

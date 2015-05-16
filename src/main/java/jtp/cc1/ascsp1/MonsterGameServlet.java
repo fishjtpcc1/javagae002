@@ -15,8 +15,9 @@ public class MonsterGameServlet extends HttpServlet {
   
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
+    String input = req.getParameter("input");
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + "men at work" + "\" }");
+    resp.getWriter().println("{ \"screen\": \"" + "you said:" + input + "\" }");
   }
 
 }
