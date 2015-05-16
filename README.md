@@ -18,17 +18,19 @@
         designer: https://github.com/fishjtpcc1
         user: open
     robots:
-        tier2-runner builder: http://104.197.74.87/jenkins/job/job001/ user:user pw:SECRETJPW
+        dev builder: http://104.197.74.87/jenkins/job/dev-build/ user:user pw:SECRETJPW
+        live builder: http://104.197.74.87/jenkins/job/live-build/ user:user pw:SECRETJPW
     producer's products:
         issues: https://github.com/fishjtpcc1/javagae002/issues
         releases: as-is informal via https://github.com/fishjtpcc1/javagae002 (master)
         core repo: https://github.com/fishjtpcc1/javagae002.git (intuitive structure, doc-in-code)
-    runnable images:
-        dev: http://direct-keel-94208.appspot.com/ (dev)
-        acceptance: 
-        as-released:
-            owner-consumed: 
-            licensee-consumed: open (unknown) via self-builds via self-served downloads of releases
+    factories:
+        dev:
+            branch: dev 
+            runner: http://dev.direct-keel-94208.appspot.com/
+        live:
+            branch: master
+            runner: http://direct-keel-94208.appspot.com/
 
 ## this repository contents
 as found
