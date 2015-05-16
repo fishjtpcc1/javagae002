@@ -15,7 +15,7 @@ public class MonsterGameServlet extends HttpServlet {
 
   class TheGame {
     void TheGame() {
-      String this.data = "newgame ";
+      String data = "newgame ";
     }
   }
   
