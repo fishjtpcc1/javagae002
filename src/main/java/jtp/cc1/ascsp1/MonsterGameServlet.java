@@ -91,15 +91,15 @@ public class MonsterGameServlet extends HttpServlet {
     // resume from where we left off
     HttpSession mySession = req.getSession();
     String input = req.getParameter("input");
-    //if (input=="") { // first call is a new session
+    if (input == null) { // first call is a new session
       mySession.setAttribute("scene", new MenuScene());
-    //}
+    }
     // proceed with this use event
-    Object scene = mySession.getAttribute("scene");
+    Scene scene = (Scene)mySession.getAttribute("scene");
     if (scene != null) {
       scene.handle(input);
     } else {
-      screen = "session problem";
+      screen = "[input:"+input+"] session problem";
     }
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
