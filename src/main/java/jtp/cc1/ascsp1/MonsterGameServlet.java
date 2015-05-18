@@ -95,7 +95,7 @@ public class MonsterGameServlet extends HttpServlet {
       mySession.setAttribute("scene", new MenuScene());
     //}
     // proceed with this use event
-    Scene scene = (Scene)mySession.getAttribute("scene");
+    Object scene = mySession.getAttribute("scene");
     if (scene != null) {
       scene.handle(input);
     } else {
