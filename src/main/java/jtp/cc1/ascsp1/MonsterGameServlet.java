@@ -62,15 +62,15 @@ public class MonsterGameServlet extends HttpServlet {
   class GameScene extends Scene {
 
     public GameScene() {
-      this.data = "newgame";
+      super.data = "newgame";
     }
     
     private String draw() {
-      return "<br>[" + this.data + "]" + "--game--<br>Enter choice: ";
+      return "<br>[" + super.data + "]" + "--game--<br>Enter choice: ";
     }
     
     public void handle(String input) {
-      this.data += input + " ";
+      super.handle(input);
       switch (input) {
         default:
           screen = draw();
@@ -87,19 +87,27 @@ public class MonsterGameServlet extends HttpServlet {
 
 
   @Override
+  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
+    // resume from where we left off
+    HttpSession mySession = req.getSession();
+    mySession.setAttribute("scene", new MenuScene());
+    // hand back to tier1 to present the initial user state
+    resp.setContentType("text/plain");
+    resp.getWriter().println(json());
+  }
+
+
+  @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
     HttpSession mySession = req.getSession();
     String input = req.getParameter("input");
-    if (input.isEmpty()) { // first call is a new session
-      mySession.setAttribute("scenexxx", new MenuScene());
-    }
-    // proceed with this use event
-    Scene scene = (Scene)mySession.getAttribute("scenexxx");
-    if (scene != null) {
-      scene.handle(input);
+    if (mySession.isNew()) { // timeout perhaps
+      mySession.setAttribute("scene", new MenuScene());
     } else {
-      screen = "[input:"+input+"("+input.length()+")] session problem";
+      // proceed with this use event
+      Scene scene = (Scene)mySession.getAttribute("scene");
+      scene.handle(input);
     }
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");

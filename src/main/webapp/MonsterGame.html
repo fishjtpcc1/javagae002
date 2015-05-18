@@ -12,42 +12,44 @@
 /** this *is* the console in this javaservlet architecture */
 // see console for exceptions eg json parse errors
 $(document).ready(function() {
-  function handle(input) {
-    $.post('/tier2', {input:input}, function(data, status) {
-      //alert(data+"\n"+status);
-      console.log(data);
-      $('#screen').html($('#screen').html() + data.screen); // app sends print or println equivalents
-      
-      switch (data.method) {
-        case "read":
-          $(document).keypress(function(event){
-              //alert(event.which);
+
+  function handle(data, status) {
+    console.log(data);
+    $('#screen').html($('#screen').html() + data.screen); // app sends print or println equivalents
+    switch (data.method) {
+      case "read":
+        $(document).keypress(function(event){
+            //alert(event.which);
+            $(document).off("keypress");
+            var char = String.fromCharCode(event.which);
+            $('#screen').html($('#screen').html() + char);
+            post(char);
+        });
+        break;
+      case "readln":
+        var text = "";
+        $(document).keypress(function(event){
+            //alert(event.which);
+            if (event.which == 13) {
+              // end of line
               $(document).off("keypress");
+              post(text);
+            } else {
               var char = String.fromCharCode(event.which);
               $('#screen').html($('#screen').html() + char);
-              handle(text);
-          });
-          break;
-        case "readln":
-          var text = "";
-          $(document).keypress(function(event){
-              //alert(event.which);
-              if (event.which == 13) {
-                // end of line
-                $(document).off("keypress");
-                handle(text);
-              } else {
-                var char = String.fromCharCode(event.which);
-                $('#screen').html($('#screen').html() + char);
-                text += char;
-              }
-          });
-          break;
-      }
-      
-    }, "json");
+              text += char;
+            }
+        });
+        break;
+    }
   }
-  handle(null); // to init  
+
+  function post(input) {
+    $.post('/tier2', {input:input}, function(data, status) {handle(data,status);}, "json");
+  }
+  
+  $.get('/tier2', function(data, status) {handle(data,status);}, "json");
+  
 });
     </script>
   </body>
