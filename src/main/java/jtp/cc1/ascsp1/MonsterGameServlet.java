@@ -27,9 +27,6 @@ public class MonsterGameServlet extends HttpServlet {
   class Scene implements Serializable {
     public String data = "";
     
-    private String draw() {
-    }
-    
     public void handle(String input) {
       this.data += input + " ";
     }
