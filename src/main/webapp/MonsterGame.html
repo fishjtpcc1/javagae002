@@ -16,16 +16,15 @@ $(document).ready(function() {
     $.post('/tier2', {input:input}, function(data, status) {
       //alert(data+"\n"+status);
       console.log(data);
-      $('#screen').html($('#screen').html()+"<p>"+data.screen+"</p>"); // app sends print or println equivalents
+      $('#screen').html($('#screen').html() + data.screen); // app sends print or println equivalents
       
       switch (data.method) {
         case "read":
-          var text = "";
           $(document).keypress(function(event){
               //alert(event.which);
               $(document).off("keypress");
-              text = String.fromCharCode(event.which);
-              $('#screen').html($('#screen').html() + "<span>" + text + "</span>");
+              var char = String.fromCharCode(event.which);
+              $('#screen').html($('#screen').html() + char);
               handle(text);
           });
           break;
@@ -36,10 +35,11 @@ $(document).ready(function() {
               if (event.which == 13) {
                 // end of line
                 $(document).off("keypress");
-                $('#screen').html($('#screen').html() + "<span>" + text + "</span>");
                 handle(text);
               } else {
-                text += String.fromCharCode(event.which);
+                var char = String.fromCharCode(event.which);
+                $('#screen').html($('#screen').html() + char);
+                text += char;
               }
           });
           break;
