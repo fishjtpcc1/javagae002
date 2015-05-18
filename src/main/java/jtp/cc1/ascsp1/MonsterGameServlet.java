@@ -36,15 +36,15 @@ public class MonsterGameServlet extends HttpServlet {
   class MenuScene extends Scene {
 
     public MenuScene() {
-      this.data = "newmenu";
+      super.data = "newmenu";
     }
     
     private String draw() {
-      return "<br>[" + this.data + "]" + "<br>1. New game<br>etc...<br>Enter choice: ";
+      return "<br>[" + super.data + "]" + "<br>1. New game<br>etc...<br>Enter choice: ";
     }
     
     public void handle(String input) {
-      this.data += input + " ";
+      super.handle(input);
       switch (input) {
         default:
           screen = draw();
