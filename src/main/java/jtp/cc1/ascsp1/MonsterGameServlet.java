@@ -101,6 +101,7 @@ public class MonsterGameServlet extends HttpServlet {
     // proceed with this use event
     Scene scene = (Scene)mySession.getAttribute("scene");
     scene.handle(input);
+    screen = "input:"+input;
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(json());
