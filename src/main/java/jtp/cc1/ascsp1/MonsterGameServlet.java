@@ -31,6 +31,7 @@ public class MonsterGameServlet extends HttpServlet {
       this.data += input + " ";
       screen = "blank";
       method = "none";
+      Logger.log(INFO, "screen:"+screen+" method:"+method);
     }
     
   }
@@ -54,6 +55,7 @@ public class MonsterGameServlet extends HttpServlet {
           screen = draw();
           method = "read";
       }
+      Logger.log(INFO, "screen:"+screen+" method:"+method);
     }
     
   }
@@ -102,8 +104,8 @@ public class MonsterGameServlet extends HttpServlet {
     screen = "safety screen";
     method = "safety method";
     Scene scene = (Scene)mySession.getAttribute("scene");
+    Logger.log(INFO, "input:"+input,scene);
     scene.handle(input);
-    screen += "input:"+input;
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(json());
