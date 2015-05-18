@@ -29,7 +29,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
     String input = req.getParameter("input");
     String method = "readln";
-    TheGame myGame = mySession.getAttribute("theGame");
+    TheGame myGame = (TheGame) mySession.getAttribute("theGame");
     myGame.data += input + " ";
     resp.setContentType("text/plain");
     resp.getWriter().println("{ \"screen\": \"" + "you said:" + input + "<br>theGame:" + myGame.data + "\", \"method\": \"" + method + "\" }");
