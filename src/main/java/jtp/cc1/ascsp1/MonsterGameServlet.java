@@ -99,7 +99,7 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(false);
     String input = req.getParameter("input");
     // proceed with this use event
-    screen = "safety screen";
+    screen = "<br>safety screen";
     method = "safety method";
     Scene scene = (Scene)mySession.getAttribute("scene");
     scene.handle(input);
