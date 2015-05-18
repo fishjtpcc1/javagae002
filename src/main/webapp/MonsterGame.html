@@ -25,7 +25,7 @@ $(document).ready(function() {
               //alert(event.which);
               $(document).off("keypress");
               text = String.fromCharCode(event.which);
-              $('#screen').html($('#screen').html()+ text;
+              $('#screen').html($('#screen').html() + "<span>" + text + "</span>");
               handle(text);
           });
           break;
@@ -36,6 +36,7 @@ $(document).ready(function() {
               if (event.which == 13) {
                 // end of line
                 $(document).off("keypress");
+                $('#screen').html($('#screen').html() + "<span>" + text + "</span>");
                 handle(text);
               } else {
                 text += String.fromCharCode(event.which);
