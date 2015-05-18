@@ -28,7 +28,7 @@ public class MonsterGameServlet extends HttpServlet {
     public String data = "";
     
     public MenuScene() {
-      this.data = "newmenu"
+      this.data = "newmenu";
     }
     
     private String draw() {
@@ -55,7 +55,7 @@ public class MonsterGameServlet extends HttpServlet {
     public String data = "";
     
     public GameScene() {
-      this.data = "newgame"
+      this.data = "newgame";
     }
     
     private String draw() {
