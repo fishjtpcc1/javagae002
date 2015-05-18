@@ -16,7 +16,7 @@ public class MonsterGameServlet extends HttpServlet {
 
   class TheGame implements Serializable {
     public String data = "";
-    public void TheGame() {
+    public TheGame() {
       this.data = "newgame ";
     }
   }
