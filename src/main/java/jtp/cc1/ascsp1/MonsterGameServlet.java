@@ -24,9 +24,20 @@ public class MonsterGameServlet extends HttpServlet {
   
   /** each scene is an object
    */
-  class MenuScene implements Serializable {
+  class Scene implements Serializable {
     public String data = "";
     
+    private String draw() {
+    }
+    
+    public void handle(String input) {
+      this.data += input + " ";
+    }
+    
+  }
+
+  class MenuScene extends Scene {
+
     public MenuScene() {
       this.data = "newmenu";
     }
@@ -51,9 +62,8 @@ public class MonsterGameServlet extends HttpServlet {
     
   }
 
-  class GameScene implements Serializable {
-    public String data = "";
-    
+  class GameScene extends Scene {
+
     public GameScene() {
       this.data = "newgame";
     }
@@ -88,7 +98,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
     String input = req.getParameter("input");
     // proceed with this use event
-    Object scene = mySession.getAttribute("scene");
+    Scene scene = (Scene)mySession.getAttribute("scene");
     scene.handle(input);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
