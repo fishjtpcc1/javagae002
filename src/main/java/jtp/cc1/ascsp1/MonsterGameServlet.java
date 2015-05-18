@@ -90,10 +90,10 @@ public class MonsterGameServlet extends HttpServlet {
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
     HttpSession mySession = req.getSession();
-    if (mySession.isNew()) {
+    String input = req.getParameter("input");
+    if (input==null) { // first call is a new session
       mySession.setAttribute("scene", new MenuScene());
     }
-    String input = req.getParameter("input");
     // proceed with this use event
     Scene scene = (Scene)mySession.getAttribute("scene");
     if (scene != null) {
