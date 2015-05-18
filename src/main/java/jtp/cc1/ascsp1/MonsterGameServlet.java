@@ -37,6 +37,8 @@ public class MonsterGameServlet extends HttpServlet {
 
     public MenuScene() {
       super.data = "newmenu";
+      screen = draw();
+      method = "read";
     }
     
     private String draw() {
@@ -50,11 +52,6 @@ public class MonsterGameServlet extends HttpServlet {
           screen = draw();
           method = "read";
       }
-    }
-    
-    public void main() {
-      screen = draw();
-      method = "read";
     }
     
   }
