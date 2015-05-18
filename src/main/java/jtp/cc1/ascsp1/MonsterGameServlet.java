@@ -14,6 +14,9 @@ public class MonsterGameServlet extends HttpServlet {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
 
+  private String screen = "";
+  private String method = "";
+  
   class TheGame implements Serializable {
     public String data = "";
     public TheGame() {
@@ -29,11 +32,12 @@ public class MonsterGameServlet extends HttpServlet {
       mySession.setAttribute("theGame", new TheGame());
     }
     String input = req.getParameter("input");
-    String method = "readln";
     TheGame myGame = (TheGame) mySession.getAttribute("theGame");
     myGame.data += input + " ";
+    screen = "you said:" + input + "<br>theGame:" + myGame.data + ": what now?";
+    method = "readln";
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + "you said:" + input + "<br>theGame:" + myGame.data + "\", \"method\": \"" + method + "\" }");
+    resp.getWriter().println("{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\" }");
   }
 
 }

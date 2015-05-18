@@ -20,10 +20,13 @@ $(document).ready(function() {
       
       switch (data.method) {
         case "read":
+          var text = "";
           $(document).keypress(function(event){
               //alert(event.which);
               $(document).off("keypress");
-              handle(event.which);
+              text = String.fromCharCode(event.which);
+              $('#screen').html($('#screen').html()+ text;
+              handle(text);
           });
           break;
         case "readln":
