@@ -29,6 +29,8 @@ public class MonsterGameServlet extends HttpServlet {
     
     public void handle(String input) {
       this.data += input + " ";
+      screen = "blank";
+      method = "none";
     }
     
   }
