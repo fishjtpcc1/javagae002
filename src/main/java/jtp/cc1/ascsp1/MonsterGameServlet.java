@@ -103,7 +103,7 @@ public class MonsterGameServlet extends HttpServlet {
     method = "safety method";
     Scene scene = (Scene)mySession.getAttribute("scene");
     scene.handle(input);
-    screen += "input:"+input+"scene:"+scene;
+    screen += "<br>input:"+input+", scene:"+scene;
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(json());
