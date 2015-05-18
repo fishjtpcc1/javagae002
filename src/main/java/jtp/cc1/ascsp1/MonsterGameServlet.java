@@ -82,8 +82,8 @@ public class MonsterGameServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
-    // resume from where we left off
-    HttpSession mySession = req.getSession();
+    // start new session
+    HttpSession mySession = req.getSession(true);
     mySession.setAttribute("scene", new MenuScene());
     // hand back to tier1 to present the initial user state
     resp.setContentType("text/plain");
@@ -94,7 +94,7 @@ public class MonsterGameServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
-    HttpSession mySession = req.getSession();
+    HttpSession mySession = req.getSession(false);
     String input = req.getParameter("input");
     if (mySession.isNew()) { // timeout perhaps
       mySession.setAttribute("scene", new MenuScene());
