@@ -96,9 +96,6 @@ public class MonsterGameServlet extends HttpServlet {
     // resume from where we left off
     HttpSession mySession = req.getSession(false);
     String input = req.getParameter("input");
-    if (mySession.isNew()) { // timeout perhaps
-      mySession.setAttribute("scene", new MenuScene());
-    }
     // proceed with this use event
     Scene scene = (Scene)mySession.getAttribute("scene");
     scene.handle(input);
