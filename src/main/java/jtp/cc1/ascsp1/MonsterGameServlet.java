@@ -99,7 +99,7 @@ public class MonsterGameServlet extends HttpServlet {
     if (scene != null) {
       scene.handle(input);
     } else {
-      screen = "[input:"+input+"("+input.length+")] session problem";
+      screen = "[input:"+input+"("+input.length()+")] session problem";
     }
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
