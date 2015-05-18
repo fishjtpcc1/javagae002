@@ -16,28 +16,82 @@ public class MonsterGameServlet extends HttpServlet {
 
   private String screen = "";
   private String method = "";
-  
-  class TheGame implements Serializable {
-    public String data = "";
-    public TheGame() {
-      this.data = "newgame ";
-    }
+
+  public String json() {
+    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\" }";
   }
   
   
+  /** each scene is an object
+   */
+  class MenuScene implements Serializable {
+    public String data = "";
+    
+    public MenuScene() {
+      this.data = "newmenu"
+    }
+    
+    private String draw() {
+      return "<br>[" + this.data + "]" + "<br>1. New game<br>etc...<br>Enter choice: ";
+    }
+    
+    public void handle(String input) {
+      this.data += input + " ";
+      switch (input) {
+        default:
+          screen = draw();
+          method = "read";
+      }
+    }
+    
+    public void main() {
+      screen = draw();
+      method = "read";
+    }
+    
+  }
+
+  class GameScene implements Serializable {
+    public String data = "";
+    
+    public GameScene() {
+      this.data = "newgame"
+    }
+    
+    private String draw() {
+      return "<br>[" + this.data + "]" + "--game--<br>Enter choice: ";
+    }
+    
+    public void handle(String input) {
+      this.data += input + " ";
+      switch (input) {
+        default:
+          screen = draw();
+          method = "read";
+      }
+    }
+    
+    public void main() {
+      screen = draw();
+      method = "read";
+    }
+    
+  }
+
+
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
+    // resume from where we left off
     HttpSession mySession = req.getSession();
     if (mySession.isNew()) {
-      mySession.setAttribute("theGame", new TheGame());
+      mySession.setAttribute("scene", new MenuScene());
     }
     String input = req.getParameter("input");
-    TheGame myGame = (TheGame) mySession.getAttribute("theGame");
-    myGame.data += input + " ";
-    screen = "<br>you said:" + input + "<br>theGame:" + myGame.data + ": what now? ";
-    method = "readln";
+    // proceed with this use event
+    mySession.getAttribute("scene").handle(input);
+    // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\" }");
+    resp.getWriter().println(json());
   }
 
 }
