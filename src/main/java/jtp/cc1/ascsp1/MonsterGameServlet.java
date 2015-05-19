@@ -26,7 +26,7 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   private static String drawMenu() {
-    return "<br>[" + super.data + "]" + "<br>1. New game<br>etc...<br>Enter choice: ";
+    return "<br>1. New game<br>etc...<br>Enter choice: ";
   }
   
   
