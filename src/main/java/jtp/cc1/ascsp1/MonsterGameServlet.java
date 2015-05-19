@@ -62,6 +62,11 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   
+  private static String drawFilesavefail() {
+    return "<br>Fail<br>Press any key to continue: ";
+  }
+  
+  
   private static void handleMenu(String input) {
     log.warning("input:"+input);
     switch (input) {
@@ -131,9 +136,16 @@ public class MonsterGameServlet extends HttpServlet {
 
   private static void handleFilesave(String input) {
     log.warning("input:"+input);
-    scene = "filesavesuccessscene";
-    screen = drawFilesavesuccess();
-    method = "read";
+    if (input.matches(" ")) {
+      // bad file name
+      scene = "filesavefailscene";
+      screen = drawFilesavefail();
+      method = "read";
+    } else {
+      scene = "filesavesuccessscene";
+      screen = drawFilesavesuccess();
+      method = "read";
+    }
   }
     
 
@@ -141,6 +153,14 @@ public class MonsterGameServlet extends HttpServlet {
     log.warning("input:"+input);
     scene = "menuscene";
     screen = drawMenu();
+    method = "read";
+  }
+    
+
+  private static void handleFilesavefail(String input) {
+    log.warning("input:"+input);
+    scene = "filesavescene";
+    screen = drawFilesave();
     method = "read";
   }
     
@@ -186,6 +206,9 @@ public class MonsterGameServlet extends HttpServlet {
         break;
       case "filesavesuccessscene":
         handleFilesavesuccess(input);
+        break;
+      case "filesavefailscene":
+        handleFilesavefail(input);
         break;
     }
     //scene.handle(input);
