@@ -113,7 +113,7 @@ public class MonsterGameServlet extends HttpServlet {
     //MenuScene scene = new MenuScene();
     String scene = (String)mySession.getAttribute("scene");
     debug += "input:"+input+":scene:"+scene;
-    select (scene) {
+    switch (scene) {
       case "menuscene":
         screen = MonsterGameServlet.drawMenu();
         method = "read";
