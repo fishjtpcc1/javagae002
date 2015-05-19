@@ -14,6 +14,7 @@ public class MonsterGameServlet extends HttpServlet {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
 
+  private String debug = "debug:";
   private String screen = "";
   private String method = "";
 
@@ -48,6 +49,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
     
     public void handle(String input) {
+      debug += "here:";
       super.handle(input);
       switch (input) {
         default:
@@ -99,11 +101,12 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(false);
     String input = req.getParameter("input");
     // proceed with this use event
-    screen = "<br>safety screen";
-    method = "safety method";
+    screen = "<br>safetyscreen";
+    method = "safetymethod";
     Scene scene = (Scene)mySession.getAttribute("scene");
+    debug += "input:"+input+":scene:"+scene;
     scene.handle(input);
-    screen += "<br>input:"+input+", scene:"+scene;
+    screen += "<br>"+debug;
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(json());
