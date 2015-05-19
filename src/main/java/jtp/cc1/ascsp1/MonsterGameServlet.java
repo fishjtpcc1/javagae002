@@ -105,7 +105,7 @@ public class MonsterGameServlet extends HttpServlet {
     method = "safetymethod";
     //MenuScene scene = new MenuScene();
     scene = (String)mySession.getAttribute("scene");
-    gamedata = (String)mySession.getAttribute("scene");
+    gamedata = (String)mySession.getAttribute("gamedata");
     log.warning("scene:"+scene+", gamedata:"+gamedata+", input:"+input);
     switch (scene) {
       case "menuscene":
