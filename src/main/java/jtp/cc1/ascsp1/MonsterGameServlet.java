@@ -17,9 +17,9 @@ public class MonsterGameServlet extends HttpServlet {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
 
-  private String debug = "debug:";
-  private String screen = "";
-  private String method = "";
+  private static String debug = "debug:";
+  private static String screen = "";
+  private static String method = "";
 
   private static String json() {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\" }";
