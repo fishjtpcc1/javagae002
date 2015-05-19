@@ -136,7 +136,7 @@ public class MonsterGameServlet extends HttpServlet {
 
   private static void handleFilesave(String input) {
     log.warning("input:"+input);
-    if (input.matches(" ")) {
+    if (input.contains(" ")) {
       // bad file name
       scene = "filesavefailscene";
       screen = drawFilesavefail();
