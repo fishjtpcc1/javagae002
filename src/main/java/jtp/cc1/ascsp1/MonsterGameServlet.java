@@ -29,6 +29,9 @@ public class MonsterGameServlet extends HttpServlet {
     public Boolean isOver() {
       return (i >= 3);
     }
+    public Boolean isWon() {
+      return (s.contains("W"));
+    }
   }
 
 
@@ -43,12 +46,17 @@ public class MonsterGameServlet extends HttpServlet {
   
   
   private static String drawGame() {
-    return "<br>|------" + theGame.s + " " + theGame.i + " " + theGame.isOver() + "------|<br>Enter choice: ";
+    return "<br>|------" + theGame.s + " " + theGame.i + "------|<br>Enter NSEWM: ";
   }
   
   
   private static String drawGameover() {
-    return "<br>LOOSER!!!!<br>Enter choice: ";
+    return "<br>LOOSER!!!!<br>Press any key to continue: ";
+  }
+  
+  
+  private static String drawGamewon() {
+    return "<br>WINNER!!!!<br>Press any key to continue: ";
   }
   
   
@@ -100,7 +108,11 @@ public class MonsterGameServlet extends HttpServlet {
         log.warning("case 'NSEW'");
         theGame.s += input + ": ";
         theGame.i ++;
-        if (theGame.isOver()) {
+        if (theGame.isWon()) {
+          scene = "gamewonscene";
+          screen = drawGamewon();
+          method = "read";
+        } else if (theGame.isOver()) {
           scene = "gameoverscene";
           screen = drawGameover();
           method = "read";
@@ -123,6 +135,14 @@ public class MonsterGameServlet extends HttpServlet {
         method = "read";
         break;
     }
+  }
+    
+
+  private static void handleGamewon(String input) {
+    log.warning("input:"+input);
+    scene = "menuscene";
+    screen = drawMenu();
+    method = "read";
   }
     
 
@@ -197,6 +217,9 @@ public class MonsterGameServlet extends HttpServlet {
         break;
       case "gamescene":
         handleGame(input);
+        break;
+      case "gamewonscene":
+        handleGamewon(input);
         break;
       case "gameoverscene":
         handleGameover(input);
