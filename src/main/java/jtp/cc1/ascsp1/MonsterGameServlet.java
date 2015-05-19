@@ -39,7 +39,7 @@ public class MonsterGameServlet extends HttpServlet {
     switch (input) {
       case "1":
         scene = "gamescene";
-        screen = drawMGame();
+        screen = drawGame();
         method = "read";
       default:
         scene = "menuscene";
@@ -72,14 +72,13 @@ public class MonsterGameServlet extends HttpServlet {
     method = "safetymethod";
     //MenuScene scene = new MenuScene();
     scene = (String)mySession.getAttribute("scene");
-    debug += "input:"+input+":scene:"+scene;
     switch (scene) {
       case "menuscene":
         handleMenu(input);
     }
     //scene.handle(input);
     //screen += "<br>"+debug;
-    log.warning(debug);
+    //log.warning(debug);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json(screen,method));
