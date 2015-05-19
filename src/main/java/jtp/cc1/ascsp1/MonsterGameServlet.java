@@ -104,6 +104,7 @@ public class MonsterGameServlet extends HttpServlet {
     // start new session
     HttpSession mySession = req.getSession(true);
     mySession.setAttribute("scene", "menuscene");
+    mySession.setAttribute("thegame", new Game());
     screen = drawMenu();
     method = "read";
     // hand back to tier1 to present the initial user state
@@ -123,7 +124,7 @@ public class MonsterGameServlet extends HttpServlet {
     //MenuScene scene = new MenuScene();
     scene = (String)mySession.getAttribute("scene");
     Game theGame = (Game)mySession.getAttribute("thegame");
-    log.warning("scene:"+scene+", thegame:"+theGame+", thegame.s:"+theGame.s+", input:"+input);
+    log.warning("scene:"+scene+", thegame:"+theGame+", theGame.s:"+theGame.s+", input:"+input);
     switch (scene) {
       case "menuscene":
         handleMenu(input);
