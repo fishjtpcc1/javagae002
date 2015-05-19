@@ -13,6 +13,7 @@ import javax.servlet.http.*;
  */
 public class MonsterGameServlet extends HttpServlet {
   
+  // static are class variables and are not cloned in objects - eg only one logger is used by all instances
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
 
@@ -20,8 +21,12 @@ public class MonsterGameServlet extends HttpServlet {
   private String screen = "";
   private String method = "";
 
-  public String json() {
+  private static String json() {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\" }";
+  }
+  
+  private static String drawMenu() {
+    return "<br>[" + super.data + "]" + "<br>1. New game<br>etc...<br>Enter choice: ";
   }
   
   
@@ -90,7 +95,7 @@ public class MonsterGameServlet extends HttpServlet {
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // start new session
     HttpSession mySession = req.getSession(true);
-    mySession.setAttribute("scene", new MenuScene());
+    mySession.setAttribute("scene", "menuscene");
     // hand back to tier1 to present the initial user state
     resp.setContentType("text/plain");
     resp.getWriter().println(json());
@@ -106,14 +111,19 @@ public class MonsterGameServlet extends HttpServlet {
     screen = "<br>safetyscreen";
     method = "safetymethod";
     //MenuScene scene = new MenuScene();
-    MenuScene scene = (MenuScene)mySession.getAttribute("scene");
+    String scene = (String)mySession.getAttribute("scene");
     debug += "input:"+input+":scene:"+scene;
-    scene.handle(input);
-    screen += "<br>"+debug;
+    select (scene) {
+      case "menuscene":
+        screen = MonsterGameServlet.drawMenu();
+        method = "read";
+    }
+    //scene.handle(input);
+    //screen += "<br>"+debug;
     log.warning(debug);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(json());
+    resp.getWriter().println(MonsterGameServlet.json());
   }
 
 }
