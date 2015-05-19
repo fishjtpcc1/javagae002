@@ -38,11 +38,11 @@ public class MonsterGameServlet extends HttpServlet {
   private static void handleMenu(String input) {
     switch (input) {
       case "1":
-        scenemode = "gamescene";
+        scene = "gamescene";
         screen = drawMGame();
         method = "read";
       default:
-        scenemode = "menuscene";
+        scene = "menuscene";
         screen = drawMenu();
         method = "read";
     }
