@@ -20,7 +20,7 @@ public class MonsterGameServlet extends HttpServlet {
   private static String screen;
   private static String method;
 
-  private static String json(String screen, String method) {
+  private static String json() {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\" }";
   }
   
@@ -58,7 +58,7 @@ public class MonsterGameServlet extends HttpServlet {
     method = "read";
     // hand back to tier1 to present the initial user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(screen,method));
+    resp.getWriter().println(MonsterGameServlet.json());
   }
 
 
@@ -72,16 +72,16 @@ public class MonsterGameServlet extends HttpServlet {
     method = "safetymethod";
     //MenuScene scene = new MenuScene();
     scene = (String)mySession.getAttribute("scene");
+    log.warning("scene:"+scene+", input:"+input);
     switch (scene) {
       case "menuscene":
         handleMenu(input);
     }
     //scene.handle(input);
     //screen += "<br>"+debug;
-    //log.warning(debug);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(screen,method));
+    resp.getWriter().println(MonsterGameServlet.json());
   }
 
 }
