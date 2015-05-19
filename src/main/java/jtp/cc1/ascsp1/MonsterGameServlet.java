@@ -19,7 +19,17 @@ public class MonsterGameServlet extends HttpServlet {
   private static String scene;
   private static String screen;
   private static String method;
-  private static String gamedata;
+  private static Game theGame;
+
+
+  private static class Game {
+    public String s = "newgame: ";
+    public int i = 0;
+    public Boolean isOver() {
+      return (i >= 3);
+    }
+  }
+
 
   private static String json() {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\" }";
@@ -32,7 +42,7 @@ public class MonsterGameServlet extends HttpServlet {
   
   
   private static String drawGame() {
-    return "<br>|------" + gamedata + "------|<br>Enter choice: ";
+    return "<br>|------" + theGame.s + " " + theGame.i + " " + theGame.isOver() + "------|<br>Enter choice: ";
   }
   
   
@@ -41,7 +51,7 @@ public class MonsterGameServlet extends HttpServlet {
     switch (input) {
       case "1":
         log.warning("case '1'");
-        gamedata = "newgame: ";
+        theGame = new Game();
         scene = "gamescene";
         screen = drawGame();
         method = "read";
@@ -61,10 +71,17 @@ public class MonsterGameServlet extends HttpServlet {
     switch (input) {
       case "N": case "S": case "E": case "W":
         log.warning("case 'NSEW'");
-        gamedata += input + ": ";
-        scene = "gamescene";
-        screen = drawGame();
-        method = "read";
+        theGame.s += input + ": ";
+        theGame.i ++;
+        if (theGame.isOver()) {
+          scene = "menuscene";
+          screen = drawMenu();
+          method = "read";
+        } else {
+          scene = "gamescene";
+          screen = drawGame();
+          method = "read";
+        }
         break;
       case "M":
         log.warning("M");
@@ -105,8 +122,8 @@ public class MonsterGameServlet extends HttpServlet {
     method = "safetymethod";
     //MenuScene scene = new MenuScene();
     scene = (String)mySession.getAttribute("scene");
-    gamedata = (String)mySession.getAttribute("gamedata");
-    log.warning("scene:"+scene+", gamedata:"+gamedata+", input:"+input);
+    Game theGame = (Game)mySession.getAttribute("thegame");
+    log.warning("scene:"+scene+", thegame:"+theGame+", thegame.s:"+theGame.s+", input:"+input);
     switch (scene) {
       case "menuscene":
         handleMenu(input);
@@ -118,7 +135,7 @@ public class MonsterGameServlet extends HttpServlet {
     //scene.handle(input);
     //screen += "<br>"+debug;
     mySession.setAttribute("scene", scene);
-    mySession.setAttribute("gamedata", gamedata);
+    mySession.setAttribute("thegame", theGame);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json());
