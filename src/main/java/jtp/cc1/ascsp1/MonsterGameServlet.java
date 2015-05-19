@@ -16,91 +16,49 @@ public class MonsterGameServlet extends HttpServlet {
   // static are class variables and are not cloned in objects - eg only one logger is used by all instances
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
+  private static String scene;
+  private static String screen;
+  private static String method;
 
-  private static String debug = "debug:";
-  private static String screen = "";
-  private static String method = "";
-
-  private static String json() {
+  private static String json(String screen, String method) {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\" }";
   }
+  
   
   private static String drawMenu() {
     return "<br>1. New game<br>etc...<br>Enter choice: ";
   }
   
   
-  /** each scene is an object
-   */
-  class Scene implements Serializable {
-    public String data = "";
-    
-    public void handle(String input) {
-      this.data += input + " ";
-      screen = "blank";
-      method = "none";
-    }
-    
+  private static String drawGame() {
+    return "<br>|------game screen------|<br>Enter choice: ";
   }
-
-  class MenuScene extends Scene {
-
-    public MenuScene() {
-      super.data = "newmenu";
-      screen = draw();
-      method = "read";
+  
+  
+  private static void handleMenu(String input) {
+    switch (input) {
+      case "1":
+        scenemode = "gamescene";
+        screen = drawMGame();
+        method = "read";
+      default:
+        scenemode = "menuscene";
+        screen = drawMenu();
+        method = "read";
     }
-    
-    private String draw() {
-      return "<br>[" + super.data + "]" + "<br>1. New game<br>etc...<br>Enter choice: ";
-    }
-    
-    public void handle(String input) {
-      debug += "here:";
-      super.handle(input);
-      switch (input) {
-        default:
-          screen = draw();
-          method = "read";
-      }
-    }
-    
   }
-
-  class GameScene extends Scene {
-
-    public GameScene() {
-      super.data = "newgame";
-      screen = draw();
-      method = "read";
-    }
     
-    private String draw() {
-      return "<br>[" + super.data + "]" + "--game--<br>Enter choice: ";
-    }
-    
-    public void handle(String input) {
-      super.handle(input);
-      switch (input) {
-        default:
-          screen = draw();
-          method = "read";
-      }
-    }
-    
-  }
-
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // start new session
     HttpSession mySession = req.getSession(true);
     mySession.setAttribute("scene", "menuscene");
-    screen = MonsterGameServlet.drawMenu();
+    screen = drawMenu();
     method = "read";
     // hand back to tier1 to present the initial user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json());
+    resp.getWriter().println(MonsterGameServlet.json(screen,method));
   }
 
 
@@ -113,19 +71,18 @@ public class MonsterGameServlet extends HttpServlet {
     screen = "<br>safetyscreen";
     method = "safetymethod";
     //MenuScene scene = new MenuScene();
-    String scene = (String)mySession.getAttribute("scene");
+    scene = (String)mySession.getAttribute("scene");
     debug += "input:"+input+":scene:"+scene;
     switch (scene) {
       case "menuscene":
-        screen = MonsterGameServlet.drawMenu();
-        method = "read";
+        handleMenu(input);
     }
     //scene.handle(input);
     //screen += "<br>"+debug;
     log.warning(debug);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json());
+    resp.getWriter().println(MonsterGameServlet.json(screen,method));
   }
 
 }
