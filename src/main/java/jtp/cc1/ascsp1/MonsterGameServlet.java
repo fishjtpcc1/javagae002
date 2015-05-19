@@ -21,8 +21,9 @@ public class MonsterGameServlet extends HttpServlet {
   private static String method;
   private static Game theGame;
 
-
-  private static class Game {
+  /** to save complex data in the session class must implement Serializable or runtime error happens
+   */
+  private static class Game implements Serializable {
     public String s = "newgame: ";
     public int i = 0;
     public Boolean isOver() {
