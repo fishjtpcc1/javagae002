@@ -27,7 +27,8 @@
   <artifactId>ascsp1</artifactId><!-- try to make consistent with java package naming -->
 
   <properties>
-    <appengine.app.version>overridden</appengine.app.version><!-- my app-in-runner version as shown in gae versions overridden in deploy-->
+    <appengine.app>overridden</appengine.app><!-- my app-in-runner projectid as shown in gae - overidden in deploy-->
+    <appengine.app.version>overridden</appengine.app.version><!-- my app-in-runner version as shown in gae versions - overridden in deploy-->
     <appengine.target.version>1.9.18</appengine.target.version><!-- appengine plugin version NOT my app version!! -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

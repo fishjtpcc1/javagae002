@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-    <application>linen-patrol-93516</application>
+    <!-- <application>${appengine.app}</application> done at deploy time-->
     <!-- <version>${appengine.app.version}</version> done at deploy time-->
     <threadsafe>true</threadsafe>
     <sessions-enabled>true</sessions-enabled>
