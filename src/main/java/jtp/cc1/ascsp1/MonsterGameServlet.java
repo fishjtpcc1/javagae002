@@ -47,6 +47,11 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   
+  private static String drawGameover() {
+    return "<br>LOOSER!!!!<br>Enter choice: ";
+  }
+  
+  
   private static void handleMenu(String input) {
     log.warning("input:"+input);
     switch (input) {
@@ -75,8 +80,8 @@ public class MonsterGameServlet extends HttpServlet {
         theGame.s += input + ": ";
         theGame.i ++;
         if (theGame.isOver()) {
-          scene = "menuscene";
-          screen = drawMenu();
+          scene = "gameoverscene";
+          screen = drawGameover();
           method = "read";
         } else {
           scene = "gamescene";
@@ -97,6 +102,14 @@ public class MonsterGameServlet extends HttpServlet {
         method = "read";
         break;
     }
+  }
+    
+
+  private static void handleGameover(String input) {
+    log.warning("input:"+input);
+    scene = "menuscene";
+    screen = drawMenu();
+    method = "read";
   }
     
 
@@ -132,6 +145,9 @@ public class MonsterGameServlet extends HttpServlet {
         break;
       case "gamescene":
         handleGame(input);
+        break;
+      case "gameoverscene":
+        handleGameover(input);
         break;
     }
     //scene.handle(input);
