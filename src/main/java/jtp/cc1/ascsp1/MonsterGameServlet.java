@@ -38,7 +38,7 @@ public class MonsterGameServlet extends HttpServlet {
   
   
   private static String drawMenu() {
-    return "<br>1. New game<br>etc...<br>Enter choice: ";
+    return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
   }
   
   
@@ -52,6 +52,11 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   
+  private static String drawFilesave() {
+    return "<br>Enter filename to save: ";
+  }
+  
+  
   private static void handleMenu(String input) {
     log.warning("input:"+input);
     switch (input) {
@@ -61,6 +66,12 @@ public class MonsterGameServlet extends HttpServlet {
         scene = "gamescene";
         screen = drawGame();
         method = "read";
+        break;
+      case "2":
+        log.warning("case '2'");
+        scene = "filesavescene";
+        screen = drawFilesave();
+        method = "readln";
         break;
       default:
         log.warning("default");
@@ -113,6 +124,22 @@ public class MonsterGameServlet extends HttpServlet {
   }
     
 
+  private static void handleFilesave(String input) {
+    log.warning("input:"+input);
+    scene = "filesavesuccessscene";
+    screen = drawFilesavesuccess();
+    method = "read";
+  }
+    
+
+  private static void handleFilesavesuccess(String input) {
+    log.warning("input:"+input);
+    scene = "menuscene";
+    screen = drawMenu();
+    method = "read";
+  }
+    
+
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // start new session
@@ -148,6 +175,12 @@ public class MonsterGameServlet extends HttpServlet {
         break;
       case "gameoverscene":
         handleGameover(input);
+        break;
+      case "filesavescene":
+        handleFilesave(input);
+        break;
+      case "filesavesuccessscene":
+        handleFilesavesuccess(input);
         break;
     }
     //scene.handle(input);
