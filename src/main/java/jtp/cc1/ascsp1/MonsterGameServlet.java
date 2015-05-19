@@ -1,5 +1,6 @@
 package jtp.cc1.ascsp1;
 
+import java.util.logging.Logger;
 import java.io.Serializable;
 import java.io.IOException;
 import javax.servlet.http.*;
@@ -13,6 +14,7 @@ import javax.servlet.http.*;
 public class MonsterGameServlet extends HttpServlet {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
+  private static final Logger log = Logger.getLogger(MyServlet.class.getName());
 
   private String debug = "debug:";
   private String screen = "";
@@ -108,6 +110,7 @@ public class MonsterGameServlet extends HttpServlet {
     debug += "input:"+input+":scene:"+scene;
     scene.handle(input);
     screen += "<br>"+debug;
+    log.warning(debug);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(json());
