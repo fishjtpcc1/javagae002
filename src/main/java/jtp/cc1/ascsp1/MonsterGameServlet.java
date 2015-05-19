@@ -14,7 +14,7 @@ import javax.servlet.http.*;
 public class MonsterGameServlet extends HttpServlet {
   
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
-  private static final Logger log = Logger.getLogger(MyServlet.class.getName());
+  private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
 
   private String debug = "debug:";
   private String screen = "";
