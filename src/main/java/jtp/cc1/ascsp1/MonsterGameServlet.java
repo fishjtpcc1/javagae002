@@ -96,9 +96,11 @@ public class MonsterGameServlet extends HttpServlet {
     // start new session
     HttpSession mySession = req.getSession(true);
     mySession.setAttribute("scene", "menuscene");
+    screen = MonsterGameServlet.drawMenu();
+    method = "read";
     // hand back to tier1 to present the initial user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(json());
+    resp.getWriter().println(MonsterGameServlet.json());
   }
 
 
