@@ -57,6 +57,11 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   
+  private static String drawFilesavesuccess() {
+    return "<br>Success<br>Press any key to continue: ";
+  }
+  
+  
   private static void handleMenu(String input) {
     log.warning("input:"+input);
     switch (input) {
