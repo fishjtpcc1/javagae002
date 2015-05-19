@@ -140,7 +140,7 @@ public class MonsterGameServlet extends HttpServlet {
       // bad file name
       scene = "filesavefailscene";
       screen = drawFilesavefail();
-      method = "read";
+      method = "readln";
     } else {
       scene = "filesavesuccessscene";
       screen = drawFilesavesuccess();
