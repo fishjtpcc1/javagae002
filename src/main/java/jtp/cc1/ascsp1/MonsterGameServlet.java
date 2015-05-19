@@ -102,10 +102,8 @@ public class MonsterGameServlet extends HttpServlet {
     
 
   private static void handleGame(String input) {
-    log.warning("input:"+input);
     switch (input) {
       case "N": case "S": case "E": case "W":
-        log.warning("case 'NSEW'");
         theGame.s += input + ": ";
         theGame.i ++;
         if (theGame.isWon()) {
@@ -123,13 +121,11 @@ public class MonsterGameServlet extends HttpServlet {
         }
         break;
       case "M":
-        log.warning("M");
         scene = "menuscene";
         screen = drawMenu();
         method = "read";
         break;
       default:
-        log.warning("default");
         scene = "gamescene";
         screen = drawGame();
         method = "read";
@@ -139,7 +135,6 @@ public class MonsterGameServlet extends HttpServlet {
     
 
   private static void handleGamewon(String input) {
-    log.warning("input:"+input);
     scene = "menuscene";
     screen = drawMenu();
     method = "read";
@@ -147,7 +142,6 @@ public class MonsterGameServlet extends HttpServlet {
     
 
   private static void handleGameover(String input) {
-    log.warning("input:"+input);
     scene = "menuscene";
     screen = drawMenu();
     method = "read";
@@ -155,7 +149,6 @@ public class MonsterGameServlet extends HttpServlet {
     
 
   private static void handleFilesave(String input) {
-    log.warning("input:"+input);
     if (input.contains(" ")) {
       // bad file name
       scene = "filesavefailscene";
@@ -170,7 +163,6 @@ public class MonsterGameServlet extends HttpServlet {
     
 
   private static void handleFilesavesuccess(String input) {
-    log.warning("input:"+input);
     scene = "menuscene";
     screen = drawMenu();
     method = "read";
@@ -178,7 +170,6 @@ public class MonsterGameServlet extends HttpServlet {
     
 
   private static void handleFilesavefail(String input) {
-    log.warning("input:"+input);
     scene = "filesavescene";
     screen = drawFilesave();
     method = "read";
@@ -207,10 +198,9 @@ public class MonsterGameServlet extends HttpServlet {
     // proceed with this use event
     screen = "<br>safetyscreen";
     method = "safetymethod";
-    //MenuScene scene = new MenuScene();
     scene = (String)mySession.getAttribute("scene");
     Game theGame = (Game)mySession.getAttribute("thegame");
-    log.warning("scene:"+scene+", thegame:"+theGame+", theGame.s:"+theGame.s+", input:"+input);
+    log.warning("scene:"+scene+", thegame:"+theGame+", input:"+input);
     switch (scene) {
       case "menuscene":
         handleMenu(input);
@@ -234,8 +224,6 @@ public class MonsterGameServlet extends HttpServlet {
         handleFilesavefail(input);
         break;
     }
-    //scene.handle(input);
-    //screen += "<br>"+debug;
     mySession.setAttribute("scene", scene);
     mySession.setAttribute("thegame", theGame);
     // hand back to tier1 to present the new user state
