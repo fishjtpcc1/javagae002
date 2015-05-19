@@ -106,7 +106,7 @@ public class MonsterGameServlet extends HttpServlet {
     screen = "<br>safetyscreen";
     method = "safetymethod";
     //MenuScene scene = new MenuScene();
-    Scene scene = (Scene)mySession.getAttribute("scene");
+    MenuScene scene = (MenuScene)mySession.getAttribute("scene");
     debug += "input:"+input+":scene:"+scene;
     scene.handle(input);
     screen += "<br>"+debug;
