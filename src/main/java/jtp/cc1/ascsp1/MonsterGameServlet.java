@@ -36,12 +36,15 @@ public class MonsterGameServlet extends HttpServlet {
   
   
   private static void handleMenu(String input) {
+    log.warning("input:"+input);
     switch (input) {
       case "1":
+        log.warning("case '1'");
         scene = "gamescene";
         screen = drawGame();
         method = "read";
       default:
+        log.warning("default");
         scene = "menuscene";
         screen = drawMenu();
         method = "read";
