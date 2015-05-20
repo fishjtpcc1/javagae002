@@ -188,9 +188,9 @@ public class MonsterGameServlet extends HttpServlet {
     objectData += "last used by " + mySession.getId() + " @ " + reuseCount; // reuse data and mod it
     // byreftest
     String asSet = "42";
-    mySession.setAttribute("javatest", asSet);
+    mySession.setAttribute("byreftest", asSet);
     String asGot = (String)mySession.getAttribute("byreftest");
-    asGot += "69";
+    asGot += ":69";
     String asMod = asGot;
     String asFound = (String)mySession.getAttribute("byreftest");
     String byreftest = asSet+"<>"+asMod+"<>"+asFound;
