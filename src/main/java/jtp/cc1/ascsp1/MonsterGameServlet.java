@@ -16,6 +16,7 @@ public class MonsterGameServlet extends HttpServlet {
   // static are class variables and are not cloned in objects - eg only one logger is used by all instances
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
+  private static int reuseCount = 0; // to prove server object reuse behaviour
   private static String scene;
   private static String screen;
   private static String method;
@@ -36,7 +37,7 @@ public class MonsterGameServlet extends HttpServlet {
 
 
   private static String json() {
-    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\" }";
+    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + "{\"reuseCount\": "+reuseCount+"}" + " }";
   }
   
   
@@ -178,6 +179,7 @@ public class MonsterGameServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
+    reuseCount ++;
     // start new session
     HttpSession mySession = req.getSession(true);
     mySession.setAttribute("scene", "menuscene");
