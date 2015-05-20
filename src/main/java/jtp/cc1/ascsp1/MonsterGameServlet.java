@@ -188,7 +188,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("thegame", new Game());
     screen = drawMenu();
     method = "read";
-    objectData = "last used by " + mySession.getId() + " @ " + reuseCount;
+    objectData += "last used by " + mySession.getId() + " @ " + reuseCount; // reuse data and mod it
     // hand back to tier1 to present the initial user state
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json("reuseCount:"+reuseCount+", sid:"+mySession.getId()+", objectData:"+objectData));
