@@ -193,7 +193,7 @@ public class MonsterGameServlet extends HttpServlet {
     asGot += "69";
     String asMod = asGot;
     String asFound = (String)mySession.getAttribute("byreftest");
-    String byreftest = asSet+"<>"+asMod+"<>"+asFound
+    String byreftest = asSet+"<>"+asMod+"<>"+asFound;
     // init the gameapp state
     mySession.setAttribute("scene", "menuscene");
     mySession.setAttribute("thegame", new Game());
