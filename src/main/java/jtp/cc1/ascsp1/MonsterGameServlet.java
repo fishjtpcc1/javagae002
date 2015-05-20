@@ -18,10 +18,85 @@ public class MonsterGameServlet extends HttpServlet {
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
   private static int reuseCount = 0; // to prove server class reuse behaviour
   
-  private String scene;
-  private String screen;
-  private String method;
-  private Game theGame;
+  private static String json(String screen, String method, String other) {
+    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
+  }
+  
+  private static String drawMenu() {
+    return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
+  }
+  
+  private static String drawFilesave() {
+    return "<br>Enter filename to save: ";
+  }
+  
+  private static String drawFilesavesuccess() {
+    return "<br>Success<br>Press any key to continue: ";
+  }
+  
+  private static String drawFilesavefail() {
+    return "<br>Fail<br>Press any key to continue: ";
+  }
+  
+  private static void handleMenu(String input) {
+    log.warning("input:"+input);
+    switch (input) {
+      case "1":
+        log.warning("case '1'");
+        theGame = new Game();
+        break;
+      case "2":
+        log.warning("case '2'");
+        scene = "filesavescene";
+        screen = drawFilesave();
+        method = "readln";
+        break;
+      default:
+        log.warning("default");
+        scene = "menuscene";
+        screen = drawMenu();
+        method = "read";
+        break;
+    }
+  }
+    
+  private static void handleGamewon(String input) {
+    scene = "menuscene";
+    screen = drawMenu();
+    method = "read";
+  }
+    
+  private static void handleGameover(String input) {
+    scene = "menuscene";
+    screen = drawMenu();
+    method = "read";
+  }
+    
+  private static void handleFilesave(String input) {
+    if (input.contains(" ")) {
+      // bad file name
+      scene = "filesavefailscene";
+      screen = drawFilesavefail();
+      method = "readln";
+    } else {
+      scene = "filesavesuccessscene";
+      screen = drawFilesavesuccess();
+      method = "read";
+    }
+  }
+    
+  private static void handleFilesavesuccess(String input) {
+    scene = "menuscene";
+    screen = drawMenu();
+    method = "read";
+  }
+    
+  private static void handleFilesavefail(String input) {
+    scene = "filesavescene";
+    screen = drawFilesave();
+    method = "read";
+  }
+    
 
   /** to save complex data in the session class must implement Serializable or runtime error happens
    */
@@ -82,95 +157,11 @@ public class MonsterGameServlet extends HttpServlet {
   }
 
 
-  private static String json(String other) {
-    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
-  }
-  
-  
-  private static String drawMenu() {
-    return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
-  }
-  
-  
-  private static String drawFilesave() {
-    return "<br>Enter filename to save: ";
-  }
-  
-  
-  private static String drawFilesavesuccess() {
-    return "<br>Success<br>Press any key to continue: ";
-  }
-  
-  
-  private static String drawFilesavefail() {
-    return "<br>Fail<br>Press any key to continue: ";
-  }
-  
-  
-  private static void handleMenu(String input) {
-    log.warning("input:"+input);
-    switch (input) {
-      case "1":
-        log.warning("case '1'");
-        theGame = new Game();
-        break;
-      case "2":
-        log.warning("case '2'");
-        scene = "filesavescene";
-        screen = drawFilesave();
-        method = "readln";
-        break;
-      default:
-        log.warning("default");
-        scene = "menuscene";
-        screen = drawMenu();
-        method = "read";
-        break;
-    }
-  }
-    
-
-  private static void handleGamewon(String input) {
-    scene = "menuscene";
-    screen = drawMenu();
-    method = "read";
-  }
-    
-
-  private static void handleGameover(String input) {
-    scene = "menuscene";
-    screen = drawMenu();
-    method = "read";
-  }
-    
-
-  private static void handleFilesave(String input) {
-    if (input.contains(" ")) {
-      // bad file name
-      scene = "filesavefailscene";
-      screen = drawFilesavefail();
-      method = "readln";
-    } else {
-      scene = "filesavesuccessscene";
-      screen = drawFilesavesuccess();
-      method = "read";
-    }
-  }
-    
-
-  private static void handleFilesavesuccess(String input) {
-    scene = "menuscene";
-    screen = drawMenu();
-    method = "read";
-  }
-    
-
-  private static void handleFilesavefail(String input) {
-    scene = "filesavescene";
-    screen = drawFilesave();
-    method = "read";
-  }
-    
+  // dynamic object stuff
+  private String scene;
+  private String screen;
+  private String method;
+  private Game theGame;
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
@@ -185,7 +176,6 @@ public class MonsterGameServlet extends HttpServlet {
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json("reuseCount:"+reuseCount+", sid:"+mySession.getId()));
   }
-
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
