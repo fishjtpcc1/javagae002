@@ -38,44 +38,6 @@ public class MonsterGameServlet extends HttpServlet {
     return "<br>Fail<br>Press any key to continue: ";
   }
   
-  private static void handleGamewon(String input) {
-    scene = "menuscene";
-    screen = drawMenu();
-    method = "read";
-  }
-    
-  private static void handleGameover(String input) {
-    scene = "menuscene";
-    screen = drawMenu();
-    method = "read";
-  }
-    
-  private static void handleFilesave(String input) {
-    if (input.contains(" ")) {
-      // bad file name
-      scene = "filesavefailscene";
-      screen = drawFilesavefail();
-      method = "readln";
-    } else {
-      scene = "filesavesuccessscene";
-      screen = drawFilesavesuccess();
-      method = "read";
-    }
-  }
-    
-  private static void handleFilesavesuccess(String input) {
-    scene = "menuscene";
-    screen = drawMenu();
-    method = "read";
-  }
-    
-  private static void handleFilesavefail(String input) {
-    scene = "filesavescene";
-    screen = drawFilesave();
-    method = "read";
-  }
-    
-
   /** to save complex data in the session class must implement Serializable or runtime error happens
    */
   public class Game implements Serializable {
@@ -141,6 +103,43 @@ public class MonsterGameServlet extends HttpServlet {
   private String method;
   private Game theGame;
 
+  private void handleGamewon(String input) {
+    scene = "menuscene";
+    screen = drawMenu();
+    method = "read";
+  }
+    
+  private void handleGameover(String input) {
+    scene = "menuscene";
+    screen = drawMenu();
+    method = "read";
+  }
+    
+  private void handleFilesave(String input) {
+    if (input.contains(" ")) {
+      // bad file name
+      scene = "filesavefailscene";
+      screen = drawFilesavefail();
+      method = "readln";
+    } else {
+      scene = "filesavesuccessscene";
+      screen = drawFilesavesuccess();
+      method = "read";
+    }
+  }
+    
+  private void handleFilesavesuccess(String input) {
+    scene = "menuscene";
+    screen = drawMenu();
+    method = "read";
+  }
+    
+  private void handleFilesavefail(String input) {
+    scene = "filesavescene";
+    screen = drawFilesave();
+    method = "read";
+  }
+    
   private void handleMenu(String input) {
     switch (input) {
       case "1":
