@@ -172,7 +172,7 @@ public class MonsterGameServlet extends HttpServlet {
     method = "read";
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json("reuseCount:"+reuseCount+", sid:"+mySession.getId()));
+    resp.getWriter().println(MonsterGameServlet.json(screen, method, "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
   }
 
   @Override
@@ -212,7 +212,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("thegame", theGame); // may be null
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json("scene:"+scene+", thegame:"+theGame+", input:"+input));
+    resp.getWriter().println(MonsterGameServlet.json(screen, method, "scene:"+scene+", thegame:"+theGame+", input:"+input));
   }
 
 }
