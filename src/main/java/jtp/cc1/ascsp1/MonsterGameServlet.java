@@ -16,12 +16,14 @@ public class MonsterGameServlet extends HttpServlet {
   // static are class variables and are not cloned in objects - eg only one logger is used by all instances
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
-  private static int reuseCount = 0; // to prove server object reuse behaviour
+  private static int reuseCount = 0; // to prove server class reuse behaviour
   private static String scene;
   private static String screen;
   private static String method;
   private static Game theGame;
 
+  private String objectData;// to prove server running object reuse behaviour
+  
   /** to save complex data in the session class must implement Serializable or runtime error happens
    */
   private static class Game implements Serializable {
@@ -186,9 +188,10 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("thegame", new Game());
     screen = drawMenu();
     method = "read";
+    objectData = "last used by " + mySession.getId() + " @ " + reuseCount;
     // hand back to tier1 to present the initial user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json("reuseCount:"+reuseCount+", sid:"+mySession.getId()));
+    resp.getWriter().println(MonsterGameServlet.json("reuseCount:"+reuseCount+", sid:"+mySession.getId()+", objectData:"+objectData));
   }
 
 
