@@ -38,7 +38,9 @@ public class MonsterGameServlet extends HttpServlet {
     return "<br>Fail<br>Press any key to continue: ";
   }
   
-  /** to save complex data in the session class must implement Serializable or runtime error happens
+  /** to save complex data in the session class
+   * must implement Serializable or runtime error happens
+   * fail: works when private static but not when public - as if interface is recognised but no implementation code is attached
    */
   public class Game implements Serializable {
     public String s = "newgame: ";
