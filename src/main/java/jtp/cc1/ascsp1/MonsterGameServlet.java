@@ -17,13 +17,12 @@ public class MonsterGameServlet extends HttpServlet {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
   private static int reuseCount = 0; // to prove server class reuse behaviour
-  private static String scene;
-  private static String screen;
-  private static String method;
-  private static Game theGame;
-
-  private String objectData;// to prove server running object reuse behaviour
   
+  private String scene;
+  private String screen;
+  private String method;
+  private Game theGame;
+
   /** to save complex data in the session class must implement Serializable or runtime error happens
    */
   private static class Game implements Serializable {
@@ -35,6 +34,51 @@ public class MonsterGameServlet extends HttpServlet {
     public Boolean isWon() {
       return (s.contains("W"));
     }
+    public String drawGame() {
+      return "<br>|------" + s + " " + i + "------|<br>Enter NSEWM: ";
+    }
+    public String drawGameover() {
+      return "<br>LOOSER!!!!<br>Press any key to continue: ";
+    }
+    public String drawGamewon() {
+      return "<br>WINNER!!!!<br>Press any key to continue: ";
+    }
+    public void handle(String input) {
+      switch (input) {
+        case "N": case "S": case "E": case "W":
+          s += input + ": ";
+          i ++;
+          if (isWon()) {
+            scene = "gamewonscene";
+            screen = drawGamewon();
+            method = "read";
+          } else if (isOver()) {
+            scene = "gameoverscene";
+            screen = drawGameover();
+            method = "read";
+          } else {
+            scene = "gamescene";
+            screen = drawGame();
+            method = "read";
+          }
+          break;
+        case "M":
+          scene = "menuscene";
+          screen = drawMenu();
+          method = "read";
+          break;
+        default:
+          scene = "gamescene";
+          screen = drawGame();
+          method = "read";
+          break;
+      }
+    }
+    public Game() {
+        scene = "gamescene";
+        screen = drawGame();
+        method = "read";
+    }
   }
 
 
@@ -45,21 +89,6 @@ public class MonsterGameServlet extends HttpServlet {
   
   private static String drawMenu() {
     return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
-  }
-  
-  
-  private static String drawGame() {
-    return "<br>|------" + theGame.s + " " + theGame.i + "------|<br>Enter NSEWM: ";
-  }
-  
-  
-  private static String drawGameover() {
-    return "<br>LOOSER!!!!<br>Press any key to continue: ";
-  }
-  
-  
-  private static String drawGamewon() {
-    return "<br>WINNER!!!!<br>Press any key to continue: ";
   }
   
   
@@ -84,9 +113,6 @@ public class MonsterGameServlet extends HttpServlet {
       case "1":
         log.warning("case '1'");
         theGame = new Game();
-        scene = "gamescene";
-        screen = drawGame();
-        method = "read";
         break;
       case "2":
         log.warning("case '2'");
@@ -98,39 +124,6 @@ public class MonsterGameServlet extends HttpServlet {
         log.warning("default");
         scene = "menuscene";
         screen = drawMenu();
-        method = "read";
-        break;
-    }
-  }
-    
-
-  private static void handleGame(String input) {
-    switch (input) {
-      case "N": case "S": case "E": case "W":
-        theGame.s += input + ": ";
-        theGame.i ++;
-        if (theGame.isWon()) {
-          scene = "gamewonscene";
-          screen = drawGamewon();
-          method = "read";
-        } else if (theGame.isOver()) {
-          scene = "gameoverscene";
-          screen = drawGameover();
-          method = "read";
-        } else {
-          scene = "gamescene";
-          screen = drawGame();
-          method = "read";
-        }
-        break;
-      case "M":
-        scene = "menuscene";
-        screen = drawMenu();
-        method = "read";
-        break;
-      default:
-        scene = "gamescene";
-        screen = drawGame();
         method = "read";
         break;
     }
@@ -184,24 +177,13 @@ public class MonsterGameServlet extends HttpServlet {
     reuseCount ++;
     // start new session
     HttpSession mySession = req.getSession(true);
-    // shared obj test
-    objectData += "last used by " + mySession.getId() + " @ " + reuseCount; // reuse data and mod it
-    // byreftest
-    String asSet = "42";
-    mySession.setAttribute("byreftest", asSet);
-    String asGot = (String)mySession.getAttribute("byreftest");
-    asGot += ":69";
-    String asMod = asGot;
-    String asFound = (String)mySession.getAttribute("byreftest");
-    String byreftest = asSet+"<>"+asMod+"<>"+asFound;
     // init the gameapp state
     mySession.setAttribute("scene", "menuscene");
-    mySession.setAttribute("thegame", new Game());
     screen = drawMenu();
     method = "read";
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json("reuseCount:"+reuseCount+", sid:"+mySession.getId()+", objectData:"+objectData+", byreftest:"+byreftest));
+    resp.getWriter().println(MonsterGameServlet.json("reuseCount:"+reuseCount+", sid:"+mySession.getId()));
   }
 
 
@@ -214,14 +196,13 @@ public class MonsterGameServlet extends HttpServlet {
     screen = "<br>safetyscreen";
     method = "safetymethod";
     scene = (String)mySession.getAttribute("scene");
-    Game theGame = (Game)mySession.getAttribute("thegame");
-    log.warning("scene:"+scene+", thegame:"+theGame+", input:"+input);
+    Game theGame = (Game)mySession.getAttribute("thegame"); // created by menu choice and save here below
     switch (scene) {
       case "menuscene":
         handleMenu(input);
         break;
       case "gamescene":
-        handleGame(input);
+        theGame.handle(input);
         break;
       case "gamewonscene":
         handleGamewon(input);
@@ -240,10 +221,10 @@ public class MonsterGameServlet extends HttpServlet {
         break;
     }
     mySession.setAttribute("scene", scene);
-    mySession.setAttribute("thegame", theGame);
+    mySession.setAttribute("thegame", theGame); // may be null
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(""));
+    resp.getWriter().println(MonsterGameServlet.json("scene:"+scene+", thegame:"+theGame+", input:"+input));
   }
 
 }
