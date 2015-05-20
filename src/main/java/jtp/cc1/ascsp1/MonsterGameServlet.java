@@ -38,28 +38,6 @@ public class MonsterGameServlet extends HttpServlet {
     return "<br>Fail<br>Press any key to continue: ";
   }
   
-  private static void handleMenu(String input) {
-    log.warning("input:"+input);
-    switch (input) {
-      case "1":
-        log.warning("case '1'");
-        theGame = new Game();
-        break;
-      case "2":
-        log.warning("case '2'");
-        scene = "filesavescene";
-        screen = drawFilesave();
-        method = "readln";
-        break;
-      default:
-        log.warning("default");
-        scene = "menuscene";
-        screen = drawMenu();
-        method = "read";
-        break;
-    }
-  }
-    
   private static void handleGamewon(String input) {
     scene = "menuscene";
     screen = drawMenu();
@@ -163,6 +141,27 @@ public class MonsterGameServlet extends HttpServlet {
   private String method;
   private Game theGame;
 
+  private void handleMenu(String input) {
+    switch (input) {
+      case "1":
+        log.warning("case '1'");
+        theGame = new Game();
+        break;
+      case "2":
+        log.warning("case '2'");
+        scene = "filesavescene";
+        screen = drawFilesave();
+        method = "readln";
+        break;
+      default:
+        log.warning("default");
+        scene = "menuscene";
+        screen = drawMenu();
+        method = "read";
+        break;
+    }
+  }
+    
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     reuseCount ++;
