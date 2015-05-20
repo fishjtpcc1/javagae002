@@ -36,8 +36,8 @@ public class MonsterGameServlet extends HttpServlet {
   }
 
 
-  private static String json() {
-    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + "{\"reuseCount\": "+reuseCount+"}" + " }";
+  private static String json(String other) {
+    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
   
@@ -188,7 +188,7 @@ public class MonsterGameServlet extends HttpServlet {
     method = "read";
     // hand back to tier1 to present the initial user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json());
+    resp.getWriter().println(MonsterGameServlet.json("reuseCount:"+reuseCount+", sid:"+mySession.getId()));
   }
 
 
@@ -230,7 +230,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("thegame", theGame);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json());
+    resp.getWriter().println(MonsterGameServlet.json(""));
   }
 
 }
