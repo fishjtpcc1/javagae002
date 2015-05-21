@@ -25,6 +25,10 @@ public class MonsterGameServlet extends HttpServlet {
     return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
   }
   
+  public static String drawOops() {
+    return "<br>Que!? ";
+  }
+  
   public static String drawGame(Game g) {
     return "<br>|------" + g.data + "------|<br>Enter NSEWP: ";
   }
@@ -108,7 +112,7 @@ public class MonsterGameServlet extends HttpServlet {
             break;
           default:
             scene = "menuscene";
-            screen = drawMenu();
+            screen = drawOops();
             method = "read";
             break;
         }
