@@ -45,14 +45,6 @@ public class MonsterGameServlet extends HttpServlet {
     return "<br>Enter filename to save: ";
   }
   
-  private static String drawFilesavesuccess() {
-    return "<br>Success<br>Press any key to continue: ";
-  }
-  
-  private static String drawFilesavefail() {
-    return "<br>Fail<br>Press any key to continue: ";
-  }
-  
   // dynamic object stuff
   static String scene;
   private String screen;
@@ -139,6 +131,11 @@ public class MonsterGameServlet extends HttpServlet {
             screen = drawGame(theGame);
             method = "read";
             break;
+          default:
+            scene = "gamescene";
+            screen = drawOops();
+            method = "read";
+            break;
         }
         break;
       case "gamewonscene":
@@ -153,27 +150,17 @@ public class MonsterGameServlet extends HttpServlet {
         break;
       case "filesavescene":
         switch (updateFilerState(input)) {
-          case "fail":
-            scene = "filesavefailscene";
-            screen = drawFilesavefail();
-            method = "readln";
-            break;
           case "success":
-            scene = "filesavesuccessscene";
-            screen = drawFilesavesuccess();
+            scene = "menuscene";
+            screen = drawMenu();
             method = "read";
             break;
-        }
-        break;
-      case "filesavesuccessscene":
-        scene = "menuscene";
-        screen = drawMenu();
-        method = "read";
-        break;
-      case "filesavefailscene":
-        scene = "filesavescene";
-        screen = drawFilesave();
-        method = "read";
+           default:
+            scene = "filesavescene";
+            screen = drawOops();
+            method = "readln";
+            break;
+       }
         break;
     }
     mySession.setAttribute("scene", scene);

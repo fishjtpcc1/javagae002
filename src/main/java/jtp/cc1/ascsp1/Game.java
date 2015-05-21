@@ -17,30 +17,26 @@ public class Game implements Serializable {
   public Boolean isWon() {
     return (data.contains("W"));
   }
-  public Boolean isPaused() {
-    return isPaused;
-  }
   public String updateState(String input) {
     switch (input) {
       case "N": case "S": case "E": case "W":
         data += input + ": ";
         i ++;
+        if (isWon()) {
+          return "iswon";
+        } else if (isOver()) {
+          return "isover";
+        } else {
+          return "isinplay";
+        }
         break;
       case "P":
         isPaused = true;
+        return "ispaused";
         break;
       default:
-        // dirty: bad input - try again
+        return "oops";
         break;
-    }
-    if (isWon()) {
-      return "iswon";
-    } else if (isOver()) {
-      return "isover";
-    } else if (isPaused()) {
-      return "ispaused";
-    } else {
-      return "isinplay";
     }
   }
   public Game() {
