@@ -1,7 +1,6 @@
 package jtp.cc1.ascsp1;
 
 import java.util.logging.Logger;
-import java.io.Serializable;
 import java.io.IOException;
 import javax.servlet.http.*;
 

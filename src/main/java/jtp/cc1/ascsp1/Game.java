@@ -1,5 +1,7 @@
 package jtp.cc1.ascsp1;
 
+import java.io.Serializable;
+
 /** to save complex data in the session class
  * must implement Serializable or runtime error happens
  * fail: works when private static but not when public - as if interface is recognised but no implementation code is attached
