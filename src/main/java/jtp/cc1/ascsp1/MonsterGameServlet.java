@@ -85,6 +85,9 @@ public class MonsterGameServlet extends HttpServlet {
     switch (input) {
       case "1":
         theGame = new Game();
+        scene = "gamescene";
+        screen = theGame.drawGame();
+        method = "read";
         break;
       case "2":
         scene = "filesavescene";
@@ -129,6 +132,23 @@ public class MonsterGameServlet extends HttpServlet {
         break;
       case "gamescene":
         theGame.handle(input);
+        if (theGame.isWon()) {
+          scene = "gamewonscene";
+          screen = drawGamewon();
+          method = "read";
+        } else if (theGame.isOver()) {
+          scene = "gameoverscene";
+          screen = drawGameover();
+          method = "read";
+        } else if (theGame.isPaused()) {
+          scene = "menuscene";
+          screen = drawMenu();
+          method = "read";
+        } else {
+          scene = "gamescene";
+          screen = theGame.drawGame();
+          method = "read";
+        }
         break;
       case "gamewonscene":
         handleGamewon(input);

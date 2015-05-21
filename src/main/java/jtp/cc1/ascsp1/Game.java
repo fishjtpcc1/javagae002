@@ -34,36 +34,15 @@ public class Game implements Serializable {
       case "N": case "S": case "E": case "W":
         s += input + ": ";
         i ++;
-        if (isWon()) {
-          MonsterGameServlet.scene = "gamewonscene";
-          screen = drawGamewon();
-          method = "read";
-        } else if (isOver()) {
-          scene = "gameoverscene";
-          screen = drawGameover();
-          method = "read";
-        } else {
-          scene = "gamescene";
-          screen = drawGame();
-          method = "read";
-        }
         break;
       case "M":
         isPaused = true;
-        scene = "menuscene";
-        screen = MonsterGameServlet.drawMenu();
-        method = "read";
         break;
       default:
-        scene = "gamescene";
-        screen = drawGame();
-        method = "read";
+        // dirty: bad input - try again
         break;
     }
   }
   public Game() {
-      scene = "gamescene";
-      screen = drawGame();
-      method = "read";
   }
 }
