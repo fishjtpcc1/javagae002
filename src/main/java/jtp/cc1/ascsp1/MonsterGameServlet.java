@@ -58,9 +58,9 @@ public class MonsterGameServlet extends HttpServlet {
 
   private void updateFilerState(String input) {
     if (input.contains(" ")) {
-      return "fail"
+      return "fail";
     } else {
-      return "success"
+      return "success";
     }
   }
     
