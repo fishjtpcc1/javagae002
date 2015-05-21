@@ -25,6 +25,10 @@ public class MonsterGameServlet extends HttpServlet {
     return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
   }
   
+  public static String drawGame(Game g) {
+    return "<br>|------" + g.data + "------|<br>Enter NSEWP: ";
+  }
+
   public static String drawGameover() {
     return "<br>LOOSER!!!!<br>Press any key to continue: ";
   }
@@ -90,24 +94,6 @@ public class MonsterGameServlet extends HttpServlet {
   }
     
   private void handleMenu(String input) {
-    switch (input) {
-      case "1":
-        theGame = new Game();
-        scene = "gamescene";
-        screen = theGame.drawGame();
-        method = "read";
-        break;
-      case "2":
-        scene = "filesavescene";
-        screen = drawFilesave();
-        method = "readln";
-        break;
-      default:
-        scene = "menuscene";
-        screen = drawMenu();
-        method = "read";
-        break;
-    }
   }
     
   @Override
@@ -134,27 +120,45 @@ public class MonsterGameServlet extends HttpServlet {
     method = "safetymethod";
     scene = (String)mySession.getAttribute("scene");
     theGame = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
+    // do input and route states
     switch (scene) {
       case "menuscene":
-        handleMenu(input);
+        switch (input) {
+          case "1":
+            theGame = new Game();
+            scene = "gamescene";
+            screen = theGame.drawGame();
+            method = "read";
+            break;
+          case "2":
+            scene = "filesavescene";
+            screen = drawFilesave();
+            method = "readln";
+            break;
+          default:
+            scene = "menuscene";
+            screen = drawMenu();
+            method = "read";
+            break;
+        }
         break;
       case "gamescene":
-        theGame.handle(input);
-        if (theGame.isWon()) {
+        switch (theGame.updateState(input));
+        case "iswon":
           scene = "gamewonscene";
           screen = drawGamewon();
           method = "read";
-        } else if (theGame.isOver()) {
+        case "isover":
           scene = "gameoverscene";
           screen = drawGameover();
           method = "read";
-        } else if (theGame.isPaused()) {
+        case "ispaused":
           scene = "menuscene";
           screen = drawMenu();
           method = "read";
-        } else {
+        case "isinplay":
           scene = "gamescene";
-          screen = theGame.drawGame();
+          screen = drawGame(theGame);
           method = "read";
         }
         break;

@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 /** to save complex data in the session class
  * must implement Serializable or runtime error happens
- * fail: works when private static but not when public - as if interface is recognised but no implementation code is attached
+ * must not be a nested class otherwise silent error accessing deserialized members
  */
 public class Game implements Serializable {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
-  public String s = "newgame: ";
   private int i = 0;
   private Boolean isPaused = false;
+  public String data;
   public Boolean isOver() {
     return (i >= 3);
   }
@@ -20,23 +20,30 @@ public class Game implements Serializable {
   public Boolean isPaused() {
     return isPaused;
   }
-  public String drawGame() {
-    return "<br>|------" + s + " " + i + "------|<br>Enter NSEWM: ";
-  }
-  public void handle(String input) {
+  public void updateState(String input) {
     switch (input) {
       case "N": case "S": case "E": case "W":
-        s += input + ": ";
+        data += input + ": ";
         i ++;
         break;
-      case "M":
+      case "P":
         isPaused = true;
         break;
       default:
         // dirty: bad input - try again
         break;
     }
+    if (isWon()) {
+      return "iswon";
+    } else if (isOver()) {
+      return "isover";
+    } else if (isPaused()) {
+      return "ispaused";
+    } else {
+      return "isinplay";
+    }
   }
   public Game() {
+    data = "fresh of the press ";
   }
 }
