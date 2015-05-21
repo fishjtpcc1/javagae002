@@ -12,11 +12,6 @@ import javax.servlet.http.*;
  */
 public class MonsterGameServlet extends HttpServlet {
   
-  // package variables
-  String scene;
-  String screen;
-  String method;
-
   // statics are class variables and are not cloned in objects - eg only one logger is used by all instances
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
@@ -43,6 +38,10 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   // dynamic object stuff
+  String scene;
+  private String screen;
+  private String method;
+
   private Game theGame;
 
   private void handleGamewon(String input) {
