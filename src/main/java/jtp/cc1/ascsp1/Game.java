@@ -20,7 +20,7 @@ public class Game implements Serializable {
   public Boolean isPaused() {
     return isPaused;
   }
-  public void updateState(String input) {
+  public String updateState(String input) {
     switch (input) {
       case "N": case "S": case "E": case "W":
         data += input + ": ";
