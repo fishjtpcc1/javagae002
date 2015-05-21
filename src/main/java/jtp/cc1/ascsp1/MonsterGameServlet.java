@@ -1,9 +1,5 @@
 package jtp.cc1.ascsp1;
 
-String scene;
-String screen;
-String method;
-
 import java.util.logging.Logger;
 import java.io.IOException;
 import javax.servlet.http.*;
@@ -16,7 +12,12 @@ import javax.servlet.http.*;
  */
 public class MonsterGameServlet extends HttpServlet {
   
-  // static are class variables and are not cloned in objects - eg only one logger is used by all instances
+  // package variables
+  String scene;
+  String screen;
+  String method;
+
+  // statics are class variables and are not cloned in objects - eg only one logger is used by all instances
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
   private static int reuseCount = 0; // to prove server class reuse behaviour
