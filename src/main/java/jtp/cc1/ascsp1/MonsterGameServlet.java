@@ -46,10 +46,9 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   // dynamic object stuff
-  static String scene;
+  private String scene;
   private String screen;
   private String method;
-
   private Game theGame;
 
   private String updateFilerState(String input) {
@@ -58,9 +57,6 @@ public class MonsterGameServlet extends HttpServlet {
     } else {
       return "success";
     }
-  }
-    
-  private void handleMenu(String input) {
   }
     
   @Override
