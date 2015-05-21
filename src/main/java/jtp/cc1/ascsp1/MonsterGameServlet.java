@@ -38,7 +38,7 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   // dynamic object stuff
-  String scene;
+  static String scene;
   private String screen;
   private String method;
 

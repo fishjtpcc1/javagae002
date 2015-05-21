@@ -35,7 +35,7 @@ public class Game implements Serializable {
         s += input + ": ";
         i ++;
         if (isWon()) {
-          scene = "gamewonscene";
+          MonsterGameServlet.scene = "gamewonscene";
           screen = drawGamewon();
           method = "read";
         } else if (isOver()) {
