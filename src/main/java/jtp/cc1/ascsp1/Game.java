@@ -9,7 +9,6 @@ import java.io.Serializable;
 public class Game implements Serializable {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private int i = 0;
-  private Boolean isPaused = false;
   public String data;
   public Boolean isOver() {
     return (i >= 3);
@@ -18,26 +17,27 @@ public class Game implements Serializable {
     return (data.contains("W"));
   }
   public String updateState(String input) {
+    String newState;
     switch (input) {
       case "N": case "S": case "E": case "W":
         data += input + ": ";
         i ++;
         if (isWon()) {
-          return "iswon";
+          newState = "iswon";
         } else if (isOver()) {
-          return "isover";
+          newState = "isover";
         } else {
-          return "isinplay";
+          newState = "isinplay";
         }
         break;
       case "P":
-        isPaused = true;
-        return "ispaused";
+        newState = "ispaused";
         break;
       default:
-        return "oops";
+        newState = "oops";
         break;
     }
+    return newState;
   }
   public Game() {
     data = "fresh of the press ";
