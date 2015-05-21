@@ -1,5 +1,9 @@
 package jtp.cc1.ascsp1;
 
+String scene;
+String screen;
+String method;
+
 import java.util.logging.Logger;
 import java.io.IOException;
 import javax.servlet.http.*;
@@ -21,7 +25,7 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
-  private static String drawMenu() {
+  public static String drawMenu() {
     return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
   }
   
@@ -38,9 +42,6 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   // dynamic object stuff
-  private String scene;
-  private String screen;
-  private String method;
   private Game theGame;
 
   private void handleGamewon(String input) {

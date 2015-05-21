@@ -9,12 +9,16 @@ import java.io.Serializable;
 public class Game implements Serializable {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   public String s = "newgame: ";
-  public int i = 0;
+  private int i = 0;
+  private Boolean isPaused = false;
   public Boolean isOver() {
     return (i >= 3);
   }
   public Boolean isWon() {
     return (s.contains("W"));
+  }
+  public Boolean isPaused() {
+    return isPaused;
   }
   public String drawGame() {
     return "<br>|------" + s + " " + i + "------|<br>Enter NSEWM: ";
@@ -45,8 +49,9 @@ public class Game implements Serializable {
         }
         break;
       case "M":
+        isPaused = true;
         scene = "menuscene";
-        screen = drawMenu();
+        screen = MonsterGameServlet.drawMenu();
         method = "read";
         break;
       default:
