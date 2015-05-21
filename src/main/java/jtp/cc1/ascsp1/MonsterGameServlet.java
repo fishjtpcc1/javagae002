@@ -25,6 +25,14 @@ public class MonsterGameServlet extends HttpServlet {
     return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
   }
   
+  public static String drawGameover() {
+    return "<br>LOOSER!!!!<br>Press any key to continue: ";
+  }
+
+  public static String drawGamewon() {
+    return "<br>WINNER!!!!<br>Press any key to continue: ";
+  }
+
   private static String drawFilesave() {
     return "<br>Enter filename to save: ";
   }

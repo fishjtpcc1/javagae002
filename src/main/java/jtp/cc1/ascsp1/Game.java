@@ -23,12 +23,6 @@ public class Game implements Serializable {
   public String drawGame() {
     return "<br>|------" + s + " " + i + "------|<br>Enter NSEWM: ";
   }
-  public String drawGameover() {
-    return "<br>LOOSER!!!!<br>Press any key to continue: ";
-  }
-  public String drawGamewon() {
-    return "<br>WINNER!!!!<br>Press any key to continue: ";
-  }
   public void handle(String input) {
     switch (input) {
       case "N": case "S": case "E": case "W":
