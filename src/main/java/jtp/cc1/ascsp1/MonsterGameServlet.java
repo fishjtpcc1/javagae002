@@ -56,41 +56,12 @@ public class MonsterGameServlet extends HttpServlet {
 
   private Game theGame;
 
-  private void handleGamewon(String input) {
-    scene = "menuscene";
-    screen = drawMenu();
-    method = "read";
-  }
-    
-  private void handleGameover(String input) {
-    scene = "menuscene";
-    screen = drawMenu();
-    method = "read";
-  }
-    
-  private void handleFilesave(String input) {
+  private void updateFilerState(String input) {
     if (input.contains(" ")) {
-      // bad file name
-      scene = "filesavefailscene";
-      screen = drawFilesavefail();
-      method = "readln";
+      return "fail"
     } else {
-      scene = "filesavesuccessscene";
-      screen = drawFilesavesuccess();
-      method = "read";
+      return "success"
     }
-  }
-    
-  private void handleFilesavesuccess(String input) {
-    scene = "menuscene";
-    screen = drawMenu();
-    method = "read";
-  }
-    
-  private void handleFilesavefail(String input) {
-    scene = "filesavescene";
-    screen = drawFilesave();
-    method = "read";
   }
     
   private void handleMenu(String input) {
@@ -127,7 +98,7 @@ public class MonsterGameServlet extends HttpServlet {
           case "1":
             theGame = new Game();
             scene = "gamescene";
-            screen = theGame.drawGame();
+            screen = drawGame(theGame);
             method = "read";
             break;
           case "2":
@@ -143,39 +114,62 @@ public class MonsterGameServlet extends HttpServlet {
         }
         break;
       case "gamescene":
-        switch (theGame.updateState(input));
-        case "iswon":
-          scene = "gamewonscene";
-          screen = drawGamewon();
-          method = "read";
-        case "isover":
-          scene = "gameoverscene";
-          screen = drawGameover();
-          method = "read";
-        case "ispaused":
-          scene = "menuscene";
-          screen = drawMenu();
-          method = "read";
-        case "isinplay":
-          scene = "gamescene";
-          screen = drawGame(theGame);
-          method = "read";
+        switch (theGame.updateState(input)) {
+          case "iswon":
+            scene = "gamewonscene";
+            screen = drawGamewon();
+            method = "read";
+            break;
+          case "isover":
+            scene = "gameoverscene";
+            screen = drawGameover();
+            method = "read";
+            break;
+          case "ispaused":
+            scene = "menuscene";
+            screen = drawMenu();
+            method = "read";
+            break;
+          case "isinplay":
+            scene = "gamescene";
+            screen = drawGame(theGame);
+            method = "read";
+            break;
         }
         break;
       case "gamewonscene":
-        handleGamewon(input);
+        scene = "menuscene";
+        screen = drawMenu();
+        method = "read";
         break;
       case "gameoverscene":
-        handleGameover(input);
+        scene = "menuscene";
+        screen = drawMenu();
+        method = "read";
         break;
       case "filesavescene":
-        handleFilesave(input);
+        switch (updateFilerState(input)) {
+          case "fail":
+            scene = "filesavefailscene";
+            screen = drawFilesavefail();
+            method = "readln";
+            break;
+          case "success":
+            scene = "filesavesuccessscene";
+            screen = drawFilesavesuccess();
+            method = "read";
+            break;
+        }
         break;
       case "filesavesuccessscene":
-        handleFilesavesuccess(input);
+        scene = "menuscene";
+        screen = drawMenu();
+        method = "read";
         break;
       case "filesavefailscene":
-        handleFilesavefail(input);
+        scene = "filesavescene";
+        screen = drawFilesave();
+        method = "read";
         break;
     }
     mySession.setAttribute("scene", scene);
