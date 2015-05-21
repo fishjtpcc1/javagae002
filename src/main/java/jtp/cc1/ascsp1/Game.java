@@ -15,7 +15,7 @@ public class Game implements Serializable {
     return (i >= 3);
   }
   public Boolean isWon() {
-    return (s.contains("W"));
+    return (data.contains("W"));
   }
   public Boolean isPaused() {
     return isPaused;
