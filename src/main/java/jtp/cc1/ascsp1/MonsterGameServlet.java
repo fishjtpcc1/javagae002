@@ -43,6 +43,19 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
+  private static void so(String b, String s) {
+    switch (s) {
+      case "oops":
+        return new OopsScene(b);
+      case "gamescene":
+        return new GameScene();
+      case "filerscene":
+        return new FilerScene();
+      default:
+        return new MenuScene();
+    }
+  }
+
   private class OopsScene implements SceneObject {
     private String back;
     public String method() {
@@ -69,6 +82,7 @@ public class MonsterGameServlet extends HttpServlet {
     public String whereToNext(String input) {
       switch (input) {
         case "1":
+          g = new Game();
           return "gamescene";
         case "2":
           return "filerscene";
@@ -111,13 +125,13 @@ public class MonsterGameServlet extends HttpServlet {
       return "<br>--my saved files--<br>Enter filename: ";
     }
     public String whereToNext(String input) {
-      String newState;
+      String newFilerState;
       if (input.contains(" ")) {
-        newState = "fail";
+        newFilerState = "fail";
       } else {
-        newState = "success";
+        newFilerState = "success";
       }
-      switch (newState) {
+      switch (newFilerState) {
         case "success":
           return "menuscene";
         default:
@@ -127,92 +141,7 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   // dynamic object stuff
-  private String scene;
-  private String screen;
-  private String method;
-  private SceneObject so;
   private Game g;
-
-  private void routeAndDo(String input) {
-    switch (scene) {
-      case "oops":
-        scene = so.whereToNext(input);
-        switch (scene) {
-          case "gamescene":
-            so = new GameScene();
-            screen = so.draw();
-            method = so.method();
-            break;
-          case "filerscene":
-            so = new FilerScene();
-            screen = so.draw();
-            method = so.method();
-            break;
-          case "menuscene":
-            so = new MenuScene();
-            screen = so.draw();
-            method = so.method();
-            break;
-        }
-        break;
-      case "menuscene":
-        scene = so.whereToNext(input);
-        switch (scene) {
-          case "gamescene":
-            g = new Game();
-            so = new GameScene();
-            screen = so.draw();
-            method = so.method();
-            break;
-          case "filerscene":
-            so = new FilerScene();
-            screen = so.draw();
-            method = so.method();
-            break;
-          default:
-            so = new OopsScene("menuscene");
-            screen = so.draw();
-            method = so.method();
-            break;
-        }
-        break;
-      case "gamescene":
-        scene = so.whereToNext(input);
-        switch (scene) {
-          case "menuscene":
-            so = new MenuScene();
-            screen = so.draw();
-            method = so.method();
-            break;
-          case "gamescene":
-            screen = so.draw();
-            method = so.method();
-            break;
-          default:
-            so = new OopsScene("gamescene");
-            screen = so.draw();
-            method = so.method();
-            break;
-        }
-        break;
-     case "filerscene":
-        scene = so.whereToNext(input);
-        switch (scene) {
-          case "menuscene":
-            so = new MenuScene();
-            screen = so.draw();
-            method = so.method();
-            break;
-          default:
-            scene = "oops";
-            so = new OopsScene("filerscene");
-            screen = so.draw();
-            method = so.method();
-            break;
-      }
-      break;
-    }
-  }
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
@@ -220,34 +149,37 @@ public class MonsterGameServlet extends HttpServlet {
     // start new session
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
-    scene = "menuscene";
-    so = new MenuScene();
+    String scene = "menuscene";
+    SceneObject so = so(null,scene);
     g = new Game();
-    screen = so.draw();
-    method = so.method();
+    // save state
     mySession.setAttribute("scene", scene);
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(screen, method, "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
+    resp.getWriter().println(MonsterGameServlet.json(so.draw(), so.method(), "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
   }
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
     HttpSession mySession = req.getSession(false);
-    String input = req.getParameter("input");
-    // proceed with this use event
-    scene = (String)mySession.getAttribute("scene");
+    String back = (String)mySession.getAttribute("back");
+    String scene = (String)mySession.getAttribute("scene");
+    SceneObject so = so(back,scene);
     g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
-    // do input and route states to new so
-    routeAndDo(input); // sets so
+    // proceed with this use event
+    String input = req.getParameter("input");
+    back = scene;
+    scene = so.whereToNext(input);
+    so = so(back,scene);
     // save state
+    mySession.setAttribute("back", back);
     mySession.setAttribute("scene", scene);
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(screen, method, "scene:"+scene+", thegame:"+g+", input:"+input));
+    resp.getWriter().println(MonsterGameServlet.json(so.draw(), so.method(), "scene:"+scene+", thegame:"+g+", input:"+input));
   }
 
 }
