@@ -43,7 +43,7 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
-  private static SceneObject so(String b, String s) {
+  private SceneObject so(String b, String s) {
     switch (s) {
       case "oops":
         return new OopsScene(b);
