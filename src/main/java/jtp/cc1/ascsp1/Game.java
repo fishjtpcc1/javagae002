@@ -10,13 +10,14 @@ public class Game implements Serializable {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private int i = 0;
   public String data;
+  public String method = "read";
   public Boolean isOver() {
     return (i >= 3);
   }
   public Boolean isWon() {
     return (data.contains("W"));
   }
-  public String updateState(String input) {
+  public String newState(String input) {
     String newState;
     switch (input) {
       case "N": case "S": case "E": case "W":

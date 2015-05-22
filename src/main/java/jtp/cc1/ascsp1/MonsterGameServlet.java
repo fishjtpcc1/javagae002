@@ -4,6 +4,12 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import javax.servlet.http.*;
 
+public interface SceneObject {
+  public String method();
+  public String draw();
+  public String whereToNext(String input);
+}
+  
 /**
  * MonsterGameServlet
  * Based on Julian's fish and chicken restaurant
@@ -25,14 +31,6 @@ public class MonsterGameServlet extends HttpServlet {
     return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
   }
   
-  public static String drawOops() {
-    return "<br>Que!? ";
-  }
-  
-  public static String drawGame(Game g) {
-    return "<br>|------" + g.data + "------|<br>Enter NSEWP: ";
-  }
-
   public static String drawGameover() {
     return "<br>LOOSER!!!!<br>Press any key to continue: ";
   }
@@ -45,11 +43,70 @@ public class MonsterGameServlet extends HttpServlet {
     return "<br>Enter filename to save: ";
   }
   
+  private class OopsScene implements SceneObject {
+    private String back;
+    public String method() {
+      return "read";
+    }
+    public String draw() {
+      return "<br>Que!? ";
+    }
+    public String whereToNext(String input) {
+      return back;
+    }
+    public OopsScene(String b) {
+      back = b;
+    }
+  }
+  
+  private class MenuScene implements SceneObject {
+    public String method() {
+      return "read";
+    }
+    public String draw() {
+      return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
+    }
+    public String whereToNext(String input) {
+      switch (input)) {
+        case "1":
+          return "gamescene";
+        case "2":
+          return "filesavescene";
+        default:
+          return "oops";
+      }
+    }
+  }
+  
+  private class GameScene implements SceneObject {
+    public String method() {
+      return g.method;
+    }
+    public String draw() {
+      return "<br>|------" + g.data + "------|<br>Enter NSEWP: ";
+    }
+    public String whereToNext(String input) {
+      switch (g.newState(input)) {
+        case "iswon":
+          return "gamewonscene";
+        case "isover":
+          return "gameoverscene";
+        case "ispaused":
+          return "menuscene";
+        case "isinplay":
+          return "gamescene";
+        default:
+          return "oops";
+      }
+    }
+  }
+
   // dynamic object stuff
   private String scene;
   private String screen;
   private String method;
-  private Game theGame;
+  private SceneObject so;
+  private Game g;
 
   private String updateFilerState(String input) {
     if (input.contains(" ")) {
@@ -59,15 +116,91 @@ public class MonsterGameServlet extends HttpServlet {
     }
   }
     
+  private void do(String input) {
+    switch (scene) {
+      case "menuscene":
+        scene = so.whereToNext(input);
+        switch (scene) {
+          case "gamescene":
+            g = new Game();
+            so = new GameScene();
+            screen = so.draw();
+            method = so.method();
+            break;
+          case "filesavescene":
+            screen = drawFilesave();
+            method = "readln";
+            break;
+          default:
+            so = new OopsScene("menuscene");
+            screen = so.draw();
+            method = so.method();
+            break;
+        }
+        break;
+      case "gamescene":
+        scene = so.whereToNext(input);
+        switch (scene) {
+          case "gamewonscene":
+            screen = drawGamewon();
+            method = "read";
+            break;
+          case "gameoverscene":
+            screen = drawGameover();
+            method = "read";
+            break;
+          case "menuscene":
+            so = new MenuScene();
+            screen = so.draw();
+            method = so.method();
+            break;
+          case "gamescene":
+            screen = so.draw();
+            method = so.method();
+            break;
+          default:
+            so = new OopsScene(scene);
+            screen = so.draw();
+            method = so.method();
+            break;
+        }
+        break;
+      case "gamewonscene": case "gameoverscene":
+        scene = "menuscene";
+        so = new MenuScene();
+        screen = so.draw();
+        method = so.method();
+        break;
+     case "filesavescene":
+        switch (updateFilerState(input)) {
+          case "success":
+            so = new MenuScene();
+            screen = so.draw();
+            method = so.method();
+            break;
+          default:
+            so = new OopsScene(scene);
+            screen = so.draw();
+            method = so.method();
+            break;
+      }
+      break;
+    }
+  }
+
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     reuseCount ++;
     // start new session
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
-    mySession.setAttribute("scene", "menuscene");
-    screen = drawMenu();
-    method = "read";
+    scene = "menuscene";
+    so = new MenuScene();
+    g = new Game();
+    screen = so.draw();
+    method = so.method();
+    mySession.setAttribute("scene", scene);
+    mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json(screen, method, "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
@@ -79,88 +212,12 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(false);
     String input = req.getParameter("input");
     // proceed with this use event
-    screen = "<br>safetyscreen";
-    method = "safetymethod";
     scene = (String)mySession.getAttribute("scene");
-    theGame = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
-    // do input and route states
-    switch (scene) {
-      case "menuscene":
-        switch (input) {
-          case "1":
-            theGame = new Game();
-            scene = "gamescene";
-            screen = drawGame(theGame);
-            method = "read";
-            break;
-          case "2":
-            scene = "filesavescene";
-            screen = drawFilesave();
-            method = "readln";
-            break;
-          default:
-            scene = "menuscene";
-            screen = drawOops();
-            method = "read";
-            break;
-        }
-        break;
-      case "gamescene":
-        switch (theGame.updateState(input)) {
-          case "iswon":
-            scene = "gamewonscene";
-            screen = drawGamewon();
-            method = "read";
-            break;
-          case "isover":
-            scene = "gameoverscene";
-            screen = drawGameover();
-            method = "read";
-            break;
-          case "ispaused":
-            scene = "menuscene";
-            screen = drawMenu();
-            method = "read";
-            break;
-          case "isinplay":
-            scene = "gamescene";
-            screen = drawGame(theGame);
-            method = "read";
-            break;
-          default:
-            scene = "gamescene";
-            screen = drawOops();
-            method = "read";
-            break;
-        }
-        break;
-      case "gamewonscene":
-        scene = "menuscene";
-        screen = drawMenu();
-        method = "read";
-        break;
-      case "gameoverscene":
-        scene = "menuscene";
-        screen = drawMenu();
-        method = "read";
-        break;
-      case "filesavescene":
-        switch (updateFilerState(input)) {
-          case "success":
-            scene = "menuscene";
-            screen = drawMenu();
-            method = "read";
-            break;
-           default:
-            scene = "filesavescene";
-            screen = drawOops();
-            method = "readln";
-            break;
-       }
-        break;
-    }
+    g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
+    // do input and route states to new so
+    do(input); // sets so
     mySession.setAttribute("scene", scene);
-    mySession.setAttribute("thegame", theGame); // may be null
+    mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json(screen, method, "scene:"+scene+", thegame:"+theGame+", input:"+input));
