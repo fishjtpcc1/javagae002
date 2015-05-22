@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import javax.servlet.http.*;
 
-public interface SceneObject {
+interface SceneObject {
   public String method();
   public String draw();
   public String whereToNext(String input);
