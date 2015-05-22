@@ -15,6 +15,22 @@ interface SceneObject {
  * Based on Julian's fish and chicken restaurant
  * Receives i/o from tier1 html consolesim via ajax
  * uses session to store running game
+ * user view state model:
+ *  start: menu
+ *  menu:
+ *    1: new game
+ *    2: filesave
+ *    invalid: oops: menu
+ *  game:
+ *    paused: menu
+ *    won: win
+ *    lost: lost
+ *    invalid: oops: game
+ *  filesave:
+ *    success: menu
+ *    fail: opps: filesave
+ *  win: menu
+ *  lost: menu
  */
 public class MonsterGameServlet extends HttpServlet {
   
@@ -178,7 +194,7 @@ public class MonsterGameServlet extends HttpServlet {
             method = so.method();
             break;
           default:
-            so = new OopsScene(scene);
+            so = new OopsScene("gamescene");
             screen = so.draw();
             method = so.method();
             break;
@@ -193,12 +209,14 @@ public class MonsterGameServlet extends HttpServlet {
      case "filesavescene":
         switch (updateFilerState(input)) {
           case "success":
+            scene = "menuscene";
             so = new MenuScene();
             screen = so.draw();
             method = so.method();
             break;
           default:
-            so = new OopsScene(scene);
+            scene = "oops";
+            so = new OopsScene("filesavescene");
             screen = so.draw();
             method = so.method();
             break;
