@@ -221,7 +221,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(screen, method, "scene:"+scene+", thegame:"+theGame+", input:"+input));
+    resp.getWriter().println(MonsterGameServlet.json(screen, method, "scene:"+scene+", thegame:"+g+", input:"+input));
   }
 
 }
