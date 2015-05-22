@@ -67,7 +67,7 @@ public class MonsterGameServlet extends HttpServlet {
       return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
     }
     public String whereToNext(String input) {
-      switch (input)) {
+      switch (input) {
         case "1":
           return "gamescene";
         case "2":
@@ -116,7 +116,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
   }
     
-  private void do(String input) {
+  private void routeAndDo(String input) {
     switch (scene) {
       case "menuscene":
         scene = so.whereToNext(input);
@@ -215,7 +215,8 @@ public class MonsterGameServlet extends HttpServlet {
     scene = (String)mySession.getAttribute("scene");
     g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
     // do input and route states to new so
-    do(input); // sets so
+    routeAndDo(input); // sets so
+    // save state
     mySession.setAttribute("scene", scene);
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the new user state
