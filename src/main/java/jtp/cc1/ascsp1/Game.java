@@ -11,7 +11,7 @@ public class Game implements Serializable {
   private int i = 0;
   public String data;
   public String method = "read";
-  public Boolean isOver() {
+  public Boolean isLost() {
     return (i >= 3);
   }
   public Boolean isWon() {
@@ -23,16 +23,14 @@ public class Game implements Serializable {
       case "N": case "S": case "E": case "W":
         data += input + ": ";
         i ++;
-        if (isWon()) {
-          newState = "iswon";
-        } else if (isOver()) {
+        if (isWon() || isLost()) {
           newState = "isover";
         } else {
           newState = "isinplay";
         }
         break;
       case "P":
-        newState = "ispaused";
+        newState = "isinplay";
         break;
       default:
         newState = "oops";

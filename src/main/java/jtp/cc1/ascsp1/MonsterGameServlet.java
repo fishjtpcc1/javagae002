@@ -43,22 +43,6 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
-  public static String drawMenu() {
-    return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
-  }
-  
-  public static String drawGameover() {
-    return "<br>LOOSER!!!!<br>Press any key to continue: ";
-  }
-
-  public static String drawGamewon() {
-    return "<br>WINNER!!!!<br>Press any key to continue: ";
-  }
-
-  private static String drawFilesave() {
-    return "<br>Enter filename to save: ";
-  }
-  
   private class OopsScene implements SceneObject {
     private String back;
     public String method() {
@@ -87,7 +71,7 @@ public class MonsterGameServlet extends HttpServlet {
         case "1":
           return "gamescene";
         case "2":
-          return "filesavescene";
+          return "filerscene";
         default:
           return "oops";
       }
@@ -99,15 +83,17 @@ public class MonsterGameServlet extends HttpServlet {
       return g.method;
     }
     public String draw() {
-      return "<br>|------" + g.data + "------|<br>Enter NSEWP: ";
+      if (g.isWon()) {
+        return "<br>WINNER!!!!<br>Press any key to continue: ";
+      } else if (g.isLost()) {
+        return "<br>LOOSER!!!!<br>Press any key to continue: ";
+      } else {
+        return "<br>|------" + g.data + "------|<br>Enter NSEWP: ";
+      }
     }
     public String whereToNext(String input) {
       switch (g.newState(input)) {
-        case "iswon":
-          return "gamewonscene";
         case "isover":
-          return "gameoverscene";
-        case "ispaused":
           return "menuscene";
         case "isinplay":
           return "gamescene";
@@ -117,6 +103,29 @@ public class MonsterGameServlet extends HttpServlet {
     }
   }
 
+  private class FilerScene implements SceneObject {
+    public String method() {
+      return "readln";
+    }
+    public String draw() {
+      return "<br>--my saved files--<br>Enter filename: ";
+    }
+    public String whereToNext(String input) {
+      String newState;
+      if (input.contains(" ")) {
+        newState = "fail";
+      } else {
+        newState = "success";
+      }
+      switch (newState) {
+        case "success":
+          return "menuscene";
+        default:
+          return "oops";
+      }
+    }
+  }
+  
   // dynamic object stuff
   private String scene;
   private String screen;
@@ -124,14 +133,6 @@ public class MonsterGameServlet extends HttpServlet {
   private SceneObject so;
   private Game g;
 
-  private String updateFilerState(String input) {
-    if (input.contains(" ")) {
-      return "fail";
-    } else {
-      return "success";
-    }
-  }
-    
   private void routeAndDo(String input) {
     switch (scene) {
       case "oops":
@@ -142,9 +143,10 @@ public class MonsterGameServlet extends HttpServlet {
             screen = so.draw();
             method = so.method();
             break;
-          case "filesavescene":
-            screen = drawFilesave();
-            method = "readln";
+          case "filerscene":
+            so = new FilerScene();
+            screen = so.draw();
+            method = so.method();
             break;
           case "menuscene":
             so = new MenuScene();
@@ -162,9 +164,10 @@ public class MonsterGameServlet extends HttpServlet {
             screen = so.draw();
             method = so.method();
             break;
-          case "filesavescene":
-            screen = drawFilesave();
-            method = "readln";
+          case "filerscene":
+            so = new FilerScene();
+            screen = so.draw();
+            method = so.method();
             break;
           default:
             so = new OopsScene("menuscene");
@@ -176,14 +179,6 @@ public class MonsterGameServlet extends HttpServlet {
       case "gamescene":
         scene = so.whereToNext(input);
         switch (scene) {
-          case "gamewonscene":
-            screen = drawGamewon();
-            method = "read";
-            break;
-          case "gameoverscene":
-            screen = drawGameover();
-            method = "read";
-            break;
           case "menuscene":
             so = new MenuScene();
             screen = so.draw();
@@ -200,23 +195,17 @@ public class MonsterGameServlet extends HttpServlet {
             break;
         }
         break;
-      case "gamewonscene": case "gameoverscene":
-        scene = "menuscene";
-        so = new MenuScene();
-        screen = so.draw();
-        method = so.method();
-        break;
-     case "filesavescene":
-        switch (updateFilerState(input)) {
-          case "success":
-            scene = "menuscene";
+     case "filerscene":
+        scene = so.whereToNext(input);
+        switch (scene) {
+          case "menuscene":
             so = new MenuScene();
             screen = so.draw();
             method = so.method();
             break;
           default:
             scene = "oops";
-            so = new OopsScene("filesavescene");
+            so = new OopsScene("filerscene");
             screen = so.draw();
             method = so.method();
             break;
