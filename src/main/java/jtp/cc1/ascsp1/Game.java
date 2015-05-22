@@ -19,22 +19,22 @@ public class Game implements Serializable {
   }
   public String newState(String input) {
     String newState;
-    switch (input) {
-      case "N": case "S": case "E": case "W":
-        data += input + ": ";
-        i ++;
-        if (isWon() || isLost()) {
-          newState = "isover";
-        } else {
+    if (isWon() || isLost()) {
+      newState = "isover";
+    } else {
+      switch (input) {
+        case "N": case "S": case "E": case "W":
+          data += input + ": ";
+          i ++;
           newState = "isinplay";
-        }
-        break;
-      case "P":
-        newState = "isinplay";
-        break;
-      default:
-        newState = "oops";
-        break;
+          break;
+        case "P":
+          newState = "ispaused";
+          break;
+        default:
+          newState = "oops";
+          break;
+      }
     }
     return newState;
   }

@@ -93,7 +93,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
     public String whereToNext(String input) {
       switch (g.newState(input)) {
-        case "isover":
+        case "ispaused": case "isover":
           return "menuscene";
         case "isinplay":
           return "gamescene";
