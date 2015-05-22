@@ -118,6 +118,25 @@ public class MonsterGameServlet extends HttpServlet {
     
   private void routeAndDo(String input) {
     switch (scene) {
+      case "oops":
+        scene = so.whereToNext(input);
+        switch (scene) {
+          case "gamescene":
+            so = new GameScene();
+            screen = so.draw();
+            method = so.method();
+            break;
+          case "filesavescene":
+            screen = drawFilesave();
+            method = "readln";
+            break;
+          case "menuscene":
+            so = new MenuScene();
+            screen = so.draw();
+            method = so.method();
+            break;
+        }
+        break;
       case "menuscene":
         scene = so.whereToNext(input);
         switch (scene) {
