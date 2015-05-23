@@ -179,7 +179,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(so.draw(), so.method(), "back:"+back+", "scene:"+scene+", thegame:"+g+", input:"+input));
+    resp.getWriter().println(MonsterGameServlet.json(so.draw(), so.method(), "back:"+back+", scene:"+scene+", thegame:"+g+", input:"+input));
   }
 
 }
