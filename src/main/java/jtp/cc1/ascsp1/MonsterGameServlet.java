@@ -166,12 +166,12 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(false);
     String back = (String)mySession.getAttribute("back");
     String scene = (String)mySession.getAttribute("scene");
-    SceneObject so = so(back,scene);
+    SceneObject so = so(back,scene); // casting as a generic interface grants permission for calling decendents' stuff
     g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
     // proceed with this use event
     String input = req.getParameter("input");
     back = scene;
-    scene = so.whereToNext(input); // expt polymorphism: compiler "cannot find symbol" now
+    scene = so.whereToNext(input); // strictly controlled polymorphism in action
     so = so(back,scene); // so is needed for final msg handling
     // save state
     mySession.setAttribute("back", back);
