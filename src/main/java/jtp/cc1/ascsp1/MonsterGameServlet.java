@@ -171,7 +171,7 @@ public class MonsterGameServlet extends HttpServlet {
     // proceed with this use event
     String input = req.getParameter("input");
     back = scene;
-    scene = so.whereToNext(input);
+    scene = so.whereToNext(input); // expt polymorphism: compiler "cannot find symbol" now
     // not needed so = so(back,scene);
     // save state
     mySession.setAttribute("back", back);
