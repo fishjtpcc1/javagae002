@@ -4,6 +4,12 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import javax.servlet.http.*;
 
+interface SceneObject {
+  public String method();
+  public String draw();
+  public SceneObject whereToNext(String input);
+}
+    
 /**
  * MonsterGameServlet
  * Based on Julian's fish and chicken restaurant
@@ -37,13 +43,7 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
-  private abstract class SceneObject {
-    public abstract String method();
-    public abstract String draw();
-    public abstract SceneObject whereToNext(String input);
-  }
-    
-  private abstract class OopsScene extends SceneObject {
+  private class OopsScene implements SceneObject {
     private SceneObject back;
     public String method() {
       return "read";
@@ -59,7 +59,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
   }
   
-  private abstract class MenuScene extends SceneObject {
+  private class MenuScene implements SceneObject {
     public String method() {
       return "read";
     }
@@ -70,16 +70,16 @@ public class MonsterGameServlet extends HttpServlet {
       switch (input) {
         case "1":
           g = new Game();
-          return GameScene;
+          return new GameScene;
         case "2":
-          return FilerScene;
+          return new FilerScene;
         default:
-          return OopsScene((SceneObject)this);
+          return new OopsScene((SceneObject)this);
       }
     }
   }
   
-  private abstract class GameScene extends SceneObject {
+  private class GameScene implements SceneObject {
     public String method() {
       return g.method;
     }
@@ -95,16 +95,16 @@ public class MonsterGameServlet extends HttpServlet {
     public SceneObject whereToNext(String input) {
       switch (g.newState(input)) {
         case "ispaused": case "isover":
-          return MenuScene;
+          return new MenuScene;
         case "isinplay":
-          return GameScene;
+          return new GameScene;
         default:
-          return OopsScene;
+          return new OopsScene;
       }
     }
   }
 
-  private abstract class FilerScene extends SceneObject {
+  private class FilerScene implements SceneObject {
     public String method() {
       return "readln";
     }
@@ -120,9 +120,9 @@ public class MonsterGameServlet extends HttpServlet {
       }
       switch (newFilerState) {
         case "success":
-          return MenuScene;
+          return new MenuScene;
         default:
-          return OopsScene;
+          return new OopsScene;
       }
     }
   }
@@ -137,7 +137,7 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
     // String scene = "menuscene";
-    SceneObject here = MenuScene;
+    SceneObject here = new MenuScene;
     g = new Game();
     // save state
     // mySession.setAttribute("scene", scene);
@@ -169,7 +169,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(here.draw(), here.method(), "back:"+here.back+", here:"+here+", thegame:"+g+", input:"+input));
+    resp.getWriter().println(MonsterGameServlet.json(here.draw(), here.method(), "here:"+here+", thegame:"+g+", input:"+input));
   }
 
 }
