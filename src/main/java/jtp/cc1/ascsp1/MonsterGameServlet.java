@@ -4,13 +4,6 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import javax.servlet.http.*;
 
-interface SceneObject {
-  public SceneObject back;
-  public String method();
-  public String draw();
-  public SceneObject whereToNext(String input);
-}
-  
 /**
  * MonsterGameServlet
  * Based on Julian's fish and chicken restaurant
@@ -44,7 +37,17 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
-  private class OopsScene implements SceneObject {
+  private abstract class SceneObject {
+    private SceneObject back;
+    public String method();
+    public String draw();
+    public SceneObject whereToNext(String input);
+    public SceneObject(SceneObject b) {
+      back = b;
+    }
+  }
+    
+  private class OopsScene extends SceneObject {
     public String method() {
       return "read";
     }
@@ -53,9 +56,6 @@ public class MonsterGameServlet extends HttpServlet {
     }
     public String whereToNext(String input) {
       return back;
-    }
-    public OopsScene(String b) {
-      back = b;
     }
   }
   
