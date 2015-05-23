@@ -166,13 +166,13 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(false);
     String back = (String)mySession.getAttribute("back");
     String scene = (String)mySession.getAttribute("scene");
-    Object so = (Object)so(back,scene); //expt polymorphism SceneObject so = so(back,scene);
+    SceneObject so = so(back,scene);
     g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
     // proceed with this use event
     String input = req.getParameter("input");
     back = scene;
     scene = so.whereToNext(input); // expt polymorphism: compiler "cannot find symbol" now
-    // not needed so = so(back,scene);
+    so = so(back,scene); // so is needed for final msg handling
     // save state
     mySession.setAttribute("back", back);
     mySession.setAttribute("scene", scene);
