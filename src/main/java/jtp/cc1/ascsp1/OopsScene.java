@@ -12,7 +12,7 @@ public class OopsScene implements Serializable, SceneObject {
     return "<br>Que!? ";
   }
   public SceneObject whereToNext(Game g, String input) {
-    return back;
+    return back.whereToNext(g, input);
   }
   public OopsScene(SceneObject b) {
     back = b;
