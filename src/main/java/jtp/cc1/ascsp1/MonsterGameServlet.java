@@ -49,11 +49,9 @@ public class MonsterGameServlet extends HttpServlet {
     // start new session
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
-    // String scene = "menuscene";
     Game g = new Game();
     SceneObject here = new MenuScene();
     // save state
-    // mySession.setAttribute("scene", scene);
     mySession.setAttribute("here", here);
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
@@ -65,19 +63,12 @@ public class MonsterGameServlet extends HttpServlet {
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
     HttpSession mySession = req.getSession(false);
-    //String back = (String)mySession.getAttribute("back");
-    //String scene = (String)mySession.getAttribute("scene");
     SceneObject here = (SceneObject)mySession.getAttribute("here");
-    //SceneObject so = so(back,scene); // casting as a generic interface grants permission for calling decendents' stuff
     Game g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
     // proceed with this use event
     String input = req.getParameter("input");
-    //back = scene;
     here = here.whereToNext(g, input); // strictly controlled polymorphism in action
-    //so = so(back,scene); // so is needed for final msg handling
     // save state
-    //mySession.setAttribute("back", back);
-    //mySession.setAttribute("scene", scene);
     mySession.setAttribute("here", here);
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the new user state

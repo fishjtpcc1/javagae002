@@ -7,13 +7,13 @@ import java.io.Serializable;
  * must not be a nested class otherwise silent error accessing deserialized members
  */
 public class Game implements Serializable {
-  private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
-  private int i = 0;
+  private static final long serialVersionUID = 1L;
+  private int;
   public String data;
   public String method = "read";
   public void restart() {
     i = 0;
-    data = "fresh of the press ";
+    data = "recycled (but still wonderful) ";
   }
   public Boolean isLost() {
     return (i >= 3);
@@ -43,6 +43,7 @@ public class Game implements Serializable {
     return newState;
   }
   public Game() {
-    restart();
+    i = 0;
+    data = "fresh of the press ";
   }
 }
