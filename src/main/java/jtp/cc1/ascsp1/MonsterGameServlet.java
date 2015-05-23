@@ -43,19 +43,6 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
-  private SceneObject so(String b, String s) {
-    switch (s) {
-      case "oops":
-        return new OopsScene(b);
-      case "gamescene":
-        return new GameScene();
-      case "filerscene":
-        return new FilerScene();
-      default:
-        return new MenuScene();
-    }
-  }
-
   private class OopsScene implements SceneObject {
     private String back;
     public String method() {
@@ -165,22 +152,24 @@ public class MonsterGameServlet extends HttpServlet {
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
     HttpSession mySession = req.getSession(false);
-    String back = (String)mySession.getAttribute("back");
-    String scene = (String)mySession.getAttribute("scene");
-    SceneObject so = so(back,scene); // casting as a generic interface grants permission for calling decendents' stuff
+    //String back = (String)mySession.getAttribute("back");
+    //String scene = (String)mySession.getAttribute("scene");
+    SceneObject here = (SceneObject)mySession.getAttribute("here");
+    //SceneObject so = so(back,scene); // casting as a generic interface grants permission for calling decendents' stuff
     g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
     // proceed with this use event
     String input = req.getParameter("input");
-    back = scene;
-    scene = so.whereToNext(input); // strictly controlled polymorphism in action
-    so = so(back,scene); // so is needed for final msg handling
+    //back = scene;
+    here = here.whereToNext(input); // strictly controlled polymorphism in action
+    //so = so(back,scene); // so is needed for final msg handling
     // save state
-    mySession.setAttribute("back", back);
-    mySession.setAttribute("scene", scene);
+    //mySession.setAttribute("back", back);
+    //mySession.setAttribute("scene", scene);
+    mySession.setAttribute("here", here);
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(so.draw(), so.method(), "back:"+back+", scene:"+scene+", thegame:"+g+", input:"+input));
+    resp.getWriter().println(MonsterGameServlet.json(here.draw(), here.method(), "back:"+here.back+", here:"+here+", thegame:"+g+", input:"+input));
   }
 
 }
