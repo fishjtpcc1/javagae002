@@ -14,7 +14,7 @@ public class MenuScene implements SceneObject, Serializable {
     switch (input) {
       case "1":
         g.restart();
-        return new GameScene(g);
+        return new GameScene();
       case "2":
         return new FilerScene();
       default:

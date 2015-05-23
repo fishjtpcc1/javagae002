@@ -11,6 +11,10 @@ public class Game implements Serializable {
   private int i = 0;
   public String data;
   public String method = "read";
+  public void restart() {
+    i = 0;
+    data = "fresh of the press ";
+  }
   public Boolean isLost() {
     return (i >= 3);
   }
@@ -39,6 +43,6 @@ public class Game implements Serializable {
     return newState;
   }
   public Game() {
-    data = "fresh of the press ";
+    restart();
   }
 }
