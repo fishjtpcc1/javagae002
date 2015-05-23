@@ -54,7 +54,7 @@ public class MonsterGameServlet extends HttpServlet {
     public String draw() {
       return "<br>Que!? ";
     }
-    public String whereToNext(String input) {
+    public SceneObject whereToNext(String input) {
       return back;
     }
   }
@@ -92,14 +92,14 @@ public class MonsterGameServlet extends HttpServlet {
         return "<br>|------" + g.data + "------|<br>Enter NSEWP: ";
       }
     }
-    public String whereToNext(String input) {
+    public SceneObject whereToNext(String input) {
       switch (g.newState(input)) {
         case "ispaused": case "isover":
-          return "menuscene";
+          return MenuScene;
         case "isinplay":
-          return "gamescene";
+          return GameScene;
         default:
-          return "oops";
+          return OopsScene;
       }
     }
   }
@@ -111,7 +111,7 @@ public class MonsterGameServlet extends HttpServlet {
     public String draw() {
       return "<br>--my saved files--<br>Enter filename: ";
     }
-    public String whereToNext(String input) {
+    public SceneObject whereToNext(String input) {
       String newFilerState;
       if (input.contains(" ")) {
         newFilerState = "fail";
@@ -120,9 +120,9 @@ public class MonsterGameServlet extends HttpServlet {
       }
       switch (newFilerState) {
         case "success":
-          return "menuscene";
+          return MenuScene;
         default:
-          return "oops";
+          return OopsScene;
       }
     }
   }
