@@ -6,7 +6,7 @@ public class OopsScene implements Serializable, SceneObject {
   private static final long serialVersionUID = 1L;
   private SceneObject back;
   public String method(Game g) {
-    return "read";
+    return back.method(g);
   }
   public String draw(Game g) {
     return "<br>Que!? ";
