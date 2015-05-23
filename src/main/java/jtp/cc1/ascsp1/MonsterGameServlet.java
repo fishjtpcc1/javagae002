@@ -5,9 +5,10 @@ import java.io.IOException;
 import javax.servlet.http.*;
 
 interface SceneObject {
+  public SceneObject back;
   public String method();
   public String draw();
-  public String whereToNext(String input);
+  public SceneObject whereToNext(String input);
 }
   
 /**
@@ -44,7 +45,6 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   private class OopsScene implements SceneObject {
-    private String back;
     public String method() {
       return "read";
     }
@@ -74,7 +74,7 @@ public class MonsterGameServlet extends HttpServlet {
         case "2":
           return FilerScene;
         default:
-          return OopsScene;
+          return OopsScene(this);
       }
     }
   }
