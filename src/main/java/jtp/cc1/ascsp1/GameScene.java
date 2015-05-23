@@ -2,7 +2,7 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 
-private class GameScene implements SceneObject, Serializable {
+public class GameScene implements SceneObject, Serializable {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   public String method() {
     return g.method;
