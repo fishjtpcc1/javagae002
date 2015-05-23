@@ -39,9 +39,9 @@ public class MonsterGameServlet extends HttpServlet {
   
   private abstract class SceneObject {
     private SceneObject back;
-    public String method();
-    public String draw();
-    public SceneObject whereToNext(String input);
+    public abstract String method();
+    public abstract String draw();
+    public abstract SceneObject whereToNext(String input);
     public SceneObject(SceneObject b) {
       back = b;
     }
