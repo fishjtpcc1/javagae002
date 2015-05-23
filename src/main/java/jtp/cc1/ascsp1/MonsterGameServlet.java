@@ -166,13 +166,13 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(false);
     String back = (String)mySession.getAttribute("back");
     String scene = (String)mySession.getAttribute("scene");
-    SceneObject so = so(back,scene);
+    Object so = (Object)so(back,scene); //expt polymorphism SceneObject so = so(back,scene);
     g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
     // proceed with this use event
     String input = req.getParameter("input");
     back = scene;
     scene = so.whereToNext(input);
-    so = so(back,scene);
+    // not needed so = so(back,scene);
     // save state
     mySession.setAttribute("back", back);
     mySession.setAttribute("scene", scene);
