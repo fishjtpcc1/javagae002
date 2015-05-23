@@ -144,7 +144,7 @@ public class MonsterGameServlet extends HttpServlet {
   private Game g;
 
   @Override // the @Override annotation is used here to assert to compiler that this method is present in the superclass
-  public void doNotGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException { // deliberate oveeride mistake
+  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException { // thankyou compilee, my mistake!
     reuseCount ++;
     // start new session
     HttpSession mySession = req.getSession(true);
