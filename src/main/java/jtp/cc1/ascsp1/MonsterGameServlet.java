@@ -99,7 +99,7 @@ public class MonsterGameServlet extends HttpServlet {
         case "isinplay":
           return new GameScene();
         default:
-          return new OopsScene();
+          return new OopsScene((SceneObject)this);
       }
     }
   }
@@ -122,7 +122,7 @@ public class MonsterGameServlet extends HttpServlet {
         case "success":
           return new MenuScene();
         default:
-          return new OopsScene();
+          return new OopsScene((SceneObject)this);
       }
     }
   }
