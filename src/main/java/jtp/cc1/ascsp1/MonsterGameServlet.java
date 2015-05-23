@@ -74,7 +74,7 @@ public class MonsterGameServlet extends HttpServlet {
         case "2":
           return FilerScene;
         default:
-          return OopsScene(this);
+          return OopsScene((SceneObject)this);
       }
     }
   }
