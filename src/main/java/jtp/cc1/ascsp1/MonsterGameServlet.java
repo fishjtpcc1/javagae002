@@ -47,7 +47,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
   }
     
-  private class OopsScene extends SceneObject {
+  private abstract class OopsScene extends SceneObject {
     public String method() {
       return "read";
     }
@@ -59,7 +59,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
   }
   
-  private abstract class MenuScene implements SceneObject {
+  private abstract class MenuScene extends SceneObject {
     public String method() {
       return "read";
     }
@@ -79,7 +79,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
   }
   
-  private class GameScene implements SceneObject {
+  private abstract class GameScene extends SceneObject {
     public String method() {
       return g.method;
     }
@@ -104,7 +104,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
   }
 
-  private class FilerScene implements SceneObject {
+  private abstract class FilerScene extends SceneObject {
     public String method() {
       return "readln";
     }
