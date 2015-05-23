@@ -72,7 +72,7 @@ public class MonsterGameServlet extends HttpServlet {
     }
   }
   
-  private class MenuScene implements SceneObject {
+  private abstract class MenuScene implements SceneObject {
     public String method() {
       return "read";
     }
