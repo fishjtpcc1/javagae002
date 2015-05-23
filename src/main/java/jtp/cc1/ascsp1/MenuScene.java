@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class MenuScene implements SceneObject, Serializable {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
-  public String method() {
+  public String method(Game g) {
     return "read";
   }
-  public String draw() {
+  public String draw(Game g) {
     return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
   }
-  public SceneObject whereToNext(String input) {
+  public SceneObject whereToNext(Game g, String input) {
     switch (input) {
       case "1":
-        g = new Game();
-        return new GameScene();
+        g.restart();
+        return new GameScene(g);
       case "2":
         return new FilerScene();
       default:

@@ -5,9 +5,9 @@ import java.io.IOException;
 import javax.servlet.http.*;
 
 interface SceneObject {
-  public String method();
-  public String draw();
-  public SceneObject whereToNext(String input);
+  public String method(Game g);
+  public String draw(Game g);
+  public SceneObject whereToNext(Game g, String input);
 }
     
 /**
@@ -43,9 +43,6 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
-  // dynamic object stuff
-  private Game g;
-
   @Override // to help me prevent stupid polymorphic mistakes, the @Override annotation is used here to assert to compiler that this method is present in the superclass
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     reuseCount ++;
@@ -53,15 +50,15 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
     // String scene = "menuscene";
-    SceneObject here = new MenuScene();
-    g = new Game();
+    Game g = new Game();
+    SceneObject here = new MenuScene(g);
     // save state
     // mySession.setAttribute("scene", scene);
     mySession.setAttribute("here", here);
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(here.draw(), here.method(), "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
+    resp.getWriter().println(MonsterGameServlet.json(here.draw(g), here.method(g), "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
   }
 
   @Override
@@ -72,11 +69,11 @@ public class MonsterGameServlet extends HttpServlet {
     //String scene = (String)mySession.getAttribute("scene");
     SceneObject here = (SceneObject)mySession.getAttribute("here");
     //SceneObject so = so(back,scene); // casting as a generic interface grants permission for calling decendents' stuff
-    g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
+    Game g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
     // proceed with this use event
     String input = req.getParameter("input");
     //back = scene;
-    here = here.whereToNext(input); // strictly controlled polymorphism in action
+    here = here.whereToNext(g, input); // strictly controlled polymorphism in action
     //so = so(back,scene); // so is needed for final msg handling
     // save state
     //mySession.setAttribute("back", back);
@@ -85,7 +82,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(here.draw(), here.method(), "here:"+here+", thegame:"+g+", input:"+input));
+    resp.getWriter().println(MonsterGameServlet.json(here.draw(g), here.method(g), "here:"+here+", thegame:"+g+", input:"+input));
   }
 
 }

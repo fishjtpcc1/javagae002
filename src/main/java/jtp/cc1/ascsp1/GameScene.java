@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class GameScene implements SceneObject, Serializable {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
-  public String method() {
+  public String method(Game g) {
     return g.method;
   }
-  public String draw() {
+  public String draw(Game g) {
     if (g.isWon()) {
       return "<br>WINNER!!!!<br>Press any key to continue: ";
     } else if (g.isLost()) {
@@ -16,12 +16,12 @@ public class GameScene implements SceneObject, Serializable {
       return "<br>|------" + g.data + "------|<br>Enter NSEWP: ";
     }
   }
-  public SceneObject whereToNext(String input) {
+  public SceneObject whereToNext(Game g, String input) {
     switch (g.newState(input)) {
       case "ispaused": case "isover":
         return new MenuScene();
       case "isinplay":
-        return new GameScene();
+        return (SceneObject)this;
       default:
         return new OopsScene((SceneObject)this);
     }
