@@ -38,16 +38,13 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   private abstract class SceneObject {
-    public SceneObject back;
     public abstract String method();
     public abstract String draw();
     public abstract SceneObject whereToNext(String input);
-    public SceneObject(SceneObject b) {
-      back = b;
-    }
   }
     
   private abstract class OopsScene extends SceneObject {
+    private SceneObject back;
     public String method() {
       return "read";
     }
@@ -56,6 +53,9 @@ public class MonsterGameServlet extends HttpServlet {
     }
     public SceneObject whereToNext(String input) {
       return back;
+    }
+    public OopsScene(SceneObject b) {
+      back = b;
     }
   }
   
