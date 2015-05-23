@@ -70,9 +70,9 @@ public class MonsterGameServlet extends HttpServlet {
       switch (input) {
         case "1":
           g = new Game();
-          return new GameScene;
+          return new GameScene();
         case "2":
-          return new FilerScene;
+          return new FilerScene();
         default:
           return new OopsScene((SceneObject)this);
       }
@@ -95,11 +95,11 @@ public class MonsterGameServlet extends HttpServlet {
     public SceneObject whereToNext(String input) {
       switch (g.newState(input)) {
         case "ispaused": case "isover":
-          return new MenuScene;
+          return new MenuScene();
         case "isinplay":
-          return new GameScene;
+          return new GameScene();
         default:
-          return new OopsScene;
+          return new OopsScene();
       }
     }
   }
@@ -120,9 +120,9 @@ public class MonsterGameServlet extends HttpServlet {
       }
       switch (newFilerState) {
         case "success":
-          return new MenuScene;
+          return new MenuScene();
         default:
-          return new OopsScene;
+          return new OopsScene();
       }
     }
   }
@@ -137,7 +137,7 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
     // String scene = "menuscene";
-    SceneObject here = new MenuScene;
+    SceneObject here = new MenuScene();
     g = new Game();
     // save state
     // mySession.setAttribute("scene", scene);
