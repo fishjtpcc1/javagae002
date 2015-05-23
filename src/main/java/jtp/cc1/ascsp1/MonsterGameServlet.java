@@ -64,7 +64,7 @@ public class MonsterGameServlet extends HttpServlet {
     // resume from where we left off
     HttpSession mySession = req.getSession(false);
     SceneObject here = (SceneObject)mySession.getAttribute("here");
-    Game g = (Game)mySession.getAttribute("thegame"); // created by menu choice and saved here below
+    Game g = (Game)mySession.getAttribute("thegame");
     // proceed with this use event
     String input = req.getParameter("input");
     here = here.whereToNext(g, input); // strictly controlled polymorphism in action
