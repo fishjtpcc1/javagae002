@@ -79,15 +79,15 @@ public class MonsterGameServlet extends HttpServlet {
     public String draw() {
       return "<br>1. New game<br>2. Save game<br>etc...<br>Enter choice: ";
     }
-    public String whereToNext(String input) {
+    public SceneObject whereToNext(String input) {
       switch (input) {
         case "1":
           g = new Game();
-          return "gamescene";
+          return GameScene;
         case "2":
-          return "filerscene";
+          return FilerScene;
         default:
-          return "oops";
+          return OopsScene;
       }
     }
   }
@@ -149,18 +149,19 @@ public class MonsterGameServlet extends HttpServlet {
     // start new session
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
-    String scene = "menuscene";
-    SceneObject so = so(null,scene);
+    // String scene = "menuscene";
+    SceneObject here = MenuScene;
     g = new Game();
     // save state
-    mySession.setAttribute("scene", scene);
+    // mySession.setAttribute("scene", scene);
+    mySession.setAttribute("here", here);
     mySession.setAttribute("thegame", g);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(so.draw(), so.method(), "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
+    resp.getWriter().println(MonsterGameServlet.json(here.draw(), here.method(), "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
   }
 
-  // annotation missing expt @Override
+  @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
     HttpSession mySession = req.getSession(false);
