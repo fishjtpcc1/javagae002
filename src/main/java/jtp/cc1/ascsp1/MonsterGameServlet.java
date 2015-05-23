@@ -38,7 +38,7 @@ public class MonsterGameServlet extends HttpServlet {
   }
   
   private abstract class SceneObject {
-    private SceneObject back;
+    public SceneObject back;
     public abstract String method();
     public abstract String draw();
     public abstract SceneObject whereToNext(String input);
