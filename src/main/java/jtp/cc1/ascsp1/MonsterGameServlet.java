@@ -51,7 +51,7 @@ public class MonsterGameServlet extends HttpServlet {
     // init the gameapp state
     // String scene = "menuscene";
     Game g = new Game();
-    SceneObject here = new MenuScene(g);
+    SceneObject here = new MenuScene();
     // save state
     // mySession.setAttribute("scene", scene);
     mySession.setAttribute("here", here);
