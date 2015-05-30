@@ -13,7 +13,7 @@ public class GameScene implements SceneObject, Serializable {
     } else if (g.isLost()) {
       return "<br>LOOSER!!!!<br>Press any key to continue: ";
     } else {
-      return "<br>|------" + g.data + "------|<br>Enter NSEWP: ";
+      return "<br>" + g.draw() + "<br>Enter NSEWP: ";
     }
   }
   public SceneObject whereToNext(Game g, String input) {

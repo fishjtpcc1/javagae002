@@ -11,6 +11,19 @@ public class Game implements Serializable {
   private int i;
   public String data;
   public String method = "read";
+  
+  public String draw() {
+    String rows = "";
+    for (int i=0; i<3; i++ ) {
+      String row = "";
+      for (int j=0; j<3; j++) {
+        row  += "*";
+      }
+      rows += row + "<br>";
+    }
+    return rows;
+  }
+  
   public void restart() {
     i = 0;
     data = "recycled (but still wonderful) ";
