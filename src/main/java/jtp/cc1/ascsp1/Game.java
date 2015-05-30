@@ -53,7 +53,9 @@ public class Game implements Serializable {
       switch (input) {
         case "N":
           if (userPos.row > 0) {
+            board[userPos.row][userPos.col] = '-';
             userPos.row--;
+            board[userPos.row][userPos.col] = 'U';
           }
           data += input + ": ";
           i ++;
@@ -61,7 +63,9 @@ public class Game implements Serializable {
           break;
         case "S":
           if (userPos.row < 2) {
+            board[userPos.row][userPos.col] = '-';
             userPos.row++;
+            board[userPos.row][userPos.col] = 'U';
           }
           data += input + ": ";
           i ++;
@@ -69,7 +73,9 @@ public class Game implements Serializable {
           break;
         case "E":
           if (userPos.col < 2) {
+            board[userPos.row][userPos.col] = '-';
             userPos.col++;
+            board[userPos.row][userPos.col] = 'U';
           }
           data += input + ": ";
           i ++;
@@ -77,7 +83,9 @@ public class Game implements Serializable {
           break;
         case "W":
           if (userPos.col > 0) {
+            board[userPos.row][userPos.col] = '-';
             userPos.col--;
+            board[userPos.row][userPos.col] = 'U';
           }
           data += input + ": ";
           i ++;
