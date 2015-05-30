@@ -9,15 +9,16 @@ import java.io.Serializable;
 public class Game implements Serializable {
   private static final long serialVersionUID = 1L;
   private int i;
+  private char[][] board;
   public String data;
   public String method = "read";
   
   public String draw() {
     String rows = "";
     for (int i=0; i<3; i++ ) {
-      String row = "";
+      String row = "|";
       for (int j=0; j<3; j++) {
-        row  += "*";
+        row  += board[i][j] + "|";
       }
       rows += row + "<br>";
     }
@@ -27,6 +28,11 @@ public class Game implements Serializable {
   public void restart() {
     i = 0;
     data = "recycled (but still wonderful) ";
+    for (int i=0; i<3; i++ ) {
+      for (int j=0; j<3; j++) {
+        board[i][j] = "-";
+      }
+    }
   }
   public Boolean isLost() {
     return (i >= 3);
