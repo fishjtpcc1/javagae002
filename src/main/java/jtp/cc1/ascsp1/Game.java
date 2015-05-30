@@ -57,7 +57,6 @@ public class Game implements Serializable {
           }
           data += input + ": ";
           i ++;
-          userPos.row ++;
           newState = "isinplay";
           break;
         case "S":
@@ -66,7 +65,6 @@ public class Game implements Serializable {
           }
           data += input + ": ";
           i ++;
-          userPos.row ++;
           newState = "isinplay";
           break;
         case "E":
@@ -75,7 +73,6 @@ public class Game implements Serializable {
           }
           data += input + ": ";
           i ++;
-          userPos.row ++;
           newState = "isinplay";
           break;
         case "W":
@@ -84,7 +81,6 @@ public class Game implements Serializable {
           }
           data += input + ": ";
           i ++;
-          userPos.row ++;
           newState = "isinplay";
           break;
         case "P":
