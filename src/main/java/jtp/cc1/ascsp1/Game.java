@@ -7,7 +7,7 @@ import java.io.Serializable;
  * must not be a nested class otherwise silent error accessing deserialized members
  */
 public class Game implements Serializable {
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 2L;
   private int i;
   private char[][] board = new char[3][3];
   private GridRC userPos = new GridRC(0,0);
