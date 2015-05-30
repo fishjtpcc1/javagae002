@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Game implements Serializable {
   private static final long serialVersionUID = 1L;
   private int i;
-  private char[][] board;
+  private char[][] board = new char[3][3];
   public String data;
   public String method = "read";
   
