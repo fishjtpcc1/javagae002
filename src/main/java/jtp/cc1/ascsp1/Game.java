@@ -14,15 +14,6 @@ public class Game implements Serializable {
   public String data;
   public String method = "read";
   
-  private class GridRC {
-    public int row;
-    public int col;
-    GridRC(int r, int c) {
-      row = r;
-      col = c;
-    }
-  }
-  
   public String draw() {
     String rows = "";
     for (int i=0; i<3; i++ ) {
