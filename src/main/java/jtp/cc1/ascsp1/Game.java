@@ -51,10 +51,33 @@ public class Game implements Serializable {
       newState = "isover";
     } else {
       switch (input) {
-        case "N": case "S": case "E": case "W":
+        case "N":
+        case "S":
+        case "E":
+        case "W":
           data += input + ": ";
           i ++;
+          userPos.row ++;
           newState = "isinplay";
+        case "N":
+          if (userPos.row > 0) {
+            userPos.row--;
+          }
+          break;
+        case "S":
+          if (userPos.row < 2) {
+            userPos.row++;
+          }
+          break;
+        case "E":
+          if (userPos.col < 2) {
+            userPos.col++;
+          }
+          break;
+        case "W":
+          if (userPos.col > 0) {
+            userPos.col--;
+          }
           break;
         case "P":
           newState = "ispaused";
