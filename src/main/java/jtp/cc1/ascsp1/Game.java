@@ -11,6 +11,7 @@ public class Game implements Serializable {
   private int i;
   private char[][] board = new char[3][3];
   private GridRC userPos = new GridRC(0,0);
+  private GridRC monsterPos = new GridRC(1,1);
   public String data;
   public String method = "read";
   
@@ -29,6 +30,8 @@ public class Game implements Serializable {
   public void restart() {
     i = 0;
     data = "recycled (but still wonderful) ";
+    userPos = new GridRC(0,0);
+    monsterPos = new GridRC(1,1);
     for (int i=0; i<3; i++ ) {
       for (int j=0; j<3; j++) {
         if (userPos.row == i && userPos.col == j) {
@@ -39,11 +42,12 @@ public class Game implements Serializable {
       }
     }
   }
+  
   public Boolean isLost() {
-    return (i >= 3);
+    return (userPos === monsterPos);
   }
   public Boolean isWon() {
-    return (data.contains("W"));
+    return (userPos === new GridRC(2,2));
   }
   public String newState(String input) {
     String newState;
