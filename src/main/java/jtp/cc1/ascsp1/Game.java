@@ -10,8 +10,18 @@ public class Game implements Serializable {
   private static final long serialVersionUID = 1L;
   private int i;
   private char[][] board = new char[3][3];
+  private GridRC userPos = new GridRC(0,0);
   public String data;
   public String method = "read";
+  
+  private class GridRC {
+    public int row;
+    public int col;
+    GridRC(int r, int c) {
+      row = r;
+      col = c;
+    }
+  }
   
   public String draw() {
     String rows = "";
@@ -30,7 +40,11 @@ public class Game implements Serializable {
     data = "recycled (but still wonderful) ";
     for (int i=0; i<3; i++ ) {
       for (int j=0; j<3; j++) {
-        board[i][j] = '-';
+        if (userPos.row == i && userPos.col == j) {
+          board[i][j] = 'U';
+        } else {
+          board[i][j] = '-';
+        }
       }
     }
   }
