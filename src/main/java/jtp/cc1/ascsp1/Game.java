@@ -131,7 +131,7 @@ public class Game implements Serializable {
           if (matches(traps, userPos)) {
             monsterIsAwake = true;
           }
-          if (matches(traps, userPos)) {
+          if (monsterIsAwake) {
             makeMonsterMove();
           }
           data += input + ": ";
