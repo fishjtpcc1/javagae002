@@ -44,10 +44,10 @@ public class Game implements Serializable {
   }
   
   public Boolean isLost() {
-    return (userPos === monsterPos);
+    return (userPos.equals(monsterPos));
   }
   public Boolean isWon() {
-    return (userPos === new GridRC(2,2));
+    return (userPos.equals(new GridRC(2,2)));
   }
   public String newState(String input) {
     String newState;
