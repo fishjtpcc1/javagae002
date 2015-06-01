@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class GridRC implements Serializable {
   public int row;
   public int col;
-  @override
+  @Override
   public Boolean equals(GridRC o) {
     return (row == o.row && col == o.col);
   }
