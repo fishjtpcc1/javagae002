@@ -7,10 +7,12 @@ import java.io.Serializable;
 public class GridRC implements Serializable {
   public int row;
   public int col;
-  @Override
+
+  // Object does not have equals?
   public Boolean equals(GridRC o) {
     return (row == o.row && col == o.col);
   }
+  
   GridRC(int r, int c) {
     row = r;
     col = c;
