@@ -22,7 +22,14 @@ public class Game implements Serializable {
     for (int i=0; i<board.length; i++ ) {
       String row = "<br>|";
       for (int j=0; j<board[i].length; j++) {
-        row  += board[i][j] + "|";
+        if (userPos.equals(new GridRC(i,j))) {
+          row += 'U';
+        } else if (monsterPos.equals(new GridRC(i,j))) {
+          row += 'M';
+        } else {
+          row += '-';
+        }
+        row += "|";
       }
       rows += row;
     }
@@ -34,17 +41,6 @@ public class Game implements Serializable {
     data = "recycled (but still wonderful) ";
     userPos = new GridRC(0,0);
     monsterPos = new GridRC(1,1);
-    for (int i=0; i<board.length; i++ ) {
-      for (int j=0; j<board[i].length; j++) {
-        if (userPos.equals(new GridRC(i,j))) {
-          board[i][j] = 'U';
-        } else if (monsterPos.equals(new GridRC(i,j))) {
-          board[i][j] = 'M';
-        } else {
-          board[i][j] = '-';
-        }
-      }
-    }
   }
   
   public Boolean isLost() {
@@ -55,6 +51,46 @@ public class Game implements Serializable {
     return (userPos.equals(new GridRC(2,2)));
   }
 
+  private void makeUserMove(String input) {
+    switch (input) {
+      case "N":
+        if (userPos.row > 0) {
+          userPos.row--;
+        }
+        break;
+      case "S":
+        if (userPos.row < 2) {
+          userPos.row++;
+        }
+        break;
+      case "E":
+        if (userPos.col < 2) {
+          userPos.col++;
+        }
+        break;
+      case "W":
+        if (userPos.col > 0) {
+          userPos.col--;
+        }
+        break;
+    }
+  }
+  
+  private void makeMonsterMove() {
+    if (userPos.row < monsterPos.row) {
+      monsterPos.row--;
+    }
+    if (userPos.row > monsterPos.row) {
+      monsterPos.row++;
+    }
+    if (userPos.col < monsterPos.col) {
+      monsterPos.col--;
+    }
+    if (userPos.col > monsterPos.col) {
+      monsterPos.col++;
+    }
+  }
+  
   public String newState(String input) {
     String newState;
     // last exit state may have displayed WON/LOST so substate check here to move on afer any key pressed
@@ -62,42 +98,9 @@ public class Game implements Serializable {
       newState = "isover";
     } else {
       switch (input) {
-        case "N":
-          if (userPos.row > 0) {
-            board[userPos.row][userPos.col] = '-';
-            userPos.row--;
-            board[userPos.row][userPos.col] = 'U';
-          }
-          data += input + ": ";
-          i ++;
-          newState = "isinplay";
-          break;
-        case "S":
-          if (userPos.row < 2) {
-            board[userPos.row][userPos.col] = '-';
-            userPos.row++;
-            board[userPos.row][userPos.col] = 'U';
-          }
-          data += input + ": ";
-          i ++;
-          newState = "isinplay";
-          break;
-        case "E":
-          if (userPos.col < 2) {
-            board[userPos.row][userPos.col] = '-';
-            userPos.col++;
-            board[userPos.row][userPos.col] = 'U';
-          }
-          data += input + ": ";
-          i ++;
-          newState = "isinplay";
-          break;
-        case "W":
-          if (userPos.col > 0) {
-            board[userPos.row][userPos.col] = '-';
-            userPos.col--;
-            board[userPos.row][userPos.col] = 'U';
-          }
+        case "N": case "S": case "E": case "W":
+          makeUserMove(input);
+          makeMonsterMove(input);
           data += input + ": ";
           i ++;
           newState = "isinplay";
