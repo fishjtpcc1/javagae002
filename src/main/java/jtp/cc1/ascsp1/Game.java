@@ -10,10 +10,11 @@ public class Game implements Serializable {
   private static final long serialVersionUID = 1L;
   private static final int BOARD_ROWS = 5;
   private static final int BOARD_COLS = 7;
+  private static final rand = new Random();
   private int i;
   private char[][] board = new char[BOARD_ROWS][BOARD_COLS];
   private GridRC userPos = new GridRC(0,0);
-  private GridRC monsterPos = new GridRC(1,1);
+  private GridRC monsterPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
   public String data;
   public String method = "read";
   
@@ -100,7 +101,7 @@ public class Game implements Serializable {
       switch (input) {
         case "N": case "S": case "E": case "W":
           makeUserMove(input);
-          makeMonsterMove(input);
+          makeMonsterMove();
           data += input + ": ";
           i ++;
           newState = "isinplay";
