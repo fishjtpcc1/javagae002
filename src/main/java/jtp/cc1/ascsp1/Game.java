@@ -18,11 +18,11 @@ public class Game implements Serializable {
   public String draw() {
     String rows = "";
     for (int i=0; i<3; i++ ) {
-      String row = "|";
+      String row = "<br>|";
       for (int j=0; j<3; j++) {
         row  += board[i][j] + "|";
       }
-      rows += row + "<br>";
+      rows += row;
     }
     return rows;
   }
