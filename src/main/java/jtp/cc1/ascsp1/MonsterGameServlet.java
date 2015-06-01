@@ -33,8 +33,6 @@ interface SceneObject {
  *  lost: menu
  */
 public class MonsterGameServlet extends HttpServlet {
-  static final int BOARD_ROWS = 5;
-  static final int BOARD_COLS = 7;
   
   // statics are class variables and are not cloned in objects - eg only one logger is used by all instances
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
