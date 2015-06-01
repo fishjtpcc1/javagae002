@@ -11,7 +11,7 @@ public class Game implements Serializable {
   private static final long serialVersionUID = 1L;
   private static final int BOARD_ROWS = 5;
   private static final int BOARD_COLS = 7;
-  private static final int TRAPS = 7;
+  private static final int TRAPS = 2;
   private static final Random rand = new Random();
   private int i;
   private char[][] board = new char[BOARD_ROWS][BOARD_COLS];
@@ -37,13 +37,14 @@ public class Game implements Serializable {
     for (int i=0; i<board.length; i++ ) {
       String row = "<br>|";
       for (int j=0; j<board[i].length; j++) {
-        if (userPos.equals(new GridRC(i,j))) {
+        GridRC p = new GridRC(i,j);
+        if (userPos.equals(p)) {
           row += 'U';
-        } else if (monsterPos.equals(new GridRC(i,j))) {
+        } else if (monsterPos.equals(p)) {
           row += 'M';
-        } else if (goalPos.equals(new GridRC(i,j))) {
+        } else if (goalPos.equals(p)) {
           row += 'G';
-        } else if (matches(traps, new GridRC(i,j))) {
+        } else if (matches(traps, p)) {
           row += 'T';
         } else {
           row += '-';
@@ -103,17 +104,15 @@ public class Game implements Serializable {
     }
   }
   
+  // move only one square h or v
   private void makeMonsterMove() {
     if (userPos.row < monsterPos.row) {
       monsterPos.row--;
-    }
-    if (userPos.row > monsterPos.row) {
+    } else if (userPos.row > monsterPos.row) {
       monsterPos.row++;
-    }
-    if (userPos.col < monsterPos.col) {
+    } else if (userPos.col < monsterPos.col) {
       monsterPos.col--;
-    }
-    if (userPos.col > monsterPos.col) {
+    } else if (userPos.col > monsterPos.col) {
       monsterPos.col++;
     }
   }
