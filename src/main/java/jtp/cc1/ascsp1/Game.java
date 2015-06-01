@@ -14,8 +14,9 @@ public class Game implements Serializable {
   private static final Random rand = new Random();
   private int i;
   private char[][] board = new char[BOARD_ROWS][BOARD_COLS];
-  private GridRC userPos = new GridRC(0,0);
-  private GridRC monsterPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
+  private GridRC userPos;
+  private GridRC monsterPos;
+
   public String data;
   public String method = "read";
   
@@ -42,7 +43,7 @@ public class Game implements Serializable {
     i = 0;
     data = "recycled (but still wonderful) ";
     userPos = new GridRC(0,0);
-    monsterPos = new GridRC(1,1);
+    monsterPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
   }
   
   public Boolean isLost() {
