@@ -55,69 +55,58 @@ public class Game implements Serializable {
 
   public String newState(String input) {
     String newState;
-    switch (input) {
-      case "N":
-        if (userPos.row > 0) {
-          board[userPos.row][userPos.col] = '-';
-          userPos.row--;
-          board[userPos.row][userPos.col] = 'U';
-        }
-        data += input + ": ";
-        i ++;
-        if (isWon() || isLost()) {
-          newState = "isover";
-        } else {
+    // last exit state may have displayed WON/LOST so substate check here to move on afer any key pressed
+    if (isWon() || isLost()) {
+      newState = "isover";
+    } else {
+      switch (input) {
+        case "N":
+          if (userPos.row > 0) {
+            board[userPos.row][userPos.col] = '-';
+            userPos.row--;
+            board[userPos.row][userPos.col] = 'U';
+          }
+          data += input + ": ";
+          i ++;
           newState = "isinplay";
-        }
-        break;
-      case "S":
-        if (userPos.row < 2) {
-          board[userPos.row][userPos.col] = '-';
-          userPos.row++;
-          board[userPos.row][userPos.col] = 'U';
-        }
-        data += input + ": ";
-        i ++;
-        if (isWon() || isLost()) {
-          newState = "isover";
-        } else {
+          break;
+        case "S":
+          if (userPos.row < 2) {
+            board[userPos.row][userPos.col] = '-';
+            userPos.row++;
+            board[userPos.row][userPos.col] = 'U';
+          }
+          data += input + ": ";
+          i ++;
           newState = "isinplay";
-        }
-        break;
-      case "E":
-        if (userPos.col < 2) {
-          board[userPos.row][userPos.col] = '-';
-          userPos.col++;
-          board[userPos.row][userPos.col] = 'U';
-        }
-        data += input + ": ";
-        i ++;
-        if (isWon() || isLost()) {
-          newState = "isover";
-        } else {
+          break;
+        case "E":
+          if (userPos.col < 2) {
+            board[userPos.row][userPos.col] = '-';
+            userPos.col++;
+            board[userPos.row][userPos.col] = 'U';
+          }
+          data += input + ": ";
+          i ++;
           newState = "isinplay";
-        }
-        break;
-      case "W":
-        if (userPos.col > 0) {
-          board[userPos.row][userPos.col] = '-';
-          userPos.col--;
-          board[userPos.row][userPos.col] = 'U';
-        }
-        data += input + ": ";
-        i ++;
-        if (isWon() || isLost()) {
-          newState = "isover";
-        } else {
+          break;
+        case "W":
+          if (userPos.col > 0) {
+            board[userPos.row][userPos.col] = '-';
+            userPos.col--;
+            board[userPos.row][userPos.col] = 'U';
+          }
+          data += input + ": ";
+          i ++;
           newState = "isinplay";
-        }
-        break;
-      case "P":
-        newState = "ispaused";
-        break;
-      default:
-        newState = "oops";
-        break;
+          break;
+        case "P":
+          newState = "ispaused";
+          break;
+        default:
+          newState = "oops";
+          break;
+      }
     }
     return newState;
   }

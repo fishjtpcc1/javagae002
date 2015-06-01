@@ -18,7 +18,7 @@ public class GameScene implements SceneObject, Serializable {
   }
   public SceneObject whereToNext(Game g, String input) {
     switch (g.newState(input)) {
-      case "ispaused": case "isover":
+      case "ispaused":
         return new MenuScene();
       case "isinplay":
         return (SceneObject)this;

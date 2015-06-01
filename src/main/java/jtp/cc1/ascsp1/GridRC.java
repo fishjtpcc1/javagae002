@@ -8,7 +8,7 @@ public class GridRC implements Serializable {
   public int row;
   public int col;
 
-  // Object does not have equals?
+  // Object does have equals but @Overrride is not needed
   public Boolean equals(GridRC o) {
     return (row == o.row && col == o.col);
   }
