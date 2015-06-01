@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Game implements Serializable {
   private static final long serialVersionUID = 1L;
   private int i;
-  private char[][] board = new char[3][3];
+  private char[][] board = new char[BOARD_ROWS][BOARD_COLS];
   private GridRC userPos = new GridRC(0,0);
   private GridRC monsterPos = new GridRC(1,1);
   public String data;
@@ -17,9 +17,9 @@ public class Game implements Serializable {
   
   public String draw() {
     String rows = "";
-    for (int i=0; i<3; i++ ) {
+    for (int i=0; i<board.length; i++ ) {
       String row = "<br>|";
-      for (int j=0; j<3; j++) {
+      for (int j=0; j<board[i].length; j++) {
         row  += board[i][j] + "|";
       }
       rows += row;
@@ -32,8 +32,8 @@ public class Game implements Serializable {
     data = "recycled (but still wonderful) ";
     userPos = new GridRC(0,0);
     monsterPos = new GridRC(1,1);
-    for (int i=0; i<3; i++ ) {
-      for (int j=0; j<3; j++) {
+    for (int i=0; i<board.length; i++ ) {
+      for (int j=0; j<board[i].length; j++) {
         if (userPos.equals(new GridRC(i,j))) {
           board[i][j] = 'U';
         } else if (monsterPos.equals(new GridRC(i,j))) {
