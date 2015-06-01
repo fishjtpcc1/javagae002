@@ -18,7 +18,7 @@ public class Game implements Serializable {
   private GridRC userPos;
   private GridRC monsterPos;
   private GridRC goalPos;
-  private GridRC traps[TRAPS];
+  private GridRC[] traps = new GridRC[TRAPS];
 
   public String data;
   public String method = "read";
