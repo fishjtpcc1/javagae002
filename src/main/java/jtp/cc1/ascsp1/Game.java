@@ -11,14 +11,26 @@ public class Game implements Serializable {
   private static final long serialVersionUID = 1L;
   private static final int BOARD_ROWS = 5;
   private static final int BOARD_COLS = 7;
+  private static final int TRAPS = 7;
   private static final Random rand = new Random();
   private int i;
   private char[][] board = new char[BOARD_ROWS][BOARD_COLS];
   private GridRC userPos;
   private GridRC monsterPos;
+  private GridRC goalPos;
+  private GridRC traps[TRAPS];
 
   public String data;
   public String method = "read";
+  
+  public Boolean matches(GridRC[] a, GridRC p) {
+    for (int i=0; i<a.length; i++) {
+      if (a[i].equals(p)) {
+        return true;
+      }
+    }
+    return false;
+  }
   
   public String draw() {
     String rows = "";
@@ -29,6 +41,10 @@ public class Game implements Serializable {
           row += 'U';
         } else if (monsterPos.equals(new GridRC(i,j))) {
           row += 'M';
+        } else if (goalPos.equals(new GridRC(i,j))) {
+          row += 'G';
+        } else if (matches(traps, new GridRC(i,j))) {
+          row += 'T';
         } else {
           row += '-';
         }
@@ -44,6 +60,14 @@ public class Game implements Serializable {
     data = "recycled (but still wonderful) ";
     userPos = new GridRC(0,0);
     monsterPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
+    goalPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
+    for (int i=0; i<traps.length; i++) {
+      GridRC trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
+      while (trapPos.equals(monsterPos) || trapPos.equals(userPos)) {
+        trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
+      }
+      traps[i] = trapPos;
+    }
   }
   
   public Boolean isLost() {
@@ -51,7 +75,7 @@ public class Game implements Serializable {
   }
 
   public Boolean isWon() {
-    return (userPos.equals(new GridRC(2,2)));
+    return (userPos.equals(goalPos));
   }
 
   private void makeUserMove(String input) {
