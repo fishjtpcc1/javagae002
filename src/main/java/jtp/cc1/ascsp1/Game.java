@@ -19,6 +19,7 @@ public class Game implements Serializable {
   private GridRC monsterPos;
   private GridRC goalPos;
   private GridRC[] traps = new GridRC[TRAPS];
+  private Boolean monsterIsAwake;
 
   public String data;
   public String method = "read";
@@ -69,6 +70,7 @@ public class Game implements Serializable {
       }
       traps[i] = trapPos;
     }
+    monsterIsAwake = false;
   }
   
   public Boolean isLost() {
@@ -87,12 +89,12 @@ public class Game implements Serializable {
         }
         break;
       case "S":
-        if (userPos.row < 2) {
+        if (userPos.row < BOARD_ROWS-1) {
           userPos.row++;
         }
         break;
       case "E":
-        if (userPos.col < 2) {
+        if (userPos.col < BOARD_COLS-1) {
           userPos.col++;
         }
         break;
@@ -126,7 +128,12 @@ public class Game implements Serializable {
       switch (input) {
         case "N": case "S": case "E": case "W":
           makeUserMove(input);
-          makeMonsterMove();
+          if (matches(traps, userPos)) {
+            monsterIsAwake = true;
+          }
+          if (matches(traps, userPos)) {
+            makeMonsterMove();
+          }
           data += input + ": ";
           i ++;
           newState = "isinplay";
