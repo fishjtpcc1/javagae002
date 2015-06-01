@@ -34,8 +34,10 @@ public class Game implements Serializable {
     monsterPos = new GridRC(1,1);
     for (int i=0; i<3; i++ ) {
       for (int j=0; j<3; j++) {
-        if (userPos.row == i && userPos.col == j) {
+        if (userPos.equals(new GridRC(i,j))) {
           board[i][j] = 'U';
+        } else if (monsterPos.equals(new GridRC(i,j))) {
+          board[i][j] = 'M';
         } else {
           board[i][j] = '-';
         }
@@ -46,62 +48,76 @@ public class Game implements Serializable {
   public Boolean isLost() {
     return (userPos.equals(monsterPos));
   }
+
   public Boolean isWon() {
     return (userPos.equals(new GridRC(2,2)));
   }
+
   public String newState(String input) {
     String newState;
-    if (isWon() || isLost()) {
-      newState = "isover";
-    } else {
-      switch (input) {
-        case "N":
-          if (userPos.row > 0) {
-            board[userPos.row][userPos.col] = '-';
-            userPos.row--;
-            board[userPos.row][userPos.col] = 'U';
-          }
-          data += input + ": ";
-          i ++;
+    switch (input) {
+      case "N":
+        if (userPos.row > 0) {
+          board[userPos.row][userPos.col] = '-';
+          userPos.row--;
+          board[userPos.row][userPos.col] = 'U';
+        }
+        data += input + ": ";
+        i ++;
+        if (isWon() || isLost()) {
+          newState = "isover";
+        } else {
           newState = "isinplay";
-          break;
-        case "S":
-          if (userPos.row < 2) {
-            board[userPos.row][userPos.col] = '-';
-            userPos.row++;
-            board[userPos.row][userPos.col] = 'U';
-          }
-          data += input + ": ";
-          i ++;
+        }
+        break;
+      case "S":
+        if (userPos.row < 2) {
+          board[userPos.row][userPos.col] = '-';
+          userPos.row++;
+          board[userPos.row][userPos.col] = 'U';
+        }
+        data += input + ": ";
+        i ++;
+        if (isWon() || isLost()) {
+          newState = "isover";
+        } else {
           newState = "isinplay";
-          break;
-        case "E":
-          if (userPos.col < 2) {
-            board[userPos.row][userPos.col] = '-';
-            userPos.col++;
-            board[userPos.row][userPos.col] = 'U';
-          }
-          data += input + ": ";
-          i ++;
+        }
+        break;
+      case "E":
+        if (userPos.col < 2) {
+          board[userPos.row][userPos.col] = '-';
+          userPos.col++;
+          board[userPos.row][userPos.col] = 'U';
+        }
+        data += input + ": ";
+        i ++;
+        if (isWon() || isLost()) {
+          newState = "isover";
+        } else {
           newState = "isinplay";
-          break;
-        case "W":
-          if (userPos.col > 0) {
-            board[userPos.row][userPos.col] = '-';
-            userPos.col--;
-            board[userPos.row][userPos.col] = 'U';
-          }
-          data += input + ": ";
-          i ++;
+        }
+        break;
+      case "W":
+        if (userPos.col > 0) {
+          board[userPos.row][userPos.col] = '-';
+          userPos.col--;
+          board[userPos.row][userPos.col] = 'U';
+        }
+        data += input + ": ";
+        i ++;
+        if (isWon() || isLost()) {
+          newState = "isover";
+        } else {
           newState = "isinplay";
-          break;
-        case "P":
-          newState = "ispaused";
-          break;
-        default:
-          newState = "oops";
-          break;
-      }
+        }
+        break;
+      case "P":
+        newState = "ispaused";
+        break;
+      default:
+        newState = "oops";
+        break;
     }
     return newState;
   }
