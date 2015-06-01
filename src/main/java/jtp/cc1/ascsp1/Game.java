@@ -1,6 +1,7 @@
 package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /** to save complex data in the session class
  * must implement Serializable or runtime error happens
@@ -10,7 +11,7 @@ public class Game implements Serializable {
   private static final long serialVersionUID = 1L;
   private static final int BOARD_ROWS = 5;
   private static final int BOARD_COLS = 7;
-  private static final rand = new Random();
+  private static final Random() rand = new Random();
   private int i;
   private char[][] board = new char[BOARD_ROWS][BOARD_COLS];
   private GridRC userPos = new GridRC(0,0);
