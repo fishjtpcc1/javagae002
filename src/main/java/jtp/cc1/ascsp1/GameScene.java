@@ -9,11 +9,11 @@ public class GameScene implements SceneObject, Serializable {
   }
   public String draw(Game g, Game[] savedGames) {
     if (g.isWon()) {
-      return "<br>" + g.name + "<br>" + g.draw() + "<br>WINNER!!!!<br>Press any key to continue: ";
+      return "<br><br>" + g.name + g.draw() + "<br>WINNER!!!!<br>Press any key to continue: ";
     } else if (g.isLost()) {
-      return "<br>" + g.name + "<br>" + g.draw() + "<br>LOOSER!!!!<br>Press any key to continue: ";
+      return "<br><br>" + g.name + g.draw() + "<br>LOOSER!!!!<br>Press any key to continue: ";
     } else {
-      return "<br>" + g.name + "<br>" + g.draw() + "<br>Enter NSEWP: ";
+      return "<br><br>" + g.name + g.draw() + "<br>Enter NSEWP: ";
     }
   }
   public SceneObject whereToNext(Game g, String input) {
