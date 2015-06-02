@@ -20,6 +20,7 @@ public class Game implements Serializable {
   private GridRC goalPos;
   private GridRC[] traps = new GridRC[TRAPS];
   private Boolean monsterIsAwake;
+  private String oneTimeMsg = "":
 
   public String data;
   public String method = "read";
@@ -54,7 +55,7 @@ public class Game implements Serializable {
       }
       rows += row;
     }
-    return rows + "<BR>[monster is awake:" + monsterIsAwake + "]";
+    return rows + oneTimeMsg;
   }
   
   public void restart() {
@@ -71,6 +72,7 @@ public class Game implements Serializable {
       traps[i] = trapPos;
     }
     monsterIsAwake = false;
+    oneTimeMsg = "";
   }
   
   public Boolean isLost() {
@@ -108,25 +110,25 @@ public class Game implements Serializable {
   
   // move only one square h or v
   private void makeMonsterMove() {
-    GridRC m2 = monsterPos;
+    GridRC m0 = new GridRC(monsterPos.row,monsterPos.col);;
     if (userPos.row < monsterPos.row) {
-        m2 = new GridRC(monsterPos.row - 1,monsterPos.col);
+        monsterPos.row--;
     } else if (userPos.row > monsterPos.row) {
-        m2 = new GridRC(monsterPos.row + 1,monsterPos.col);
+        monsterPos.row++;
     } else if (userPos.col < monsterPos.col) {
-        m2 = new GridRC(monsterPos.row,monsterPos.col - 1);
-    } else if (userPos.col > monsterPos.col) {
-        m2 = new GridRC(monsterPos.row,monsterPos.col + 1);
+        monsterPos.col--;
+     } else if (userPos.col > monsterPos.col) {
+        monsterPos.col++;
     }
     // swap goal
-    if (m2.equals(goalPos)) {
-      goalPos = monsterPos;
+    if (monsterPos.equals(goalPos)) {
+      goalPos = m0;
     }
-    monsterPos = m2;
   }
   
   public String newState(String input) {
     String newState;
+    oneTimeMsg = "";
     // last exit state may have displayed WON/LOST so substate check here to move on afer any key pressed
     if (isWon() || isLost()) {
       newState = "isover";
@@ -135,6 +137,9 @@ public class Game implements Serializable {
         case "N": case "S": case "E": case "W":
           makeUserMove(input);
           if (matches(traps, userPos)) {
+            if (!monsterIsAwake) {
+              oneTimeMsg = "<br>MONSTER IS AWAKE!!";
+            }
             monsterIsAwake = true;
           }
           if (monsterIsAwake) {
