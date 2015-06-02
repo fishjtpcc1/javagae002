@@ -9,7 +9,7 @@ public class FilerScene implements SceneObject, Serializable {
     return "readln";
   }
   
-  public String draw(Game g) {
+  public String draw(Game g, Game[] savedGames) {
     String rows = "";
     for (int i=0; i<savedGames.length; i++ ) {
       if (savedGames[i]) {

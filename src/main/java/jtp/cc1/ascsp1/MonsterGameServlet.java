@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 
 interface SceneObject {
   public String method(Game g);
-  public String draw(Game g);
+  public String draw(Game g, Game[] savedGames);
   public SceneObject whereToNext(Game g, String input);
 }
     
@@ -43,8 +43,6 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
-  Game[] savedGames = new Game[3];
-
   @Override // to help me prevent stupid polymorphic mistakes, the @Override annotation is used here to assert to compiler that this method is present in the superclass
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     reuseCount ++;
@@ -52,6 +50,7 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
     Game g = new Game("fred.1");
+    Game[] savedGames = new Game[3];
     int currentGameIndex = 0;
     savedGames[currentGameIndex] = g;
     SceneObject here = new MenuScene();
@@ -61,7 +60,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("currentGameIndex", currentGameIndex);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(here.draw(g), here.method(g), "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
+    resp.getWriter().println(MonsterGameServlet.json(here.draw(g, savedGames), here.method(g), "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
   }
 
   @Override
@@ -81,7 +80,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("currentGameIndex", currentGameIndex);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(here.draw(g), here.method(g), "here:"+here+", thegame:"+g+", input:"+input));
+    resp.getWriter().println(MonsterGameServlet.json(here.draw(g,savedGames), here.method(g), "here:"+here+", thegame:"+g+", input:"+input));
   }
 
 }

@@ -7,7 +7,7 @@ public class PausedGameMenuScene implements SceneObject, Serializable {
   public String method(Game g) {
     return "read";
   }
-  public String draw(Game g) {
+  public String draw(Game g, Game[] savedGames) {
     return "<br><br>PAUSED<br>1. Resume game<br>2. Save game<br>3. Quit<br>Enter choice: ";
   }
   public SceneObject whereToNext(Game g, String input) {

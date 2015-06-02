@@ -8,7 +8,7 @@ public class OopsScene implements Serializable, SceneObject {
   public String method(Game g) {
     return back.method(g);
   }
-  public String draw(Game g) {
+  public String draw(Game g, Game[] savedGames) {
     return "<br>Que!? ";
   }
   public SceneObject whereToNext(Game g, String input) {

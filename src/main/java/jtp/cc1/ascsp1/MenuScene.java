@@ -7,7 +7,7 @@ public class MenuScene implements SceneObject, Serializable {
   public String method(Game g) {
     return "read";
   }
-  public String draw(Game g) {
+  public String draw(Game g, Game[] savedGames) {
     return "<br><br>1. New game<br>2. Training game<br>Enter choice: ";
   }
   public SceneObject whereToNext(Game g, String input) {

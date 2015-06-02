@@ -7,7 +7,7 @@ public class GameScene implements SceneObject, Serializable {
   public String method(Game g) {
     return g.method;
   }
-  public String draw(Game g) {
+  public String draw(Game g, Game[] savedGames) {
     if (g.isWon()) {
       return "<br>" + g.draw() + "<br>WINNER!!!!<br>Press any key to continue: ";
     } else if (g.isLost()) {
