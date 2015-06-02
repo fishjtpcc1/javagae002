@@ -65,7 +65,7 @@ public class Game implements Serializable {
     goalPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
     for (int i=0; i<traps.length; i++) {
       GridRC trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
-      while (traps[i].equals(monsterPos) || traps[i].equals(goalPos)) {
+      while (trapPos.equals(monsterPos) || trapPos.equals(goalPos)) {
         trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
       }
       traps[i] = trapPos;
