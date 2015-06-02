@@ -25,6 +25,7 @@ public class FilerScene implements SceneObject, Serializable {
       newFilerState = "fail";
     } else {
       newFilerState = "success";
+      g.name = input;
     }
     switch (newFilerState) {
       case "success":
