@@ -43,6 +43,8 @@ public class MonsterGameServlet extends HttpServlet {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
+  Game[] savedGames = new Game[3];
+
   @Override // to help me prevent stupid polymorphic mistakes, the @Override annotation is used here to assert to compiler that this method is present in the superclass
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     reuseCount ++;
@@ -50,7 +52,6 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
     Game g = new Game("fred.1");
-    Game[] savedGames = new Game[3];
     int currentGameIndex = 0;
     savedGames[currentGameIndex] = g;
     SceneObject here = new MenuScene();
