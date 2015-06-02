@@ -108,7 +108,7 @@ public class Game implements Serializable {
   
   // move only one square h or v
   private void makeMonsterMove() {
-    GridRC m2;
+    GridRC m2 = monsterPos;
     if (userPos.row < monsterPos.row) {
         m2 = new GridRC(monsterPos.row--,monsterPos.col);
     } else if (userPos.row > monsterPos.row) {
