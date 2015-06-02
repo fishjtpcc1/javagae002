@@ -65,7 +65,7 @@ public class Game implements Serializable {
     goalPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
     for (int i=0; i<traps.length; i++) {
       GridRC trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
-      while (trapPos.equals(monsterPos) || trapPos.equals(userPos)) {
+      while (traps[i].equals(monsterPos) || traps[i].equals(goalPos)) {
         trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
       }
       traps[i] = trapPos;
@@ -108,15 +108,21 @@ public class Game implements Serializable {
   
   // move only one square h or v
   private void makeMonsterMove() {
+    GridRc m2;
     if (userPos.row < monsterPos.row) {
-      monsterPos.row--;
+        m2 = new GridRC(monsterPos.row--,monsterPos.col);
     } else if (userPos.row > monsterPos.row) {
-      monsterPos.row++;
+        m2 = new GridRC(monsterPos.row++,monsterPos.col);
     } else if (userPos.col < monsterPos.col) {
-      monsterPos.col--;
+        m2 = new GridRC(monsterPos.row,monsterPos.col--);
     } else if (userPos.col > monsterPos.col) {
-      monsterPos.col++;
+        m2 = new GridRC(monsterPos.row,monsterPos.col++);
     }
+    // swap goal
+    if (m2.equals(goalPos)) {
+      goalPos = monsterPos;
+    }
+    monsterPos = m2;
   }
   
   public String newState(String input) {
@@ -148,8 +154,10 @@ public class Game implements Serializable {
     }
     return newState;
   }
+  
   public Game() {
     i = 0;
     data = "fresh of the press ";
   }
+  
 }
