@@ -9,9 +9,9 @@ public class GameScene implements SceneObject, Serializable {
   }
   public String draw(Game g) {
     if (g.isWon()) {
-      return "<br>WINNER!!!!<br>Press any key to continue: ";
+      return "<br>" + g.draw() + "<br>WINNER!!!!<br>Press any key to continue: ";
     } else if (g.isLost()) {
-      return "<br>LOOSER!!!!<br>Press any key to continue: ";
+      return "<br>" + g.draw() + "<br>LOOSER!!!!<br>Press any key to continue: ";
     } else {
       return "<br>" + g.draw() + "<br>Enter NSEWP: ";
     }

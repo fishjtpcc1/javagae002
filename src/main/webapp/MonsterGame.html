@@ -22,6 +22,7 @@ $(document).ready(function() {
             //alert(event.which);
             $(document).off("keypress");
             var char = String.fromCharCode(event.which);
+            if (event.which == 13) char = '.'; // control char in return json is not allowed
             $('#screen').html($('#screen').html() + char);
             post(char);
         });
