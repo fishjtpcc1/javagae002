@@ -110,13 +110,13 @@ public class Game implements Serializable {
   private void makeMonsterMove() {
     GridRC m2 = monsterPos;
     if (userPos.row < monsterPos.row) {
-        m2 = new GridRC(monsterPos.row--,monsterPos.col);
+        m2 = new GridRC(monsterPos.row - 1,monsterPos.col);
     } else if (userPos.row > monsterPos.row) {
-        m2 = new GridRC(monsterPos.row++,monsterPos.col);
+        m2 = new GridRC(monsterPos.row + 1,monsterPos.col);
     } else if (userPos.col < monsterPos.col) {
-        m2 = new GridRC(monsterPos.row,monsterPos.col--);
+        m2 = new GridRC(monsterPos.row,monsterPos.col - 1);
     } else if (userPos.col > monsterPos.col) {
-        m2 = new GridRC(monsterPos.row,monsterPos.col++);
+        m2 = new GridRC(monsterPos.row,monsterPos.col + 1);
     }
     // swap goal
     if (m2.equals(goalPos)) {
