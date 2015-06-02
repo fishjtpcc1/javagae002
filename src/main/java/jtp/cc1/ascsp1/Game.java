@@ -75,6 +75,18 @@ public class Game implements Serializable {
     oneTimeMsg = "";
   }
   
+  public void restartPreset() {
+    i = 0;
+    data = "preset";
+    userPos = new GridRC(0,0);
+    monsterPos = new GridRC(2,2);
+    goalPos = new GridRC(4,4);
+    traps[0] = new GridRC(3,3);
+    traps[1] = new GridRC(1,1);
+    monsterIsAwake = false;
+    oneTimeMsg = "";
+  }
+  
   public Boolean isLost() {
     return (userPos.equals(monsterPos));
   }
