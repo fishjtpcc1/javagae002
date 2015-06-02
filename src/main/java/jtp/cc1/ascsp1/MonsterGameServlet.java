@@ -50,7 +50,7 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
     Game g = new Game("fred.1");
-    Game[] savedGames = Game[3];
+    Game[] savedGames = new Game[3];
     int currentGameIndex = 0;
     savedGames[currentGameIndex] = g;
     SceneObject here = new MenuScene();
