@@ -22,6 +22,7 @@ public class Game implements Serializable {
   private Boolean monsterIsAwake;
   private String oneTimeMsg = "";
 
+  public String name;
   public String data;
   public String method = "read";
   

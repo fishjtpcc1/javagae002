@@ -49,11 +49,15 @@ public class MonsterGameServlet extends HttpServlet {
     // start new session
     HttpSession mySession = req.getSession(true);
     // init the gameapp state
-    Game g = new Game();
+    Game g = new Game("fred.1");
+    Game[] savedGames = Game[3];
+    int currentGameIndex = 0;
+    savedGames[currentGameIndex] = g;
     SceneObject here = new MenuScene();
     // save state
     mySession.setAttribute("here", here);
-    mySession.setAttribute("thegame", g);
+    mySession.setAttribute("savedGames", savedGames);
+    mySession.setAttribute("currentGameIndex", currentGameIndex);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json(here.draw(g), here.method(g), "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
@@ -63,14 +67,17 @@ public class MonsterGameServlet extends HttpServlet {
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
     HttpSession mySession = req.getSession(false);
-    SceneObject here = (SceneObject)mySession.getAttribute("here");
-    Game g = (Game)mySession.getAttribute("thegame");
+    SceneObject here = mySession.getAttribute("here"); // no need to cast as implied in assignment
+    Game[] savedGames = mySession.getAttribute("savedGames");
+    int currentGameIndex = mySession.getAttribute("currentGameIndex");
+    Game g = savedGames[currentGameIndex];
     // proceed with this use event
     String input = req.getParameter("input");
     here = here.whereToNext(g, input); // strictly controlled polymorphism in action
     // save state
     mySession.setAttribute("here", here);
-    mySession.setAttribute("thegame", g);
+    mySession.setAttribute("savedGames", savedGames);
+    mySession.setAttribute("currentGameIndex", currentGameIndex);
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json(here.draw(g), here.method(g), "here:"+here+", thegame:"+g+", input:"+input));
