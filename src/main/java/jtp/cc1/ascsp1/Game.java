@@ -173,9 +173,10 @@ public class Game implements Serializable {
     return newState;
   }
   
-  public Game() {
+  public Game(String n) {
     i = 0;
     data = "fresh of the press ";
+    name = n;
   }
   
 }
