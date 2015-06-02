@@ -54,7 +54,7 @@ public class Game implements Serializable {
       }
       rows += row;
     }
-    return rows;
+    return rows + "<BR>[monster is awake:" + monsterIsAwake + "]";
   }
   
   public void restart() {
