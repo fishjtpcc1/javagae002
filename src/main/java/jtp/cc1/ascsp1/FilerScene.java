@@ -12,7 +12,7 @@ public class FilerScene implements SceneObject, Serializable {
   public String draw(Game g, Game[] savedGames) {
     String rows = "";
     for (int i=0; i<savedGames.length; i++ ) {
-      if (savedGames[i]) {
+      if (savedGames[i] != null) {
         rows += "<br>" + savedGames[i].name;
       }
     }
