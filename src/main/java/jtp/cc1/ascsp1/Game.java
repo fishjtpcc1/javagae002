@@ -20,7 +20,7 @@ public class Game implements Serializable {
   private GridRC goalPos;
   private GridRC[] traps = new GridRC[TRAPS];
   private Boolean monsterIsAwake;
-  private String oneTimeMsg = "":
+  private String oneTimeMsg = "";
 
   public String data;
   public String method = "read";
