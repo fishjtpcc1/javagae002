@@ -43,7 +43,7 @@ public class MonsterGameServlet extends HttpServlet {
   
   @Override // to help me prevent stupid polymorphic mistakes, the @Override annotation is used here to assert to compiler that this method is present in the superclass
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
-    // hand off to initial SceneI
+    // hand off to initial Scene
     MenuScene here = new MenuScene();
     here.doGet(req,resp);
   }
@@ -51,9 +51,10 @@ public class MonsterGameServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
-/*
     HttpSession mySession = req.getSession(false);
-    SceneI here = (SceneI)mySession.getAttribute("here"); // know: casting IS required tho implied in assignment
+    Scene here = (Scene)mySession.getAttribute("here"); // know: casting IS required tho implied in assignment
+    here.doPost(req,resp);
+/*
     Game[] savedGames = (Game[])mySession.getAttribute("savedGames");
     int currentGameIndex = (int)mySession.getAttribute("currentGameIndex");
     Game g = savedGames[currentGameIndex];

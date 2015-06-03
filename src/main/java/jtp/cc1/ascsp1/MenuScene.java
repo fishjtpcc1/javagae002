@@ -11,16 +11,16 @@ public class MenuScene extends Scene implements Serializable {
   public String draw() {
     return "<br><br>1. New game<br>2. Training game<br>Enter choice: ";
   }
-  public Scene whereToNext(Game g, String input) {
+  public Scene whereToNext(String input) {
     switch (input) {
       case "1":
-        g.restart();
+        //g.restart();
         return new GameScene();
       case "2":
-        g.restartPreset();
+        //g.restartPreset();
         return new GameScene();
       default:
-        return new OopsScene(this);
+        return new OopsScene(this); // know: casting back is not required as is obviously valid in inheritance structure
     }
   }
   
