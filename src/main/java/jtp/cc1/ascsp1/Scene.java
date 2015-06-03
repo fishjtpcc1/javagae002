@@ -10,7 +10,7 @@ public class Scene {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
-  HttpSession datastore;
+  private HttpSession datastore;
   
   public String method() {
     return "nomethod";
@@ -22,6 +22,8 @@ public class Scene {
     return this;
   }
 
+  public HttpSession getDatastore() { return datastore; }
+  
    /* no input yet: sets up session data of current SceneI = this, sends screen image to tier1
    */
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {

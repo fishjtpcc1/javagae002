@@ -7,6 +7,7 @@ public class FilerScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private Scene back;
+  private HttpSession datastore = getDatastore();
   
   public String method() {
     return "readln";
