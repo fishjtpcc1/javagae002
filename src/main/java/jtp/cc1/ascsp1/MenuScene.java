@@ -11,7 +11,7 @@ public class MenuScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    return "<br><br>" + drawFIles() + "<br>1. New game<br>2. Training game<br>Enter choice: ";
+    return "<br><br>" + drawFiles() + "<br>1. New game<br>2. Training game<br>Enter choice: ";
   }
   
   public Scene whereToNext(String input) {
