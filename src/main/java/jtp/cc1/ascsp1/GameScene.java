@@ -35,8 +35,12 @@ public class GameScene extends Scene implements Serializable {
     }
   }
 
-  GameScene() {
-    g.restart();
+  GameScene(int mode) {
+    if (mode == 1) {
+      g.restart();
+    } else {
+      g.restartPreset();
+    }
   }
   
 }
