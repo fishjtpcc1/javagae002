@@ -6,11 +6,11 @@ import java.io.IOException;
 
 public class Scene {
 
-  protected static final Game g = new Game();
-
   protected static String json(String screen, String method, String other) {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
+
+  protected final Game g = new Game(); // canot be static otherwise all users play the same game!!
 
   public String method() {
     return "nomethod";
