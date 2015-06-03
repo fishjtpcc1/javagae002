@@ -5,11 +5,12 @@ import javax.servlet.http.*;
 
 public class GameScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
-/*
+
   public String method() {
     return g.method;
   }
-  public String draw(Game g, Game[] savedGames) {
+  
+  public String draw() {
     if (g.isWon()) {
       return "<br><br>" + g.name + g.draw() + "<br>WINNER!!!!<br>Press any key to continue: ";
     } else if (g.isLost()) {
@@ -18,7 +19,8 @@ public class GameScene extends Scene implements Serializable {
       return "<br><br>" + g.name + g.draw() + "<br>Enter NSEWP: ";
     }
   }
-  public Scene whereToNext(Game g, String input) {
+  
+  public Scene whereToNext(String input) {
     switch (g.newState(input)) {
       case "ispaused":
         return new PausedGameMenuScene();
@@ -30,5 +32,5 @@ public class GameScene extends Scene implements Serializable {
         return new OopsScene(this);
     }
   }
-  */
+
 }
