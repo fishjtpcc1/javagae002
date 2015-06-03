@@ -24,7 +24,7 @@ public class MenuScene implements Scene, Serializable {
     }
   }
   
-  /* mo input yet: sets up session data of current scene = this, sends screen image to tier1
+  /* no input yet: sets up session data of current scene = this, sends screen image to tier1
    */
   public void doGet(HttpServletRequest req, HttpServletResponse resp) {
     // save state

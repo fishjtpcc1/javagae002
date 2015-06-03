@@ -8,7 +8,7 @@ interface Scene {
   public String method(Game g);
   public String draw(Game g, Game[] savedGames);
   public Scene whereToNext(Game g, String input);
-  public void doGet(HttpServletRequest req, HttpServletResponse resp);
+  //public void doGet(HttpServletRequest req, HttpServletResponse resp);
 }
     
 /**
@@ -47,7 +47,7 @@ public class MonsterGameServlet extends HttpServlet {
   @Override // to help me prevent stupid polymorphic mistakes, the @Override annotation is used here to assert to compiler that this method is present in the superclass
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // hand off to initial scene
-    Scene here = new MenuScene();
+    MenuScene here = new MenuScene();
     here.doGet(req,resp);
   }
 
