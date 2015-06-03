@@ -25,7 +25,7 @@ public class MenuScene extends Scene implements Serializable {
     }
   }
   
-  FilerScene(Scene b) {
+  MenuScene(Scene b) {
     datastore = b.datastore;
   }
 
