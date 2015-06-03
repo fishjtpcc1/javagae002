@@ -35,13 +35,14 @@ public class FilerScene extends Scene implements Serializable {
     } else {
       newFilerState = "success";
       List<Game> savedGames = (List<Game>)datastore.getAttribute("savedGames");
+      Game pausedGame = ((GameScene)((PausedGameMenuScene)back).back).g;
       if (savedGames != null) {
-        savedGames.add(back.g);
+        savedGames.add(pausedGame);
       } else {
-        savedgames = Arrays.asList(back.g);
+        savedGames = Arrays.asList(pausedGame);
       }
-      back.back.g.name = input;
-      datastore.setAttribute("savedGames", savedgames);
+      pausedGame.name = input;
+      datastore.setAttribute("savedGames", savedGames);
     }
     switch (newFilerState) {
       case "success":
