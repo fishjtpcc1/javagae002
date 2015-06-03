@@ -2,13 +2,13 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 import javax.servlet.http.*;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GameScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public final Game g = new Game(); // canot be static otherwise all users play the same game!!
-  public List<Game> datastore; // dirty: sim datastore
+  public ArrayList<Game> datastore; // dirty: sim datastore
 
   public String method() {
     return g.method;
@@ -37,7 +37,7 @@ public class GameScene extends Scene implements Serializable {
     }
   }
 
-  GameScene(int mode, List<Game> datastore) {
+  GameScene(int mode, ArrayList<Game> datastore) {
     this.datastore = datastore;
     if (mode == 1) {
       g.restart();

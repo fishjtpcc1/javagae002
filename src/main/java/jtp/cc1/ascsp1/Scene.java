@@ -3,7 +3,7 @@ package jtp.cc1.ascsp1;
 import java.io.Serializable;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Scene {
 
@@ -11,7 +11,7 @@ public class Scene {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
-  protected String drawFiles(List<Game> datastore) {
+  protected String drawFiles(ArrayList<Game> datastore) {
     String rows = "";
     if (datastore != null) {
       for (int i=0; i<datastore.size(); i++ ) {

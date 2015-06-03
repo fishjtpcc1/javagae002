@@ -2,13 +2,13 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 import javax.servlet.http.*;
-import java.util.List;
+import java.util.ArrayList;
 
 public class PausedGameMenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public Scene back;
-  public List<Game> datastore; // dirty: sim datastore
+  public ArrayList<Game> datastore; // dirty: sim datastore
 
   public String method() {
     return "read";
@@ -31,7 +31,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
     }
   }
   
-  PausedGameMenuScene(Scene b, List<Game> datastore) {
+  PausedGameMenuScene(Scene b, ArrayList<Game> datastore) {
     back = b;
     this.datastore = datastore;
   }

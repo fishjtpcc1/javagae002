@@ -2,14 +2,14 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 import javax.servlet.http.*;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FilerScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private Game pausedGame;
-  public List<Game> datastore; // dirty: sim datastore
+  public ArrayList<Game> datastore; // dirty: sim datastore
 
   public String method() {
     return "readln";
@@ -40,7 +40,7 @@ public class FilerScene extends Scene implements Serializable {
     }
   }
   
-  FilerScene(Game g, List<Game> datastore) {
+  FilerScene(Game g, ArrayList<Game> datastore) {
     pausedGame = g;
     this.datastore = datastore;
   }

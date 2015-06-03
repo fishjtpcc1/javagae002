@@ -2,12 +2,12 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 import javax.servlet.http.*;
-import java.util.List;
+import java.util.ArrayList;
 
 public class MenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-  public List<Game> datastore; // dirty: sim datastore
+  public ArrayList<Game> datastore; // dirty: sim datastore
 
   public String method() {
     return "read";
@@ -31,7 +31,7 @@ public class MenuScene extends Scene implements Serializable {
   MenuScene() {
   }
 
-  MenuScene(List<Game> datastore) {
+  MenuScene(ArrayList<Game> datastore) {
     this.datastore = datastore;
   }
 
