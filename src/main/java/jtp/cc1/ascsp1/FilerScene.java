@@ -13,7 +13,7 @@ public class FilerScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    Game[] savedGames = datastore.getAttribute("savedGames");
+    Game[] savedGames = (Game[])datastore.getAttribute("savedGames");
     String rows = "";
     if (savedGames != null) {
       for (int i=0; i<savedGames.length; i++ ) {
@@ -33,7 +33,7 @@ public class FilerScene extends Scene implements Serializable {
       newFilerState = "fail";
     } else {
       newFilerState = "success";
-      g.name = input;
+      //g.name = input;
     }
     switch (newFilerState) {
       case "success":
