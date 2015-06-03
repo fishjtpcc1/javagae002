@@ -40,7 +40,7 @@ public class FilerScene extends Scene implements Serializable {
       } else {
         savedgames = Arrays.asList(back.g);
       }
-      back.g.name = input;
+      back.back.g.name = input;
       datastore.setAttribute("savedGames", savedgames);
     }
     switch (newFilerState) {
