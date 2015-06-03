@@ -4,10 +4,10 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import javax.servlet.http.*;
 
-interface Scene {
+interface SceneI {
   //public String method(Game g);
   //public String draw(Game g, Game[] savedGames);
-  //public Scene whereToNext(Game g, String input);
+  //public SceneI whereToNext(Game g, String input);
   //public void doGet(HttpServletRequest req, HttpServletResponse resp);
   
 }
@@ -43,7 +43,7 @@ public class MonsterGameServlet extends HttpServlet {
   
   @Override // to help me prevent stupid polymorphic mistakes, the @Override annotation is used here to assert to compiler that this method is present in the superclass
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
-    // hand off to initial scene
+    // hand off to initial SceneI
     MenuScene here = new MenuScene();
     here.doGet(req,resp);
   }
@@ -53,7 +53,7 @@ public class MonsterGameServlet extends HttpServlet {
     // resume from where we left off
 /*
     HttpSession mySession = req.getSession(false);
-    Scene here = (Scene)mySession.getAttribute("here"); // know: casting IS required tho implied in assignment
+    SceneI here = (SceneI)mySession.getAttribute("here"); // know: casting IS required tho implied in assignment
     Game[] savedGames = (Game[])mySession.getAttribute("savedGames");
     int currentGameIndex = (int)mySession.getAttribute("currentGameIndex");
     Game g = savedGames[currentGameIndex];

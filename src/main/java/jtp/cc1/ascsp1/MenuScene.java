@@ -20,7 +20,7 @@ public class MenuScene extends Scene implements Serializable {
         g.restartPreset();
         return new GameScene();
       default:
-        return new OopsScene((Scene)this);
+        return new OopsScene(this);
     }
   }
   
