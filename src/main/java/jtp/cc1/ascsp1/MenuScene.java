@@ -20,7 +20,7 @@ public class MenuScene extends Scene implements Serializable {
         g.restartPreset();
         return new GameScene();
       default:
-        return new OopsScene(this);
+        return new OopsScene((Scene)this); // know: must cast to expected type - even tho implied
     }
   }
   
