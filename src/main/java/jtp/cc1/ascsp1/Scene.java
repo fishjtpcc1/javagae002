@@ -13,6 +13,20 @@ public class Scene {
 
   protected List<Game> datastore; // dirty: sim datastore
 
+  protected String drawFiles() {
+    String rows = "";
+    if (datastore != null) {
+      for (int i=0; i<datastore.size(); i++ ) {
+        if (datastore.get(i) != null) {
+          rows += "<br>" + datastore.get(i).name;
+        }
+      }
+    } else {
+      rows = "<br>EMPTY";
+    }
+    return rows;
+  }
+  
   public String method() {
     return "nomethod";
   }

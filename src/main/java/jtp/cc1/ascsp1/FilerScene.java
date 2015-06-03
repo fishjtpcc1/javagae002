@@ -15,17 +15,7 @@ public class FilerScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    String rows = "";
-    if (datastore != null) {
-      for (int i=0; i<datastore.size(); i++ ) {
-        if (datastore.get(i) != null) {
-          rows += "<br>" + datastore.get(i).name;
-        }
-      }
-    } else {
-      rows = "<br>EMPTY";
-    }
-    return "<br><br>PAUSED" + rows + "<br>Enter filename: ";
+    return "<br><br>PAUSED" + drawFiles() + "<br>Enter filename: ";
   }
   
   public Scene whereToNext(String input) {
