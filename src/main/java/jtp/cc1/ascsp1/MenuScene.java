@@ -3,6 +3,8 @@ package jtp.cc1.ascsp1;
 import java.io.Serializable;
 import javax.servlet.http.*;
 
+/* recompile me
+*/
 public class MenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
