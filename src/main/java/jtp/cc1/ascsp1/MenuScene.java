@@ -32,7 +32,7 @@ public class MenuScene implements Scene, Serializable {
     mySession.setAttribute("here", this);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(draw(), method(), "sid:"+mySession.getId()));
+    resp.getWriter().println(json(draw(), method(), "sid:"+mySession.getId()));
   }
   
 }
