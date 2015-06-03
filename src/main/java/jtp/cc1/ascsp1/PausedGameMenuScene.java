@@ -6,6 +6,8 @@ import javax.servlet.http.*;
 public class PausedGameMenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
+  private Scene back;
+
   public String method() {
     return "read";
   }
@@ -27,4 +29,8 @@ public class PausedGameMenuScene extends Scene implements Serializable {
     }
   }
   
+  PausedGameMenuScene(Scene b) {
+    back = b;
+  }
+
 }

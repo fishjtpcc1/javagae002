@@ -20,7 +20,7 @@ public class OopsScene extends Scene implements Serializable {
     return back.whereToNext(input);
   }
   
-  public OopsScene(Scene b) {
+  OopsScene(Scene b) {
     back = b;
   }
 
