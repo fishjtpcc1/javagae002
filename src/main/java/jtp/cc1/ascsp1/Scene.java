@@ -10,7 +10,7 @@ public class Scene {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
-  protected HttpSession datastore;
+  public HttpSession datastore;
   
   public String method() {
     return "nomethod";
