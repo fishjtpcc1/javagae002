@@ -70,7 +70,8 @@ public class MonsterGameServlet extends HttpServlet {
     // hand back to tier1 to present the new user state
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json(here.draw(g,savedGames), here.method(g), "here:"+here+", thegame:"+g+", input:"+input));
-  }
 */
+
+  }
 
 }
