@@ -6,9 +6,9 @@ import java.io.IOException;
 
 abstract class Scene {
 
-  private static final Game g = new Game();
+  protected static final Game g = new Game();
 
-  static String json(String screen, String method, String other) {
+  private static String json(String screen, String method, String other) {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
