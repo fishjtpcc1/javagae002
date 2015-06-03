@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class FilerScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
+  private Game pausedGame;
   public List<Game> datastore; // dirty: sim datastore
 
   public String method() {
@@ -24,7 +25,6 @@ public class FilerScene extends Scene implements Serializable {
       newFilerState = "fail";
     } else {
       newFilerState = "success";
-      Game pausedGame = ((GameScene)((PausedGameMenuScene)back).back).g;
       if (datastore != null) {
         datastore.add(pausedGame);
       } else {
@@ -40,7 +40,8 @@ public class FilerScene extends Scene implements Serializable {
     }
   }
   
-  FilerScene(List<Game> datastore) {
+  FilerScene(Game g, List<Game> datastore) {
+    pausedGame = g;
     this.datastore = datastore;
   }
 
