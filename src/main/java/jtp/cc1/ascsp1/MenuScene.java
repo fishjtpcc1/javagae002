@@ -24,4 +24,15 @@ public class MenuScene extends Scene implements Serializable {
     }
   }
   
+  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
+    HttpSession mySession = req.getSession(false);
+    String input = req.getParameter("input");
+    Scene next = whereToNext(input); // strictly controlled polymorphism in action
+    // save state
+    mySession.setAttribute("here", next);
+    // hand back to tier1 to present the initial user state and service access (user can enter his data)
+    resp.setContentType("text/plain");
+    resp.getWriter().println(json(draw(), method(), "sid:"+mySession.getId()));
+  }
+  
 }
