@@ -16,8 +16,9 @@ public class OopsScene extends Scene implements Serializable {
   public SceneI whereToNext(Game g, String input) {
     return back.whereToNext(g, input);
   }
+  */
   public OopsScene(Scene b) {
     back = b;
   }
-  */
+
 }
