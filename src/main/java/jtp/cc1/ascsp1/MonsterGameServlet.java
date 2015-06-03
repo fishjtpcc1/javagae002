@@ -5,10 +5,14 @@ import java.io.IOException;
 import javax.servlet.http.*;
 
 interface Scene {
-  public String method(Game g);
-  public String draw(Game g, Game[] savedGames);
-  public Scene whereToNext(Game g, String input);
+  //public String method(Game g);
+  //public String draw(Game g, Game[] savedGames);
+  //public Scene whereToNext(Game g, String input);
   //public void doGet(HttpServletRequest req, HttpServletResponse resp);
+  abstract String json(String screen, String method, String other) {
+    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
+  }
+  
 }
     
 /**
@@ -39,10 +43,6 @@ public class MonsterGameServlet extends HttpServlet {
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
   private static final Logger log = Logger.getLogger(MonsterGameServlet.class.getName());
   private static int reuseCount = 0; // to prove server class reuse behaviour
-  
-  private static String json(String screen, String method, String other) {
-    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
-  }
   
   @Override // to help me prevent stupid polymorphic mistakes, the @Override annotation is used here to assert to compiler that this method is present in the superclass
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
