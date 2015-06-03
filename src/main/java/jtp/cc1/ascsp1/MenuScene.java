@@ -3,7 +3,7 @@ package jtp.cc1.ascsp1;
 import java.io.Serializable;
 import javax.servlet.http.*;
 
-public class MenuScene implements Scene, Serializable {
+public class MenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   public String method() {
     return "read";
@@ -22,17 +22,6 @@ public class MenuScene implements Scene, Serializable {
       default:
         return new OopsScene((Scene)this);
     }
-  }
-  
-  /* no input yet: sets up session data of current scene = this, sends screen image to tier1
-   */
-  public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-    // save state
-    HttpSession mySession = req.getSession(true);
-    mySession.setAttribute("here", this);
-    // hand back to tier1 to present the initial user state and service access (user can enter his data)
-    resp.setContentType("text/plain");
-    resp.getWriter().println(Scene.json(draw(), method(), "sid:"+mySession.getId()));
   }
   
 }
