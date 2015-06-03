@@ -54,6 +54,7 @@ public class MonsterGameServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
+/*
     HttpSession mySession = req.getSession(false);
     Scene here = (Scene)mySession.getAttribute("here"); // know: casting IS required tho implied in assignment
     Game[] savedGames = (Game[])mySession.getAttribute("savedGames");
@@ -70,5 +71,6 @@ public class MonsterGameServlet extends HttpServlet {
     resp.setContentType("text/plain");
     resp.getWriter().println(MonsterGameServlet.json(here.draw(g,savedGames), here.method(g), "here:"+here+", thegame:"+g+", input:"+input));
   }
+*/
 
 }
