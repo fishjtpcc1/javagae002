@@ -5,14 +5,16 @@ import javax.servlet.http.*;
 
 public class PausedGameMenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
-/*
-  public String method(Game g) {
+
+  public String method() {
     return "read";
   }
-  public String draw(Game g, Game[] savedGames) {
+  
+  public String draw() {
     return "<br><br>PAUSED<br>1. Resume game<br>2. Save game<br>3. Quit<br>Enter choice: ";
   }
-  public Scene whereToNext(Game g, String input) {
+  
+  public Scene whereToNext(String input) {
     switch (input) {
       case "1":
         return new GameScene();
@@ -24,5 +26,5 @@ public class PausedGameMenuScene extends Scene implements Serializable {
         return new OopsScene(this);
     }
   }
-  */
+  
 }

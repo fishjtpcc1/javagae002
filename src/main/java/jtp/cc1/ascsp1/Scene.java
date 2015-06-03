@@ -16,7 +16,7 @@ public class Scene {
     return "nomethod";
   }
   public String draw() {
-    return "blank";
+    return "<br><br>BLANK";
   }
   public Scene whereToNext(String input) {
     return this;
