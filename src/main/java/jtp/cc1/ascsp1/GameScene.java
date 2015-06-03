@@ -6,6 +6,8 @@ import javax.servlet.http.*;
 public class GameScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
+  private final Game g = new Game(); // canot be static otherwise all users play the same game!!
+
   public String method() {
     return g.method;
   }
@@ -33,4 +35,8 @@ public class GameScene extends Scene implements Serializable {
     }
   }
 
+  GameScene() {
+    g.restart();
+  }
+  
 }

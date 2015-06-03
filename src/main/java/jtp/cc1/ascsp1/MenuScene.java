@@ -3,8 +3,6 @@ package jtp.cc1.ascsp1;
 import java.io.Serializable;
 import javax.servlet.http.*;
 
-/* recompile me
-*/
 public class MenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
@@ -19,10 +17,9 @@ public class MenuScene extends Scene implements Serializable {
   public Scene whereToNext(String input) {
     switch (input) {
       case "1":
-        g.restart();
         return new GameScene();
       case "2":
-        g.restartPreset();
+        //g.restartPreset();
         return new GameScene();
       default:
         return new OopsScene(this); // know: casting back is not required as is obviously valid in inheritance structure

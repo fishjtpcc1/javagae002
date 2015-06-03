@@ -10,8 +10,6 @@ public class Scene {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
-  protected final Game g = new Game(); // canot be static otherwise all users play the same game!!
-
   public String method() {
     return "nomethod";
   }
