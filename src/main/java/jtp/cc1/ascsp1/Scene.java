@@ -8,7 +8,7 @@ abstract class Scene {
 
   protected static final Game g = new Game();
 
-  private static String json(String screen, String method, String other) {
+  protected static String json(String screen, String method, String other) {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
