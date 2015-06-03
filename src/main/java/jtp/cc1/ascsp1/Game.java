@@ -2,6 +2,7 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 import java.util.Random;
+import java.util.List;
 
 /** to save complex data in the session class
  * must implement Serializable or runtime error happens
