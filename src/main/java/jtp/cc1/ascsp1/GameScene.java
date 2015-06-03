@@ -16,7 +16,7 @@ public class GameScene implements SceneI, Serializable {
       return "<br><br>" + g.name + g.draw() + "<br>Enter NSEWP: ";
     }
   }
-  public SceneI whereToNext(Game g, String input) {
+  public Scene whereToNext(Game g, String input) {
     switch (g.newState(input)) {
       case "ispaused":
         return new PausedGameMenuScene();

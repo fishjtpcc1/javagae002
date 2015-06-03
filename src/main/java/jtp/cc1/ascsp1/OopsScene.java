@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class OopsScene implements Serializable, SceneI {
   private static final long serialVersionUID = 1L;
-  private SceneI back;
+  private Scene back;
   public String method(Game g) {
     return back.method(g);
   }
@@ -14,7 +14,7 @@ public class OopsScene implements Serializable, SceneI {
   public SceneI whereToNext(Game g, String input) {
     return back.whereToNext(g, input);
   }
-  public OopsScene(SceneI b) {
+  public OopsScene(Scene b) {
     back = b;
   }
 }

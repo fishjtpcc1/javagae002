@@ -19,7 +19,7 @@ public class FilerScene implements SceneI, Serializable {
     return "<br>" + rows + "<br>Enter filename: ";
   }
   
-  public SceneI whereToNext(Game g, String input) {
+  public Scene whereToNext(Game g, String input) {
     String newFilerState;
     if (input.contains(" ")) {
       newFilerState = "fail";
@@ -31,7 +31,7 @@ public class FilerScene implements SceneI, Serializable {
       case "success":
         return new MenuScene();
       default:
-        return new OopsScene((SceneI)this);
+        return new OopsScene(this);
     }
   }
   
