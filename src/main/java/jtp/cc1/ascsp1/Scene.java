@@ -3,7 +3,6 @@ package jtp.cc1.ascsp1;
 import java.io.Serializable;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.List;
 
 public class Scene {
 
