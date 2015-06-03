@@ -2,6 +2,7 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 import javax.servlet.http.*;
+import java.io.IOException;
 
 abstract class Scene {
 
@@ -14,7 +15,7 @@ abstract class Scene {
  
    /* no input yet: sets up session data of current SceneI = this, sends screen image to tier1
    */
-  public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // save state
     HttpSession mySession = req.getSession(true);
     mySession.setAttribute("here", this);
