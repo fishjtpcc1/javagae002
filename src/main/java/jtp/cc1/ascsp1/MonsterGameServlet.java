@@ -50,6 +50,7 @@ public class MonsterGameServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
+    log.warning("hello");
     // resume from where we left off
     HttpSession mySession = req.getSession(false);
     Scene here = (Scene)mySession.getAttribute("here"); // know: casting IS required tho implied in assignment

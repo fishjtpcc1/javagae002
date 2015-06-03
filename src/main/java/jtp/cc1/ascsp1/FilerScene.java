@@ -13,7 +13,7 @@ public class FilerScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    MonsterGameServlet.log.logWarning(datastore);
+    if (datastore == null) { return "<br><br>no datastore"; }
     Game[] savedGames = (Game[])datastore.getAttribute("savedGames");
     String rows = "";
     if (savedGames != null) {
