@@ -22,7 +22,7 @@ public class GameScene extends Scene implements Serializable {
     }
   }
   
-  public Scene whereToNext(String input) {
+  public Scene whereToNext(String input, HttpSession datastore) {
     switch (g.newState(input)) {
       case "ispaused":
         return new PausedGameMenuScene(this);

@@ -16,7 +16,7 @@ public class OopsScene extends Scene implements Serializable {
     return "<br>Que!? ";
   }
   
-  public Scene whereToNext(String input) {
+  public Scene whereToNext(String input, HttpSession datastore) {
     return back.whereToNext(input);
   }
   

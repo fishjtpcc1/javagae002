@@ -14,7 +14,7 @@ public class MenuScene extends Scene implements Serializable {
     return "<br><br>1. New game<br>2. Training game<br>Enter choice: ";
   }
   
-  public Scene whereToNext(String input) {
+  public Scene whereToNext(String input, HttpSession datastore) {
     switch (input) {
       case "1":
         return new GameScene(1);

@@ -15,12 +15,13 @@ public class FilerScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    List<Game> savedGames = (List<Game>)datastore.getAttribute("savedGames");
+    Game pausedGame = ((GameScene)((PausedGameMenuScene)back).back).g;
+    List<Game> datastore = pausedGame.datastore;
     String rows = "";
-    if (savedGames != null) {
-      for (int i=0; i<savedGames.size(); i++ ) {
-        if (savedGames.get(i) != null) {
-          rows += "<br>" + savedGames.get(i).name;
+    if (datastore != null) {
+      for (int i=0; i<datastore.size(); i++ ) {
+        if (datastore.get(i) != null) {
+          rows += "<br>" + datastore.get(i).name;
         }
       }
     } else {
@@ -29,21 +30,20 @@ public class FilerScene extends Scene implements Serializable {
     return "<br><br>PAUSED" + rows + "<br>Enter filename: ";
   }
   
-  public Scene whereToNext(String input) {
+  public Scene whereToNext(String input, HttpSession datastore) {
     String newFilerState;
     if (input.contains(" ")) {
       newFilerState = "fail";
     } else {
       newFilerState = "success";
-      List<Game> savedGames = (List<Game>)datastore.getAttribute("savedGames");
       Game pausedGame = ((GameScene)((PausedGameMenuScene)back).back).g;
-      if (savedGames != null) {
-        savedGames.add(pausedGame);
+      List<Game> datastore = pausedGame.datastore;
+      if (datastore != null) {
+        datastore.add(pausedGame);
       } else {
-        savedGames = Arrays.asList(pausedGame);
+        pausedGame.datastore = Arrays.asList(pausedGame);
       }
       pausedGame.name = input;
-      datastore.setAttribute("savedGames", savedGames);
     }
     switch (newFilerState) {
       case "success":
