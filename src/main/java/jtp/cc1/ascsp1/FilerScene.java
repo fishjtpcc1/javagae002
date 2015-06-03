@@ -16,7 +16,7 @@ public class FilerScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    return "<br><br>PAUSED" + drawFiles() + "<br>Enter filename: ";
+    return "<br><br>PAUSED" + drawFiles(datastore) + "<br>Enter filename: ";
   }
   
   public Scene whereToNext(String input) {
