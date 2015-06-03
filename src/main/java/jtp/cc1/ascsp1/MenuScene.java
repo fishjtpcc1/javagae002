@@ -6,6 +6,8 @@ import javax.servlet.http.*;
 public class MenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
+  public List<Game> datastore; // dirty: sim datastore
+
   public String method() {
     return "read";
   }

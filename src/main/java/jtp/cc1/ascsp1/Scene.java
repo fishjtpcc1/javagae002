@@ -11,8 +11,6 @@ public class Scene {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
-  public List<Game> datastore; // dirty: sim datastore
-
   protected String drawFiles() {
     String rows = "";
     if (datastore != null) {

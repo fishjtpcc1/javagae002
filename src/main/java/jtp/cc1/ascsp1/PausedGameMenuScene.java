@@ -7,6 +7,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public Scene back;
+  public List<Game> datastore; // dirty: sim datastore
 
   public String method() {
     return "read";

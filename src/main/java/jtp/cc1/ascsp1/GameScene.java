@@ -7,6 +7,7 @@ public class GameScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public final Game g = new Game(); // canot be static otherwise all users play the same game!!
+  public List<Game> datastore; // dirty: sim datastore
 
   public String method() {
     return g.method;
