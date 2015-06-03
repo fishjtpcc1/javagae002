@@ -11,7 +11,7 @@ public class Scene {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
-  protected List<Game> datastore; // dirty: sim datastore
+  public List<Game> datastore; // dirty: sim datastore
 
   protected String drawFiles() {
     String rows = "";
@@ -37,7 +37,7 @@ public class Scene {
     return this;
   }
 
-   /* no input yet: sets up session data of current SceneI = this, sends screen image to tier1
+  /* no input yet: sets up session data of current SceneI = this, sends screen image to tier1
    */
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // fresh start
