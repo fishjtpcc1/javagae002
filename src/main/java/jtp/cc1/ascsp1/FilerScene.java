@@ -7,14 +7,12 @@ public class FilerScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private Scene back;
-  private HttpSession datastore;
-  
+
   public String method() {
     return "readln";
   }
   
   public String draw() {
-    datastore = getDatastore();
     if (datastore == null) { return "<br><br>no datastore"; }
     Game[] savedGames = (Game[])datastore.getAttribute("savedGames");
     String rows = "";
