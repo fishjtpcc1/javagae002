@@ -23,17 +23,17 @@ public class PausedGameMenuScene extends Scene implements Serializable {
       case "1":
         return back;
       case "2":
-        return new FilerScene(this);
+        return new FilerScene(datastore);
       case "3":
-        return new MenuScene(this);
+        return new MenuScene(datastore);
       default:
         return new OopsScene(this);
     }
   }
   
-  PausedGameMenuScene(Scene b) {
+  PausedGameMenuScene(Scene b, List<Game> datastore) {
     back = b;
-    datastore = b.datastore;
+    this.datastore = datastore;
   }
 
 }

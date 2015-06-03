@@ -27,9 +27,9 @@ public class GameScene extends Scene implements Serializable {
   public Scene whereToNext(String input) {
     switch (g.newState(input)) {
       case "ispaused":
-        return new PausedGameMenuScene(this);
+        return new PausedGameMenuScene(this,datastore);
       case "isover":
-        return new MenuScene(this);
+        return new MenuScene(datastore);
       case "isinplay":
         return this;
       default:
@@ -37,8 +37,8 @@ public class GameScene extends Scene implements Serializable {
     }
   }
 
-  GameScene(int mode, Scene b) {
-    datastore = b.datastore;
+  GameScene(int mode, List<Game> datastore) {
+    this.datastore = datastore;
     if (mode == 1) {
       g.restart();
     } else {
