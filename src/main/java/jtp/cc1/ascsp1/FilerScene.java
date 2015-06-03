@@ -7,7 +7,7 @@ import java.util.List;
 public class FilerScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-  private Scene back;
+  public Scene back;
 
   public String method() {
     return "readln";
