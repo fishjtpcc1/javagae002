@@ -10,7 +10,7 @@ public class PausedGameMenuScene implements SceneI, Serializable {
   public String draw(Game g, Game[] savedGames) {
     return "<br><br>PAUSED<br>1. Resume game<br>2. Save game<br>3. Quit<br>Enter choice: ";
   }
-  public SceneI whereToNext(Game g, String input) {
+  public Scene whereToNext(Game g, String input) {
     switch (input) {
       case "1":
         return new GameScene();
@@ -19,7 +19,7 @@ public class PausedGameMenuScene implements SceneI, Serializable {
       case "3":
         return new MenuScene();
       default:
-        return new OopsScene((SceneI)this);
+        return new OopsScene(this);
     }
   }
 }

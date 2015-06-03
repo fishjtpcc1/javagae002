@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class OopsScene implements Serializable, SceneI {
   private static final long serialVersionUID = 1L;
   private Scene back;
-  public String method(Game g) {
-    return back.method(g);
+  public String method() {
+    return back.method();
   }
   public String draw(Game g, Game[] savedGames) {
     return "<br>Que!? ";
