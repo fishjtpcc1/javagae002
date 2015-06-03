@@ -23,7 +23,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
       case "2":
         return new FilerScene(this);
       case "3":
-        return new MenuScene();
+        return new MenuScene(this);
       default:
         return new OopsScene(this);
     }

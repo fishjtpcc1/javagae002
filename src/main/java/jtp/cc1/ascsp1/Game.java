@@ -2,7 +2,6 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 import java.util.Random;
-import java.util.List;
 
 /** to save complex data in the session class
  * must implement Serializable or runtime error happens
@@ -27,8 +26,6 @@ public class Game implements Serializable {
   public String data;
   public String method = "read";
   
-  public List<Game> datastore; // dirty: sim datastore
-
   public Boolean matches(GridRC[] a, GridRC p) {
     for (int i=0; i<a.length; i++) {
       if (a[i].equals(p)) {

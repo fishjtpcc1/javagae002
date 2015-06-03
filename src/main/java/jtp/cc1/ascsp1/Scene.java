@@ -3,12 +3,15 @@ package jtp.cc1.ascsp1;
 import java.io.Serializable;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.List;
 
 public class Scene {
 
   protected static String json(String screen, String method, String other) {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
+
+  protected List<Game> datastore; // dirty: sim datastore
 
   public String method() {
     return "nomethod";

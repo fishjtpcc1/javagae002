@@ -27,7 +27,7 @@ public class GameScene extends Scene implements Serializable {
       case "ispaused":
         return new PausedGameMenuScene(this);
       case "isover":
-        return new MenuScene();
+        return new MenuScene(this);
       case "isinplay":
         return this;
       default:
@@ -35,7 +35,8 @@ public class GameScene extends Scene implements Serializable {
     }
   }
 
-  GameScene(int mode) {
+  GameScene(int mode, Scene b) {
+    datastore = b.datastore;
     if (mode == 1) {
       g.restart();
     } else {

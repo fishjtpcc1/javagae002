@@ -15,8 +15,6 @@ public class FilerScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    Game pausedGame = ((GameScene)((PausedGameMenuScene)back).back).g;
-    List<Game> datastore = pausedGame.datastore;
     String rows = "";
     if (datastore != null) {
       for (int i=0; i<datastore.size(); i++ ) {
@@ -36,18 +34,17 @@ public class FilerScene extends Scene implements Serializable {
       newFilerState = "fail";
     } else {
       newFilerState = "success";
-      Game pausedGame = ((GameScene)((PausedGameMenuScene)back).back).g;
-      List<Game> datastore = pausedGame.datastore;
       if (datastore != null) {
         datastore.add(pausedGame);
       } else {
         pausedGame.datastore = Arrays.asList(pausedGame);
       }
+      Game pausedGame = ((GameScene)((PausedGameMenuScene)back).back).g;
       pausedGame.name = input;
     }
     switch (newFilerState) {
       case "success":
-        return new MenuScene();
+        return new MenuScene(this);
       default:
         return new OopsScene(this);
     }
@@ -55,6 +52,7 @@ public class FilerScene extends Scene implements Serializable {
   
   FilerScene(Scene b) {
     back = b;
+    datastore = b.datastore;
   }
 
 }
