@@ -2,7 +2,7 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 
-public class FilerScene implements SceneObject, Serializable {
+public class FilerScene implements Scene, Serializable {
   private static final long serialVersionUID = 1L;
   
   public String method(Game g) {
@@ -19,7 +19,7 @@ public class FilerScene implements SceneObject, Serializable {
     return "<br>" + rows + "<br>Enter filename: ";
   }
   
-  public SceneObject whereToNext(Game g, String input) {
+  public Scene whereToNext(Game g, String input) {
     String newFilerState;
     if (input.contains(" ")) {
       newFilerState = "fail";
@@ -31,7 +31,7 @@ public class FilerScene implements SceneObject, Serializable {
       case "success":
         return new MenuScene();
       default:
-        return new OopsScene((SceneObject)this);
+        return new OopsScene((Scene)this);
     }
   }
   

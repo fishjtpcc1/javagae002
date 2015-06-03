@@ -2,15 +2,15 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 
-public class MenuScene implements SceneObject, Serializable {
+public class MenuScene implements Scene, Serializable {
   private static final long serialVersionUID = 1L;
-  public String method(Game g) {
+  public String method() {
     return "read";
   }
-  public String draw(Game g, Game[] savedGames) {
+  public String draw() {
     return "<br><br>1. New game<br>2. Training game<br>Enter choice: ";
   }
-  public SceneObject whereToNext(Game g, String input) {
+  public Scene whereToNext(Game g, String input) {
     switch (input) {
       case "1":
         g.restart();
@@ -19,7 +19,19 @@ public class MenuScene implements SceneObject, Serializable {
         g.restartPreset();
         return new GameScene();
       default:
-        return new OopsScene((SceneObject)this);
+        return new OopsScene((Scene)this);
     }
   }
+  
+  /* mo input yet: sets up session data of current scene = this, sends screen image to tier1
+   */
+  public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    // save state
+    HttpSession mySession = req.getSession(true);
+    mySession.setAttribute("here", this);
+    // hand back to tier1 to present the initial user state and service access (user can enter his data)
+    resp.setContentType("text/plain");
+    resp.getWriter().println(MonsterGameServlet.json(draw(), method(), "sid:"+mySession.getId()));
+  }
+  
 }

@@ -2,7 +2,7 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 
-public class GameScene implements SceneObject, Serializable {
+public class GameScene implements Scene, Serializable {
   private static final long serialVersionUID = 1L;
   public String method(Game g) {
     return g.method;
@@ -16,7 +16,7 @@ public class GameScene implements SceneObject, Serializable {
       return "<br><br>" + g.name + g.draw() + "<br>Enter NSEWP: ";
     }
   }
-  public SceneObject whereToNext(Game g, String input) {
+  public Scene whereToNext(Game g, String input) {
     switch (g.newState(input)) {
       case "ispaused":
         return new PausedGameMenuScene();

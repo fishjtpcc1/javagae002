@@ -4,10 +4,11 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import javax.servlet.http.*;
 
-interface SceneObject {
+interface Scene {
   public String method(Game g);
   public String draw(Game g, Game[] savedGames);
-  public SceneObject whereToNext(Game g, String input);
+  public Scene whereToNext(Game g, String input);
+  public void doGet(HttpServletRequest req, HttpServletResponse resp);
 }
     
 /**
@@ -45,29 +46,16 @@ public class MonsterGameServlet extends HttpServlet {
   
   @Override // to help me prevent stupid polymorphic mistakes, the @Override annotation is used here to assert to compiler that this method is present in the superclass
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
-    reuseCount ++;
-    // start new session
-    HttpSession mySession = req.getSession(true);
-    // init the gameapp state
-    Game g = new Game("fred.1");
-    Game[] savedGames = new Game[3];
-    int currentGameIndex = 0;
-    savedGames[currentGameIndex] = g;
-    SceneObject here = new MenuScene();
-    // save state
-    mySession.setAttribute("here", here);
-    mySession.setAttribute("savedGames", savedGames);
-    mySession.setAttribute("currentGameIndex", currentGameIndex);
-    // hand back to tier1 to present the initial user state and service access (user can enter his data)
-    resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(here.draw(g, savedGames), here.method(g), "reuseCount:"+reuseCount+", sid:"+mySession.getId()));
+    // hand off to initial scene
+    Scene here = new MenuScene();
+    here.doGet(req,resp);
   }
 
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // resume from where we left off
     HttpSession mySession = req.getSession(false);
-    SceneObject here = (SceneObject)mySession.getAttribute("here"); // know: casting IS required tho implied in assignment
+    Scene here = (Scene)mySession.getAttribute("here"); // know: casting IS required tho implied in assignment
     Game[] savedGames = (Game[])mySession.getAttribute("savedGames");
     int currentGameIndex = (int)mySession.getAttribute("currentGameIndex");
     Game g = savedGames[currentGameIndex];

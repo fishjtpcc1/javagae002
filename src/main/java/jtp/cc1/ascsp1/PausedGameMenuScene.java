@@ -2,7 +2,7 @@ package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
 
-public class PausedGameMenuScene implements SceneObject, Serializable {
+public class PausedGameMenuScene implements Scene, Serializable {
   private static final long serialVersionUID = 1L;
   public String method(Game g) {
     return "read";
@@ -10,7 +10,7 @@ public class PausedGameMenuScene implements SceneObject, Serializable {
   public String draw(Game g, Game[] savedGames) {
     return "<br><br>PAUSED<br>1. Resume game<br>2. Save game<br>3. Quit<br>Enter choice: ";
   }
-  public SceneObject whereToNext(Game g, String input) {
+  public Scene whereToNext(Game g, String input) {
     switch (input) {
       case "1":
         return new GameScene();
@@ -19,7 +19,7 @@ public class PausedGameMenuScene implements SceneObject, Serializable {
       case "3":
         return new MenuScene();
       default:
-        return new OopsScene((SceneObject)this);
+        return new OopsScene((Scene)this);
     }
   }
 }
