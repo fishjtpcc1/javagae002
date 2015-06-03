@@ -16,7 +16,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
     return "<br><br>PAUSED<br>1. Resume game<br>2. Save game<br>3. Quit<br>Enter choice: ";
   }
   
-  public Scene whereToNext(String input, HttpSession datastore) {
+  public Scene whereToNext(String input) {
     switch (input) {
       case "1":
         return back;

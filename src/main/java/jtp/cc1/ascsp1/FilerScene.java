@@ -30,7 +30,7 @@ public class FilerScene extends Scene implements Serializable {
     return "<br><br>PAUSED" + rows + "<br>Enter filename: ";
   }
   
-  public Scene whereToNext(String input, HttpSession datastore) {
+  public Scene whereToNext(String input) {
     String newFilerState;
     if (input.contains(" ")) {
       newFilerState = "fail";
