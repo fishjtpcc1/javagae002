@@ -34,7 +34,7 @@ public class FilerScene extends Scene implements Serializable {
     }
     switch (newFilerState) {
       case "success":
-        return new MenuScene(this);
+        return new MenuScene(datastore);
       default:
         return new OopsScene(this);
     }
