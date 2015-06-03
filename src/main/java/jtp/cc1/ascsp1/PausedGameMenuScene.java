@@ -1,9 +1,11 @@
 package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
+import javax.servlet.http.*;
 
-public class PausedGameMenuScene implements SceneI, Serializable {
+public class PausedGameScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
+/*
   public String method(Game g) {
     return "read";
   }
@@ -22,4 +24,5 @@ public class PausedGameMenuScene implements SceneI, Serializable {
         return new OopsScene(this);
     }
   }
+  */
 }

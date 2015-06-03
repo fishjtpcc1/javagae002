@@ -1,10 +1,12 @@
 package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
+import javax.servlet.http.*;
 
-public class FilerScene implements SceneI, Serializable {
+public class FilerScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
+/*
   public String method(Game g) {
     return "readln";
   }
@@ -34,5 +36,5 @@ public class FilerScene implements SceneI, Serializable {
         return new OopsScene(this);
     }
   }
-  
+  */
 }

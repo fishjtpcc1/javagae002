@@ -1,9 +1,11 @@
 package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
+import javax.servlet.http.*;
 
-public class OopsScene implements Serializable, SceneI {
+public class OopsScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
+/*  
   private Scene back;
   public String method() {
     return back.method();
@@ -17,4 +19,5 @@ public class OopsScene implements Serializable, SceneI {
   public OopsScene(Scene b) {
     back = b;
   }
+  */
 }

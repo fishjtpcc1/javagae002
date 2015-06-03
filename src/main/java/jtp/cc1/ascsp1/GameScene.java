@@ -1,10 +1,12 @@
 package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
+import javax.servlet.http.*;
 
-public class GameScene implements SceneI, Serializable {
+public class GameScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
-  public String method(Game g) {
+/*
+  public String method() {
     return g.method;
   }
   public String draw(Game g, Game[] savedGames) {
@@ -28,4 +30,5 @@ public class GameScene implements SceneI, Serializable {
         return new OopsScene(this);
     }
   }
+  */
 }
