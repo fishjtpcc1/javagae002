@@ -27,6 +27,7 @@ public class Scene {
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     // save state
     HttpSession mySession = req.getSession(true);
+    mySession.invalidate(); // fresh start
     mySession.setAttribute("here", this);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
