@@ -13,19 +13,18 @@ public class FilerScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    if (datastore == null) { return "<br><br>no datastore"; }
-    Game[] savedGames = (Game[])datastore.getAttribute("savedGames");
+    List<Game> savedGames = (List<Game>)datastore.getAttribute("savedGames");
     String rows = "";
     if (savedGames != null) {
-      for (int i=0; i<savedGames.length; i++ ) {
-        if (savedGames[i] != null) {
-          rows += "<br>" + savedGames[i].name;
+      for (int i=0; i<savedGames.size(); i++ ) {
+        if (savedGames.get(i) != null) {
+          rows += "<br>" + savedGames.get(i).name;
         }
       }
     } else {
-      rows = "EMPTY";
+      rows = "<br>EMPTY";
     }
-    return "<br><br>PAUSED<br>" + rows + "<br>Enter filename: ";
+    return "<br><br>PAUSED" + rows + "<br>Enter filename: ";
   }
   
   public Scene whereToNext(String input) {
