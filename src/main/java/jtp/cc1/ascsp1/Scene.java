@@ -10,6 +10,8 @@ public class Scene {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
+  protected HttpSession datastore;
+  
   public String method() {
     return "nomethod";
   }
@@ -19,7 +21,6 @@ public class Scene {
   public Scene whereToNext(String input) {
     return this;
   }
-  
 
    /* no input yet: sets up session data of current SceneI = this, sends screen image to tier1
    */
@@ -35,6 +36,9 @@ public class Scene {
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
     HttpSession mySession = req.getSession(false);
     String input = req.getParameter("input");
+    // enable filesave sim
+    datastore = mySession;
+    // handle
     Scene next = whereToNext(input); // strictly controlled polymorphism in action
     // save state
     mySession.setAttribute("here", next);

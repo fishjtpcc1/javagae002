@@ -6,22 +6,26 @@ import javax.servlet.http.*;
 public class FilerScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-/*
-  public String method(Game g) {
+  public String method() {
     return "readln";
   }
   
-  public String draw(Game g, Game[] savedGames) {
+  public String draw() {
+    Game[] savedGames = datastore.getAttribute("savedGames");
     String rows = "";
-    for (int i=0; i<savedGames.length; i++ ) {
-      if (savedGames[i] != null) {
-        rows += "<br>" + savedGames[i].name;
+    if (savedGames != null) {
+      for (int i=0; i<savedGames.length; i++ ) {
+        if (savedGames[i] != null) {
+          rows += "<br>" + savedGames[i].name;
+        }
       }
+    } else {
+      rows = "EMPTY";
     }
-    return "<br>" + rows + "<br>Enter filename: ";
+    return "<br><br>PAUSED<br>" + rows + "<br>Enter filename: ";
   }
   
-  public Scene whereToNext(Game g, String input) {
+  public Scene whereToNext(String input) {
     String newFilerState;
     if (input.contains(" ")) {
       newFilerState = "fail";
@@ -36,5 +40,5 @@ public class FilerScene extends Scene implements Serializable {
         return new OopsScene(this);
     }
   }
-  */
+  
 }
