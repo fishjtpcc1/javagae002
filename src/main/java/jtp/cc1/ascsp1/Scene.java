@@ -10,8 +10,12 @@ abstract class Scene {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
-  abstract String method();
-  abstract String draw();
+  public String method() {
+    return "nomethod";
+  }
+  public String draw() {
+    return "blank";
+  }
  
    /* no input yet: sets up session data of current SceneI = this, sends screen image to tier1
    */
