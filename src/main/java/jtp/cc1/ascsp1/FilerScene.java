@@ -28,7 +28,7 @@ public class FilerScene extends Scene implements Serializable {
       if (datastore != null) {
         datastore.add(pausedGame);
       } else {
-        datastore = Arrays.asList(pausedGame);
+        datastore = (ArrayList<Game>)Arrays.asList(pausedGame);
       }
       pausedGame.name = input;
     }
