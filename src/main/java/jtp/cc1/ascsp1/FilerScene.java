@@ -6,6 +6,8 @@ import javax.servlet.http.*;
 public class FilerScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
+  private Scene back;
+  
   public String method() {
     return "readln";
   }
@@ -41,4 +43,8 @@ public class FilerScene extends Scene implements Serializable {
     }
   }
   
+  FilerScene(Scene b) {
+    back = b;
+  }
+
 }
