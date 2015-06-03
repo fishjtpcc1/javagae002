@@ -3,6 +3,7 @@ package jtp.cc1.ascsp1;
 import java.io.Serializable;
 import javax.servlet.http.*;
 import java.util.List;
+import java.util.Arrays;
 
 public class FilerScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
