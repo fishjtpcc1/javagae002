@@ -16,7 +16,7 @@ public class Scene {
   public String draw() {
     return "<br><br>BLANK";
   }
-  public Scene whereToNext(String input, HttpSession datastore) {
+  public Scene whereToNext(String input) {
     return this;
   }
 
@@ -38,7 +38,7 @@ public class Scene {
     HttpSession mySession = req.getSession(false);
     String input = req.getParameter("input");
     // handle
-    Scene next = whereToNext(input, mySession); // strictly controlled polymorphism in action
+    Scene next = whereToNext(input); // strictly controlled polymorphism in action
     // save state
     mySession.setAttribute("here", next);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
