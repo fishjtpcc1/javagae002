@@ -9,7 +9,7 @@ interface Scene {
   //public String draw(Game g, Game[] savedGames);
   //public Scene whereToNext(Game g, String input);
   //public void doGet(HttpServletRequest req, HttpServletResponse resp);
-  abstract String json(String screen, String method, String other) {
+  static String json(String screen, String method, String other) {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
   
