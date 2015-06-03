@@ -19,7 +19,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
   public Scene whereToNext(String input) {
     switch (input) {
       case "1":
-        return new GameScene();
+        return back;
       case "2":
         return new FilerScene();
       case "3":
