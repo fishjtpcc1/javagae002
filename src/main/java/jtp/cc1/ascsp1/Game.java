@@ -127,22 +127,22 @@ public class Game implements Serializable {
 
   private void makeUserMove(String input) {
     switch (input) {
-      case "N":
+      case "n":
         if (userPos.row > 0) {
           userPos.row--;
         }
         break;
-      case "S":
+      case "s":
         if (userPos.row < BOARD_ROWS-1) {
           userPos.row++;
         }
         break;
-      case "E":
+      case "e":
         if (userPos.col < BOARD_COLS-1) {
           userPos.col++;
         }
         break;
-      case "W":
+      case "w":
         if (userPos.col > 0) {
           userPos.col--;
         }
@@ -176,7 +176,7 @@ public class Game implements Serializable {
       newState = "isover";
     } else {
       switch (input) {
-        case "N": case "S": case "E": case "W":
+        case "n": case "s": case "e": case "w":
           makeUserMove(input);
           if(!isWon()) {
             if (matches(traps, userPos)) {
@@ -193,7 +193,7 @@ public class Game implements Serializable {
           i ++;
           newState = "isinplay";
           break;
-        case "P":
+        case "/":
           newState = "ispaused";
           break;
         default:

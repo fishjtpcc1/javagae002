@@ -15,12 +15,12 @@ public class GameScene extends Scene implements Serializable {
     } else if (g.isLost()) {
       return "<br><br>" + g.draw() + "<br>LOOSER!!!!<br>Press any key to continue: ";
     } else {
-      return "<br><br>" + g.draw() + "<br>Enter NSEWP: ";
+      return "<br><br>" + g.draw() + "<br>Enter NSEW/: ";
     }
   }
   
   public Scene whereToNext(String input) {
-    switch (g.newState(input)) {
+    switch (g.newState(input.toLowerCase())) {
       case "ispaused":
         return new PausedGameMenuScene(this);
       case "isover":
