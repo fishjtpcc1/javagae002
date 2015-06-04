@@ -1,8 +1,8 @@
-package monster;
+package jtpcc1.java.monster;
 
 import java.io.Serializable;
 
-public class OpenScene extends Scene implements Serializable {
+public class SaveScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
   public String method() {
@@ -10,34 +10,30 @@ public class OpenScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    return "<br>" + drawFiles() + "<br>Enter filename: ";
+    return "<br><br>PAUSED" + drawFiles() + "<br>Enter filename: ";
   }
   
   public Scene whereToNext(String input) {
     String localExitState;
-    GameSnapshot s = null;
     if (input.isEmpty()) {
       localExitState = "back";
+    } else if (input.contains(" ")) {
+      localExitState = "fail";
     } else {
-      s = getGameSnapshotByName(input.toLowerCase());
-      if (s == null) {
-        localExitState = "fail";
-      } else {
-        localExitState = "success";
-      }
+      String id = insert(input.toLowerCase(), g.getSnapshot());
+      localExitState = "success";
     }
     switch (localExitState) {
       case "back":
         return back;
       case "success":
-        g.restartSnapshot(s);
-        return new GameScene(this);
+        return new MenuScene(this);
       default:
         return new OopsScene(this);
     }
   }
   
-  OpenScene(Scene b) {
+  SaveScene(Scene b) {
     super(b);
   }
 

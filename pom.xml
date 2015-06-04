@@ -23,8 +23,8 @@
   <packaging>war</packaging>
   <version>1-SNAPSHOT</version><!-- built package version NOT my app-in-runner version as shown in gae versions!! -->
 
-  <groupId>jtpcc1</groupId><!-- try to make consistent with java package producer naming -->
-  <artifactId>ascsp1</artifactId><!-- try to make consistent with java package naming -->
+  <groupId>java.jtpcc1</groupId><!-- try to make consistent with java package producer naming -->
+  <artifactId>monster</artifactId><!-- try to make consistent with java package naming -->
 
   <properties>
     <appengine.app>overridden</appengine.app><!-- my app-in-runner projectid as shown in gae - overidden in deploy-->

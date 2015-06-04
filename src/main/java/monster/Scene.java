@@ -1,4 +1,4 @@
-package monster;
+package jtpcc1.java.monster;
 
 import java.io.Serializable;
 import java.util.ArrayList;

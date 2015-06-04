@@ -6,7 +6,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
     <servlet>
         <servlet-name>tier2</servlet-name>
-        <servlet-class>jtp.cc1.ascsp1.MonsterGameServlet</servlet-class>
+        <servlet-class>jtpcc1.java.monster.GameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>tier2</servlet-name>
