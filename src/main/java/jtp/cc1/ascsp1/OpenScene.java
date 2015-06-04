@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FilerScene extends Scene implements Serializable {
+public class OpenScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private Game pausedGame;
@@ -34,23 +34,22 @@ public class FilerScene extends Scene implements Serializable {
   }
   
   public Scene whereToNext(String input) {
-    String updateOutcome;
+    String localExitState;
     pausedGame = getGameByName(input, datastore);
     if (pausedGame == null) {
-      updateOutcome = "fail";
+      localExitState = "fail";
     } else {
-      updateOutcome = "success";
+      localExitState = "success";
     }
-    switch (updateOutcome) {
+    switch (localExitState) {
       case "success":
-        return new MenuScene(datastore);
+        return new GameScene(pausedGame, datastore);
       default:
         return new OopsScene(this);
     }
   }
   
-  OpenScene(Game g, ArrayList<Game> datastore) {
-    pausedGame = g;
+  OpenScene(ArrayList<Game> datastore) {
     this.datastore = datastore;
   }
 

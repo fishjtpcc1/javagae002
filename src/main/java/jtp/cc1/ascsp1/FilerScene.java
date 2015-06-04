@@ -20,11 +20,11 @@ public class FilerScene extends Scene implements Serializable {
   }
   
   public Scene whereToNext(String input) {
-    String updateOutcome;
+    String localExitState;
     if (input.contains(" ")) {
-      updateOutcome = "fail";
+      localExitState = "fail";
     } else {
-      updateOutcome = "success";
+      localExitState = "success";
       if (datastore != null) {
         datastore.add(pausedGame);
       } else {
@@ -33,7 +33,7 @@ public class FilerScene extends Scene implements Serializable {
       }
       pausedGame.name = input;
     }
-    switch (updateOutcome) {
+    switch (localExitState) {
       case "success":
         return new MenuScene(datastore);
       default:
