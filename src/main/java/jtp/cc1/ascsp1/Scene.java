@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Scene {
+public class Scene implements Serializable {
 
   protected static String json(String screen, String method, String other) {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
