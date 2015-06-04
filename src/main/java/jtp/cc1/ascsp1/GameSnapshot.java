@@ -12,7 +12,7 @@ public class GameSnapshot implements Serializable {
   public GridRC userPos;
   public GridRC monsterPos;
   public GridRC goalPos;
-  public GridRC[] traps = new GridRC[TRAPS];
+  public GridRC[] traps;
   public Boolean monsterIsAwake;
   public String name;
 
