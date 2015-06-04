@@ -28,9 +28,8 @@ public class OpenScene extends Scene implements Serializable {
           }
         }
       }
-    } else {
-      return null;
     }
+    return null;
   }
   
   public Scene whereToNext(String input) {
