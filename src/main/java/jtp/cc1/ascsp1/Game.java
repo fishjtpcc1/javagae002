@@ -79,11 +79,11 @@ public class Game implements Serializable {
     i = 0;
     data = "preset";
     userPos = new GridRC(0,0);
-    monsterPos = new GridRC(2,2);
-    goalPos = new GridRC(4,4);
+    monsterPos = new GridRC(0,2);
+    goalPos = new GridRC(0,1);
     traps[0] = new GridRC(3,3);
     traps[1] = new GridRC(1,1);
-    monsterIsAwake = false;
+    monsterIsAwake = true;
     oneTimeMsg = "<br>GO!!";
   }
   
