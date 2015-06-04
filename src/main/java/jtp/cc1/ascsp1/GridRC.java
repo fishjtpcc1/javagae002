@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /** a point structure
  */
-public class GridRC implements Serializable {
+public class GridRC implements Serializable, Cloneable {
   public int row;
   public int col;
 
@@ -13,8 +13,9 @@ public class GridRC implements Serializable {
     return (row == o.row && col == o.col);
   }
   
-  public GridRC clone() throws CloneNotSupportedException {
-    return (GridRC)super.clone();
+  public GridRC clone() {
+    GridRC minime = (GridRC)super.clone(); // know: shallow copy but thats aok as fileds are all primitives
+    return minime;
   }
   
   GridRC(int r, int c) {
