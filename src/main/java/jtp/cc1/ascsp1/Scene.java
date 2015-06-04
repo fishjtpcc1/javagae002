@@ -59,6 +59,10 @@ public class Scene implements Serializable {
     return this;
   }
   
+  Scene() {
+    // for menuscene
+  }
+
   Scene(Scene b) {
     back = b;
     datastore = b.datastore;
