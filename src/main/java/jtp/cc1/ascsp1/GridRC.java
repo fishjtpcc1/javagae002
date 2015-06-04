@@ -13,6 +13,10 @@ public class GridRC implements Serializable {
     return (row == o.row && col == o.col);
   }
   
+  public GridRC clone() {
+    return super.clone();
+  }
+  
   GridRC(int r, int c) {
     row = r;
     col = c;

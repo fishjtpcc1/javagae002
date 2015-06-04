@@ -103,7 +103,7 @@ public class Game implements Serializable {
   public void restartSnapshot(GameSnapshot s) {
     i = 0;
     data = "snapshot";
-    userPos = (GridRC)s.userPos.clone();
+    userPos = s.userPos.clone();
     monsterPos = s.monsterPos;
     goalPos = s.goalPos;
     traps = s.traps;
