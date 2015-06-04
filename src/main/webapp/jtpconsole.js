@@ -7,7 +7,7 @@ $(document).ready(function() {
   function handle(data, status) {
     console.log(data);
     $('#screen').html($('#screen').html() + data.screen); // app sends print or println equivalents
-    window.scrollTo(0, window.innerHeight); // keep bottom in view
+    window.scrollTo(0, document.documentElement.scrollHeight); // keep bottom in view
     switch (data.method) {
       case "read":
         $(document).keypress(function(event){
