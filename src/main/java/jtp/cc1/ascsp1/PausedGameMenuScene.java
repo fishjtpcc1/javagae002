@@ -23,7 +23,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
       case "1":
         return back;
       case "2":
-        return new SaveScene(((GameScene)back).g, datastore);
+        return new SaveScene(back, datastore);
       case "3":
         return new MenuScene(datastore);
       default:

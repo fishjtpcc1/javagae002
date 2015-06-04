@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class SaveScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
+  public Scene back;
   private Game pausedGame;
   public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
@@ -20,7 +21,9 @@ public class SaveScene extends Scene implements Serializable {
   
   public Scene whereToNext(String input) {
     String localExitState;
-    if (input.contains(" ")) {
+    if (input.isEmpty()) {
+      localExitState = "back";
+    } else if (input.contains(" ")) {
       localExitState = "fail";
     } else {
       localExitState = "success";
@@ -33,6 +36,8 @@ public class SaveScene extends Scene implements Serializable {
       }
     }
     switch (localExitState) {
+      case "back":
+        return back;
       case "success":
         return new MenuScene(datastore);
       default:
@@ -40,8 +45,9 @@ public class SaveScene extends Scene implements Serializable {
     }
   }
   
-  SaveScene(Game g, ArrayList<GameSnapshot> datastore) {
-    pausedGame = g;
+  SaveScene(Scene b, ArrayList<GameSnapshot> datastore) {
+    back = b;
+    pausedGame = ((GameScene)((PausedGameMenuScene)back).back).g;
     this.datastore = datastore;
   }
 
