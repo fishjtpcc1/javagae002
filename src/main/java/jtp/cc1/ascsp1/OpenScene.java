@@ -34,7 +34,7 @@ public class OpenScene extends Scene implements Serializable {
   
   public Scene whereToNext(String input) {
     String localExitState;
-    GameSnapshot s;
+    GameSnapshot s = null;
     if (input.isEmpty()) {
       localExitState = "back";
     } else {
