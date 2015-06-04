@@ -22,7 +22,6 @@ public class Game implements Serializable {
   private Boolean monsterIsAwake;
   private String oneTimeMsg = "";
 
-  public String name;
   public String data;
   public String method = "read";
   
@@ -94,9 +93,12 @@ public class Game implements Serializable {
     s.userPos = new GridRC(userPos);
     s.monsterPos = new GridRC(monsterPos);
     s.goalPos = new GridRC(goalPos);
-    s.traps = traps.clone();
+    // need to deep clone traps so array.clone() is no good
+    s.traps = new GridRC[traps.length];
+    for (int i=0; i<traps.length; i++) {
+      s.traps[i] = traps[i].clone();
+    }
     s.monsterIsAwake = monsterIsAwake;
-    s.name = name;
     return s;
   }
   
@@ -104,11 +106,14 @@ public class Game implements Serializable {
     i = 0;
     data = "snapshot";
     userPos = s.userPos.clone();
-    monsterPos = s.monsterPos;
-    goalPos = s.goalPos;
-    traps = s.traps;
+    monsterPos = s.monsterPos.clone();
+    goalPos = s.goalPos.clone();
+    // need to deep clone traps so array.clone() is no good
+    traps = new GridRC[s.traps.length];
+    for (int i=0; i<traps.length; i++) {
+      traps[i] = s.traps[i].clone();
+    }
     monsterIsAwake = s.monsterIsAwake;
-    name = s.name;
     oneTimeMsg = "<br>" + s.name + "...";
   }
   
@@ -200,7 +205,6 @@ public class Game implements Serializable {
   public Game() {
     i = 0;
     data = "fresh of the press ";
-    name = "noname";
   }
   
 }

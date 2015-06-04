@@ -27,12 +27,13 @@ public class SaveScene extends Scene implements Serializable {
       localExitState = "fail";
     } else {
       localExitState = "success";
-      pausedGame.name = input;
+      GameSnapshot s = pausedGame.getSnapshot();
+      s.name = input;
       if (datastore != null) {
-        datastore.add(pausedGame.getSnapshot());
+        datastore.add(s);
       } else {
         datastore = new ArrayList<GameSnapshot>();
-        datastore.add(pausedGame.getSnapshot());
+        datastore.add(s);
       }
     }
     switch (localExitState) {

@@ -16,11 +16,11 @@ public class GameScene extends Scene implements Serializable {
   
   public String draw() {
     if (g.isWon()) {
-      return "<br><br>" + g.name + g.draw() + "<br>WINNER!!!!<br>Press any key to continue: ";
+      return "<br><br>" + g.draw() + "<br>WINNER!!!!<br>Press any key to continue: ";
     } else if (g.isLost()) {
-      return "<br><br>" + g.name + g.draw() + "<br>LOOSER!!!!<br>Press any key to continue: ";
+      return "<br><br>" + g.draw() + "<br>LOOSER!!!!<br>Press any key to continue: ";
     } else {
-      return "<br><br>" + drawFiles(datastore) + "<br>" + g.name + g.draw() + "<br>Enter NSEWP: ";
+      return "<br><br>" + drawFiles(datastore) + "<br>" + g.draw() + "<br>Enter NSEWP: ";
     }
   }
   
