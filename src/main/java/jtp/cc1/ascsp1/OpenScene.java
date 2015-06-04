@@ -30,7 +30,8 @@ public class OpenScene extends Scene implements Serializable {
       case "back":
         return back;
       case "success":
-        return new GameScene(s, this);
+        g.restartSnapshot(s);
+        return new GameScene(this);
       default:
         return new OopsScene(this);
     }

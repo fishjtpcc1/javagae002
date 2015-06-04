@@ -16,9 +16,11 @@ public class MenuScene extends Scene implements Serializable {
   public Scene whereToNext(String input) {
     switch (input) {
       case "1":
-        return new GameScene(1,this);
+        g.restart();
+        return new GameScene(this);
       case "2":
-        return new GameScene(2,this);
+        g.restartPreset();
+        return new GameScene(this);
       case "3":
         return new OpenScene(this);
       default:
@@ -35,3 +37,4 @@ public class MenuScene extends Scene implements Serializable {
   }
 
 }
+

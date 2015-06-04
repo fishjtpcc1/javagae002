@@ -5,8 +5,6 @@ import java.io.Serializable;
 public class PausedGameMenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  private Game g;
-
   public String method() {
     return "read";
   }
@@ -20,7 +18,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
       case "1":
         return back;
       case "2":
-        return new SaveScene(g, this);
+        return new SaveScene(this);
       case "3":
         return new MenuScene(this);
       default:
@@ -28,9 +26,8 @@ public class PausedGameMenuScene extends Scene implements Serializable {
     }
   }
   
-  PausedGameMenuScene(Game g, Scene b) {
+  PausedGameMenuScene(Scene b) {
     super(b);
-    this.g = g;
   }
 
 }

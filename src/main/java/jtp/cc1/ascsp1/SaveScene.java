@@ -5,8 +5,6 @@ import java.io.Serializable;
 public class SaveScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-  private Game pausedGame;
-
   public String method() {
     return "readln";
   }
@@ -22,7 +20,7 @@ public class SaveScene extends Scene implements Serializable {
     } else if (input.contains(" ")) {
       localExitState = "fail";
     } else {
-      String id = insert(input, pausedGame.getSnapshot());
+      String id = insert(input, g.getSnapshot());
       localExitState = "success";
     }
     switch (localExitState) {
@@ -35,9 +33,8 @@ public class SaveScene extends Scene implements Serializable {
     }
   }
   
-  SaveScene(Game g, Scene b) {
+  SaveScene(Scene b) {
     super(b);
-    pausedGame = g;
   }
 
 }

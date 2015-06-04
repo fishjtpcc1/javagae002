@@ -5,8 +5,6 @@ import java.io.Serializable;
 public class GameScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  public Game g = new Game(); // canot be static otherwise all users play the same game!!
-
   public String method() {
     return g.method;
   }
@@ -24,7 +22,7 @@ public class GameScene extends Scene implements Serializable {
   public Scene whereToNext(String input) {
     switch (g.newState(input)) {
       case "ispaused":
-        return new PausedGameMenuScene(g, this);
+        return new PausedGameMenuScene(this);
       case "isover":
         return new MenuScene(this);
       case "isinplay":
@@ -34,19 +32,4 @@ public class GameScene extends Scene implements Serializable {
     }
   }
 
-  GameScene(int mode, Scene b) {
-    super(b);
-    if (mode == 1) {
-      g.restart();
-    } else {
-      g.restartPreset();
-    }
-  }
-  
-  GameScene(GameSnapshot s, Scene b) {
-    super(b);
-    // load snapshot data
-    g.restartSnapshot(s);
-  }
-  
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Scene implements Serializable {
 
   public Scene back;
+  public Game g = new Game(); // canot be static otherwise all users play the same game!!
   public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String insert(String n, GameSnapshot s) {
@@ -65,6 +66,7 @@ public class Scene implements Serializable {
 
   Scene(Scene b) {
     back = b;
+    g = b.g;
     datastore = b.datastore;
   }
 
