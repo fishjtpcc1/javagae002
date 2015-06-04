@@ -14,7 +14,7 @@ public class MenuScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    return "<br><br>" + drawFiles(datastore) + "<br>1. New game<br>2. Training game<br>Enter choice: ";
+    return "<br><br>" + drawFiles(datastore) + "<br>1. New game<br>2. Training game<br>3. Load game<br>Enter choice: ";
   }
   
   public Scene whereToNext(String input) {
@@ -23,6 +23,8 @@ public class MenuScene extends Scene implements Serializable {
         return new GameScene(1,datastore);
       case "2":
         return new GameScene(2,datastore);
+      case "3":
+        return new OpenScene(datastore);
       default:
         return new OopsScene(this); // know: casting back is not required as is obviously valid in inheritance structure
     }

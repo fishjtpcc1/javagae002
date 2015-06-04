@@ -46,4 +46,9 @@ public class GameScene extends Scene implements Serializable {
     }
   }
   
+  GameScene(Game savedGame, ArrayList<Game> datastore) {
+    this.datastore = datastore;
+    this.g = savedGame;
+  }
+  
 }

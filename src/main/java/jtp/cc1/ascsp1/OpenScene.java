@@ -19,19 +19,27 @@ public class FilerScene extends Scene implements Serializable {
     return "<br><br>PAUSED" + drawFiles(datastore) + "<br>Enter filename: ";
   }
   
+  private String getGameByName(String n, ArrayList<Game> datastore) {
+    if (datastore != null) {
+      for (int i=0; i<datastore.size(); i++ ) {
+        if (datastore.get(i) != null) {
+          if (datastore.get(i).name == n) {
+            return datastore.get(i);
+          }
+        }
+      }
+    } else {
+      return null;
+    }
+  }
+  
   public Scene whereToNext(String input) {
     String updateOutcome;
-    if (input.contains(" ")) {
+    pausedGame = getGameByName(input, datastore);
+    if (pausedGame == null) {
       updateOutcome = "fail";
     } else {
       updateOutcome = "success";
-      if (datastore != null) {
-        datastore.add(pausedGame);
-      } else {
-        datastore = new ArrayList<Game>();
-        datastore.add(pausedGame);
-      }
-      pausedGame.name = input;
     }
     switch (updateOutcome) {
       case "success":
@@ -41,7 +49,7 @@ public class FilerScene extends Scene implements Serializable {
     }
   }
   
-  FilerScene(Game g, ArrayList<Game> datastore) {
+  OpenScene(Game g, ArrayList<Game> datastore) {
     pausedGame = g;
     this.datastore = datastore;
   }
