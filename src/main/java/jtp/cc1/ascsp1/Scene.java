@@ -14,7 +14,7 @@ public class Scene implements Serializable {
 
   public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
-  public insert(String n, GameSnapshot s) {
+  public String insert(String n, GameSnapshot s) {
       s.name = n;
       if (datastore != null) {
         datastore.add(s);
@@ -22,6 +22,7 @@ public class Scene implements Serializable {
         datastore = new ArrayList<GameSnapshot>();
         datastore.add(s);
       }
+      return n; // dirty: id
   }
   
   protected String drawFiles() {

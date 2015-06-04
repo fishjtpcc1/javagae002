@@ -25,7 +25,7 @@ public class SaveScene extends Scene implements Serializable {
     } else if (input.contains(" ")) {
       localExitState = "fail";
     } else {
-      Boolean status = insert(input, pausedGame.getSnapshot());
+      String id = insert(input, pausedGame.getSnapshot());
       localExitState = "success";
     }
     switch (localExitState) {
