@@ -32,4 +32,8 @@ public class GameScene extends Scene implements Serializable {
     }
   }
 
+  GameScene(Scene b) {
+    super(b);
+  }
+
 }
