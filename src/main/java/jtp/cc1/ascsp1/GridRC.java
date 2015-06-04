@@ -13,7 +13,7 @@ public class GridRC implements Serializable {
     return (row == o.row && col == o.col);
   }
   
-  public GridRC clone() {
+  public GridRC clone() throws CloneNotSupportedException {
     return (GridRC)super.clone();
   }
   
