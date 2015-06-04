@@ -5,8 +5,6 @@ import java.io.Serializable;
 public class PausedGameMenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  public Scene back;
-  
   private Game g;
 
   public String method() {
@@ -32,7 +30,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
   
   PausedGameMenuScene(Game g, Scene b) {
     back = b;
-    this.datastore = b.datastore;
+    datastore = b.datastore;
     this.g = g;
   }
 

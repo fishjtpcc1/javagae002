@@ -5,8 +5,6 @@ import java.io.Serializable;
 public class OpenScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-  public Scene back;
-
   public String method() {
     return "readln";
   }
@@ -38,9 +36,4 @@ public class OpenScene extends Scene implements Serializable {
     }
   }
   
-  OpenScene(Scene b) {
-    back = b;
-    this.datastore = b.datastore;
-  }
-
 }

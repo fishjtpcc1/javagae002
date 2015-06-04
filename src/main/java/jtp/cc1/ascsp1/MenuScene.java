@@ -26,11 +26,4 @@ public class MenuScene extends Scene implements Serializable {
     }
   }
   
-  MenuScene() {
-  }
-
-  MenuScene(Scene b) {
-    this.datastore = b.datastore;
-  }
-
 }

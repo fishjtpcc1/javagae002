@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class SaveScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-  public Scene back;
   private Game pausedGame;
 
   public String method() {
@@ -39,7 +38,7 @@ public class SaveScene extends Scene implements Serializable {
   SaveScene(Game g, Scene b) {
     back = b;
     pausedGame = g;
-    this.datastore = b.datastore;
+    datastore = b.datastore;
   }
 
 }

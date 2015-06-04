@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /* must be serializable to rebuild fields to be inherited by children */
 public class Scene implements Serializable {
 
+  public Scene back;
   public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String insert(String n, GameSnapshot s) {
@@ -49,11 +50,18 @@ public class Scene implements Serializable {
   public String method() {
     return "nomethod";
   }
+  
   public String draw() {
     return "<br><br>BLANK";
   }
+  
   public Scene whereToNext(String input) {
     return this;
+  }
+  
+  Scene(Scene b) {
+    back = b;
+    datastore = b.datastore;
   }
 
 }

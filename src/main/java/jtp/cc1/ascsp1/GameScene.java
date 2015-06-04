@@ -35,7 +35,7 @@ public class GameScene extends Scene implements Serializable {
   }
 
   GameScene(int mode, Scene b) {
-    this.datastore = b.datastore;
+    datastore = b.datastore;
     if (mode == 1) {
       g.restart();
     } else {
@@ -44,7 +44,7 @@ public class GameScene extends Scene implements Serializable {
   }
   
   GameScene(GameSnapshot s, Scene b) {
-    this.datastore = b.datastore;
+    datastore = b.datastore;
     // load snapshot data
     g.restartSnapshot(s);
   }
