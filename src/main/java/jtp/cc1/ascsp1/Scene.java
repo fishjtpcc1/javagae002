@@ -8,10 +8,6 @@ import java.util.ArrayList;
 /* must be serializable to rebuild fields to be inherited by children */
 public class Scene implements Serializable {
 
-  protected static String json(String screen, String method, String other) {
-    return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
-  }
-
   public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String insert(String n, GameSnapshot s) {
@@ -49,27 +45,4 @@ public class Scene implements Serializable {
     return this;
   }
 
-  /* no input yet: sets up session data of current SceneI = this, sends screen image to tier1
-   */
-  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
-    // save state
-    HttpSession mySession = req.getSession(true);
-    mySession.setAttribute("here", this);
-    // hand back to tier1 to present the initial user state and service access (user can enter his data)
-    resp.setContentType("text/plain");
-    resp.getWriter().println(json(draw(), method(), "here:"+this));
-  }
-  
-  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
-    HttpSession mySession = req.getSession(false);
-    String input = req.getParameter("input");
-    // handle
-    Scene next = whereToNext(input); // strictly controlled polymorphism in action
-    // save state
-    mySession.setAttribute("here", next);
-    // hand back to tier1 to present the initial user state and service access (user can enter his data)
-    resp.setContentType("text/plain");
-    resp.getWriter().println(json(next.draw(), next.method(), "here:"+next+" files:"+drawFiles()));
-  }
-  
 }
