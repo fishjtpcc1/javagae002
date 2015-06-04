@@ -1,4 +1,4 @@
-package jtp.cc1.ascsp1;
+package monster;
 
 import java.util.logging.Logger;
 import java.io.IOException;
