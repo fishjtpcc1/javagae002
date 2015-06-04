@@ -178,14 +178,16 @@ public class Game implements Serializable {
       switch (input) {
         case "N": case "S": case "E": case "W":
           makeUserMove(input);
-          if (matches(traps, userPos)) {
-            if (!monsterIsAwake) {
-              oneTimeMsg = "<br>MONSTER IS AWAKE!!";
+          if(!isWon()) {
+            if (matches(traps, userPos)) {
+              if (!monsterIsAwake) {
+                oneTimeMsg = "<br>MONSTER IS AWAKE!!";
+              }
+              monsterIsAwake = true;
             }
-            monsterIsAwake = true;
-          }
-          if (monsterIsAwake) {
-            makeMonsterMove();
+            if (monsterIsAwake) {
+              makeMonsterMove();
+            }
           }
           data += input + ": ";
           i ++;
