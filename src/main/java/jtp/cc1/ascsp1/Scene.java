@@ -14,6 +14,16 @@ public class Scene implements Serializable {
 
   public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
+  public insert(String n, GameSnapshot s) {
+      s.name = n;
+      if (datastore != null) {
+        datastore.add(s);
+      } else {
+        datastore = new ArrayList<GameSnapshot>();
+        datastore.add(s);
+      }
+  }
+  
   protected String drawFiles() {
     String rows = "";
     if (datastore != null) {
@@ -49,7 +59,7 @@ public class Scene implements Serializable {
     mySession.setAttribute("here", this);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(json(draw(), method(), "sid:"+mySession.getId()));
+    resp.getWriter().println(json(draw(), method(), "sid:"+mySession.getId()+"s.isnew:"+mySession.isNew()));
   }
   
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
@@ -61,7 +71,7 @@ public class Scene implements Serializable {
     mySession.setAttribute("here", next);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(json(next.draw(), next.method(), "sid:"+mySession.getId()+" here:"+next+"files:"+drawFiles()));
+    resp.getWriter().println(json(next.draw(), next.method(), "here:"+next+" files:"+drawFiles()));
   }
   
 }

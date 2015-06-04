@@ -8,6 +8,8 @@ public class PausedGameMenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public Scene back;
+  
+  private Game g;
 
   public String method() {
     return "read";
@@ -22,17 +24,18 @@ public class PausedGameMenuScene extends Scene implements Serializable {
       case "1":
         return back;
       case "2":
-        return new SaveScene(this, datastore);
+        return new SaveScene(g, this);
       case "3":
-        return new MenuScene(datastore);
+        return new MenuScene(this);
       default:
         return new OopsScene(this);
     }
   }
   
-  PausedGameMenuScene(Scene b, ArrayList<GameSnapshot> datastore) {
+  PausedGameMenuScene(Game g, Scene b) {
     back = b;
-    this.datastore = datastore;
+    this.datastore = b.datastore;
+    this.g = g;
   }
 
 }

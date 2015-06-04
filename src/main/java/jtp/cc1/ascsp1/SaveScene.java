@@ -25,30 +25,23 @@ public class SaveScene extends Scene implements Serializable {
     } else if (input.contains(" ")) {
       localExitState = "fail";
     } else {
+      Boolean status = insert(input, pausedGame.getSnapshot());
       localExitState = "success";
-      GameSnapshot s = pausedGame.getSnapshot();
-      s.name = input;
-      if (datastore != null) {
-        datastore.add(s);
-      } else {
-        datastore = new ArrayList<GameSnapshot>();
-        datastore.add(s);
-      }
     }
     switch (localExitState) {
       case "back":
         return back;
       case "success":
-        return new MenuScene(datastore);
+        return new MenuScene(this);
       default:
         return new OopsScene(this);
     }
   }
   
-  SaveScene(Scene b, ArrayList<GameSnapshot> datastore) {
+  SaveScene(Game g, Scene b) {
     back = b;
-    pausedGame = ((GameScene)((PausedGameMenuScene)back).back).g;
-    this.datastore = datastore;
+    pausedGame = g;
+    this.datastore = b.datastore;
   }
 
 }

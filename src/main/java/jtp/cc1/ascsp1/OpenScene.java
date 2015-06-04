@@ -48,15 +48,15 @@ public class OpenScene extends Scene implements Serializable {
       case "back":
         return back;
       case "success":
-        return new GameScene(s, datastore);
+        return new GameScene(s, this);
       default:
         return new OopsScene(this);
     }
   }
   
-  OpenScene(Scene b, ArrayList<GameSnapshot> datastore) {
+  OpenScene(Scene b) {
     back = b;
-    this.datastore = datastore;
+    this.datastore = b.datastore;
   }
 
 }

@@ -18,11 +18,11 @@ public class MenuScene extends Scene implements Serializable {
   public Scene whereToNext(String input) {
     switch (input) {
       case "1":
-        return new GameScene(1,datastore);
+        return new GameScene(1,this);
       case "2":
-        return new GameScene(2,datastore);
+        return new GameScene(2,this);
       case "3":
-        return new OpenScene(this,datastore);
+        return new OpenScene(this);
       default:
         return new OopsScene(this); // know: casting back is not required as is obviously valid in inheritance structure
     }
@@ -31,8 +31,8 @@ public class MenuScene extends Scene implements Serializable {
   MenuScene() {
   }
 
-  MenuScene(ArrayList<GameSnapshot> datastore) {
-    this.datastore = datastore;
+  MenuScene(Scene b) {
+    this.datastore = b.datastore;
   }
 
 }
