@@ -73,7 +73,7 @@ public class Game implements Serializable {
       traps[i] = trapPos;
     }
     monsterIsAwake = false;
-    oneTimeMsg = "GO!!";
+    oneTimeMsg = "<br>GO!!";
   }
   
   public void restartPreset() {
@@ -85,7 +85,7 @@ public class Game implements Serializable {
     traps[0] = new GridRC(3,3);
     traps[1] = new GridRC(1,1);
     monsterIsAwake = false;
-    oneTimeMsg = "GO!!";
+    oneTimeMsg = "<br>GO!!";
   }
   
   public GameSnapshot getSnapshot() {
@@ -109,7 +109,7 @@ public class Game implements Serializable {
     traps = s.traps;
     monsterIsAwake = s.monsterIsAwake;
     name = s.name;
-    oneTimeMsg = s.name+ "...";
+    oneTimeMsg = "<br>" + s.name + "...";
   }
   
   public Boolean isLost() {
