@@ -14,7 +14,7 @@ public class GridRC implements Serializable {
   }
   
   public GridRC clone() {
-    return super.clone();
+    return (GridRC)super.clone();
   }
   
   GridRC(int r, int c) {
