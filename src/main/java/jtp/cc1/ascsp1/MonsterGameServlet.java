@@ -48,7 +48,7 @@ public class MonsterGameServlet extends HttpServlet {
     oldSession.invalidate();
     HttpSession mySession = req.getSession(true);
     reuseCount++;
-    log.info("server reuseCount:"+reuseCount+" session id:"+mySession.getId()+" is new:"+mySession.isNew())
+    log.info("server reuseCount:"+reuseCount+" session id:"+mySession.getId()+" is new:"+mySession.isNew());
     // hand off to initial Scene
     MenuScene here = new MenuScene();
     here.doGet(req,resp);
