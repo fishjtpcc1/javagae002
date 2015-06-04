@@ -46,10 +46,10 @@ public class GameScene extends Scene implements Serializable {
     }
   }
   
-  GameScene(Game gameSnapshot, ArrayList<GameSnapshot> datastore) {
+  GameScene(GameSnapshot s, ArrayList<GameSnapshot> datastore) {
     this.datastore = datastore;
     // load snapshot data
-    this.g.restartSnapshot(gameSnapshot);
+    g.restartSnapshot(s);
   }
   
 }
