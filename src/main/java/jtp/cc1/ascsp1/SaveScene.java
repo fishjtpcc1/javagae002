@@ -5,11 +5,11 @@ import javax.servlet.http.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FilerScene extends Scene implements Serializable {
+public class SaveScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private Game pausedGame;
-  public ArrayList<Game> datastore; // dirty: sim datastore
+  public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String method() {
     return "readln";
@@ -25,13 +25,13 @@ public class FilerScene extends Scene implements Serializable {
       localExitState = "fail";
     } else {
       localExitState = "success";
-      if (datastore != null) {
-        datastore.add(pausedGame);
-      } else {
-        datastore = new ArrayList<Game>();
-        datastore.add(pausedGame);
-      }
       pausedGame.name = input;
+      if (datastore != null) {
+        datastore.add(pausedGame.getSnapshot());
+      } else {
+        datastore = new ArrayList<GameSnapshot>();
+        datastore.add(pausedGame.getSnapshot());
+      }
     }
     switch (localExitState) {
       case "success":
@@ -41,7 +41,7 @@ public class FilerScene extends Scene implements Serializable {
     }
   }
   
-  FilerScene(Game g, ArrayList<Game> datastore) {
+  SaveScene(Game g, ArrayList<GameSnapshot> datastore) {
     pausedGame = g;
     this.datastore = datastore;
   }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class MenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-  public ArrayList<Game> datastore; // dirty: sim datastore
+  public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String method() {
     return "read";
@@ -33,7 +33,7 @@ public class MenuScene extends Scene implements Serializable {
   MenuScene() {
   }
 
-  MenuScene(ArrayList<Game> datastore) {
+  MenuScene(ArrayList<GameSnapshot> datastore) {
     this.datastore = datastore;
   }
 

@@ -8,7 +8,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public Scene back;
-  public ArrayList<Game> datastore; // dirty: sim datastore
+  public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String method() {
     return "read";
@@ -23,7 +23,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
       case "1":
         return back;
       case "2":
-        return new FilerScene(((GameScene)back).g, datastore);
+        return new SaveScene(((GameScene)back).g, datastore);
       case "3":
         return new MenuScene(datastore);
       default:
@@ -31,7 +31,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
     }
   }
   
-  PausedGameMenuScene(Scene b, ArrayList<Game> datastore) {
+  PausedGameMenuScene(Scene b, ArrayList<GameSnapshot> datastore) {
     back = b;
     this.datastore = datastore;
   }

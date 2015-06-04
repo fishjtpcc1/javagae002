@@ -8,7 +8,7 @@ public class GameScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public Game g = new Game(); // canot be static otherwise all users play the same game!!
-  public ArrayList<Game> datastore; // dirty: sim datastore
+  public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String method() {
     return g.method;
@@ -37,7 +37,7 @@ public class GameScene extends Scene implements Serializable {
     }
   }
 
-  GameScene(int mode, ArrayList<Game> datastore) {
+  GameScene(int mode, ArrayList<GameSnapshot> datastore) {
     this.datastore = datastore;
     if (mode == 1) {
       g.restart();
@@ -46,9 +46,10 @@ public class GameScene extends Scene implements Serializable {
     }
   }
   
-  GameScene(Game savedGame, ArrayList<Game> datastore) {
+  GameScene(Game gameSnapshot, ArrayList<GameSnapshot> datastore) {
     this.datastore = datastore;
-    this.g = savedGame;
+    // load snapshot data
+    this.g.restartSnapshot(gameSnapshot);
   }
   
 }

@@ -8,8 +8,8 @@ import java.util.Arrays;
 public class OpenScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-  private Game pausedGame;
-  public ArrayList<Game> datastore; // dirty: sim datastore
+  private GameSnapshot snapshot;
+  public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String method() {
     return "readln";
@@ -19,7 +19,7 @@ public class OpenScene extends Scene implements Serializable {
     return "<br><br>PAUSED" + drawFiles(datastore) + "<br>Enter filename: ";
   }
   
-  private Game getGameByName(String n, ArrayList<Game> datastore) {
+  private GameSnapshot getGameSnapshotByName(String n, ArrayList<GameSnapshot> datastore) {
     if (datastore != null) {
       for (int i=0; i<datastore.size(); i++ ) {
         if (datastore.get(i) != null) {
@@ -34,21 +34,21 @@ public class OpenScene extends Scene implements Serializable {
   
   public Scene whereToNext(String input) {
     String localExitState;
-    pausedGame = getGameByName(input, datastore);
-    if (pausedGame == null) {
+    snapshot = getGameSnapshotByName(input, datastore);
+    if (snapshot == null) {
       localExitState = "fail";
     } else {
       localExitState = "success";
     }
     switch (localExitState) {
       case "success":
-        return new GameScene(pausedGame, datastore);
+        return new GameScene(snapshot, datastore);
       default:
         return new OopsScene(this);
     }
   }
   
-  OpenScene(ArrayList<Game> datastore) {
+  OpenScene(ArrayList<GameSnapshot> datastore) {
     this.datastore = datastore;
   }
 

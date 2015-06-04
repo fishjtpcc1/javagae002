@@ -11,7 +11,7 @@ public class Scene {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 
-  protected String drawFiles(ArrayList<Game> datastore) {
+  protected String drawFiles(ArrayList<GameSnapshot> datastore) {
     String rows = "";
     if (datastore != null) {
       for (int i=0; i<datastore.size(); i++ ) {

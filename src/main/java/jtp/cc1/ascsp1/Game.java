@@ -88,6 +88,29 @@ public class Game implements Serializable {
     oneTimeMsg = "";
   }
   
+  public GameSnapshot getSnapshot() {
+    GameSnapshot s = new GameSnapshot();
+    s.userPos = userPos;
+    s.monsterPos = monsterPos;
+    s.goalPos = goalPos;
+    s.traps = traps;
+    s.monsterIsAwake = monsterIsAwake;
+    s.name = name;
+    return s;
+  }
+  
+  public void restartSnapshot(GameSnapshot s) {
+    i = 0;
+    data = "snapshot";
+    userPos = s.userPos;
+    monsterPos = s.monsterPos;
+    goalPos = s.goalPos;
+    traps = s.traps;
+    monsterIsAwake = s.monsterIsAwake;
+    name = s.name;
+    oneTimeMsg = "";
+  }
+  
   public Boolean isLost() {
     return (userPos.equals(monsterPos));
   }
