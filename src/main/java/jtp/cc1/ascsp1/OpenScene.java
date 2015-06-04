@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class OpenScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-  private GameSnapshot snapshot;
+  public Scene back;
   public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String method() {
@@ -34,21 +34,29 @@ public class OpenScene extends Scene implements Serializable {
   
   public Scene whereToNext(String input) {
     String localExitState;
-    snapshot = getGameSnapshotByName(input, datastore);
-    if (snapshot == null) {
-      localExitState = "fail";
+    GameSnapshot s;
+    if (input.isEmpty()) {
+      localExitState = "back";
     } else {
-      localExitState = "success";
+      s = getGameSnapshotByName(input, datastore);
+      if (snapshot == null) {
+        localExitState = "fail";
+      } else {
+        localExitState = "success";
+      }
     }
     switch (localExitState) {
+      case "back":
+        return back;
       case "success":
-        return new GameScene(snapshot, datastore);
+        return new GameScene(s, datastore);
       default:
         return new OopsScene(this);
     }
   }
   
-  OpenScene(ArrayList<GameSnapshot> datastore) {
+  OpenScene(Scene b, ArrayList<GameSnapshot> datastore) {
+    back = b;
     this.datastore = datastore;
   }
 

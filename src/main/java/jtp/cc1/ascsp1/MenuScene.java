@@ -24,7 +24,7 @@ public class MenuScene extends Scene implements Serializable {
       case "2":
         return new GameScene(2,datastore);
       case "3":
-        return new OpenScene(datastore);
+        return new OpenScene(this,datastore);
       default:
         return new OopsScene(this); // know: casting back is not required as is obviously valid in inheritance structure
     }
