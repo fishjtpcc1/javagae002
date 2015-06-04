@@ -15,7 +15,7 @@ public class Game implements Serializable {
   private static final Random rand = new Random();
   private int moves;
   private char[][] board = new char[BOARD_ROWS][BOARD_COLS];
-  private data = new GameSnapshot();
+  private GameSnapshot data = new GameSnapshot();
   private String oneTimeMsg = "";
 
   public String about;
