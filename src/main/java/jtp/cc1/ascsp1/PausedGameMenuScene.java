@@ -29,8 +29,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
   }
   
   PausedGameMenuScene(Game g, Scene b) {
-    back = b;
-    datastore = b.datastore;
+    super(b);
     this.g = g;
   }
 

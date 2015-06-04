@@ -36,4 +36,8 @@ public class OpenScene extends Scene implements Serializable {
     }
   }
   
+  OpenScene(Scene b) {
+    super(b);
+  }
+
 }

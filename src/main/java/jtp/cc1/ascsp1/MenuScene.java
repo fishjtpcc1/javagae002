@@ -26,4 +26,8 @@ public class MenuScene extends Scene implements Serializable {
     }
   }
   
+  MenuScene(Scene b) {
+    super(b);
+  }
+
 }

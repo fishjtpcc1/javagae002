@@ -36,9 +36,8 @@ public class SaveScene extends Scene implements Serializable {
   }
   
   SaveScene(Game g, Scene b) {
-    back = b;
+    super(b);
     pausedGame = g;
-    datastore = b.datastore;
   }
 
 }
