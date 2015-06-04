@@ -42,7 +42,7 @@ public class Game implements Serializable {
           row += 'M';
         } else if (data.goalPos.equals(p)) {
           row += 'G';
-        } else if (data.matches(traps, p)) {
+        } else if (matches(data.traps, p)) {
           row += 'T';
         } else {
           row += '-';
@@ -59,9 +59,9 @@ public class Game implements Serializable {
     data.monsterPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
     data.goalPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
     data.traps = new GridRC[TRAPS];
-    for (int i=0; i<traps.length; i++) {
+    for (int i=0; i<data.traps.length; i++) {
       GridRC trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
-      while (trapPos.equals(monsterPos) || trapPos.equals(goalPos)) {
+      while (trapPos.equals(data.monsterPos) || trapPos.equals(data.goalPos)) {
         trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
       }
       data.traps[i] = trapPos;
@@ -108,7 +108,7 @@ public class Game implements Serializable {
     data.goalPos = s.goalPos.clone();
     // need to deep clone traps so array.clone() is no good
     data.traps = new GridRC[s.traps.length];
-    for (int i=0; i<traps.length; i++) {
+    for (int i=0; i<data.traps.length; i++) {
       data.traps[i] = s.traps[i].clone();
     }
     data.monsterIsAwake = s.monsterIsAwake;
@@ -180,7 +180,7 @@ public class Game implements Serializable {
         case "n": case "s": case "e": case "w":
           makeUserMove(input);
           if(!isWon()) {
-            if (matches(traps, userPos)) {
+            if (matches(data.traps, data.userPos)) {
               if (!data.monsterIsAwake) {
                 oneTimeMsg = "<br>MONSTER IS AWAKE!!";
               }
