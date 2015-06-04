@@ -1,8 +1,6 @@
 package jtp.cc1.ascsp1;
 
 import java.io.Serializable;
-import javax.servlet.http.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /* must be serializable to rebuild fields to be inherited by children */
@@ -19,6 +17,19 @@ public class Scene implements Serializable {
         datastore.add(s);
       }
       return n; // dirty: id
+  }
+  
+  public GameSnapshot getGameSnapshotByName(String n) {
+    if (datastore != null) {
+      for (int i=0; i<datastore.size(); i++ ) {
+        if (datastore.get(i) != null) {
+          if (datastore.get(i).name.equals(n)) {
+            return datastore.get(i);
+          }
+        }
+      }
+    }
+    return null;
   }
   
   protected String drawFiles() {
