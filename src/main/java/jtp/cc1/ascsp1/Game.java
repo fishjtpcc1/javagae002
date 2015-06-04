@@ -73,7 +73,7 @@ public class Game implements Serializable {
       traps[i] = trapPos;
     }
     monsterIsAwake = false;
-    oneTimeMsg = "";
+    oneTimeMsg = "GO!!";
   }
   
   public void restartPreset() {
@@ -85,15 +85,16 @@ public class Game implements Serializable {
     traps[0] = new GridRC(3,3);
     traps[1] = new GridRC(1,1);
     monsterIsAwake = false;
-    oneTimeMsg = "";
+    oneTimeMsg = "GO!!";
   }
   
   public GameSnapshot getSnapshot() {
     GameSnapshot s = new GameSnapshot();
-    s.userPos = userPos;
-    s.monsterPos = monsterPos;
-    s.goalPos = goalPos;
-    s.traps = traps;
+    // do not use simple object ref assignment otherwise snapshots share memory
+    s.userPos = new GridRC(userPos);
+    s.monsterPos = new GridRC(monsterPos);
+    s.goalPos = new GridRC(goalPos);
+    s.traps = traps.clone();
     s.monsterIsAwake = monsterIsAwake;
     s.name = name;
     return s;
@@ -108,7 +109,7 @@ public class Game implements Serializable {
     traps = s.traps;
     monsterIsAwake = s.monsterIsAwake;
     name = s.name;
-    oneTimeMsg = "";
+    oneTimeMsg = s.name+ "...";
   }
   
   public Boolean isLost() {

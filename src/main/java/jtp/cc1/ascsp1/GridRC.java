@@ -17,4 +17,10 @@ public class GridRC implements Serializable {
     row = r;
     col = c;
   }
+  
+  GridRC(GridRC t) {
+    row = t.row;
+    col = t.col;
+  }
+  
 }

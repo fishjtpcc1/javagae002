@@ -16,7 +16,7 @@ public class OpenScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    return "<br><br>PAUSED" + drawFiles(datastore) + "<br>Enter filename: ";
+    return "<br>" + drawFiles(datastore) + "<br>Enter filename: ";
   }
   
   private GameSnapshot getGameSnapshotByName(String n, ArrayList<GameSnapshot> datastore) {
