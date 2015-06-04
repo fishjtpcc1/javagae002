@@ -59,7 +59,7 @@ public class MonsterGameServlet extends HttpServlet {
     mySession.setAttribute("here", here);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(json(draw(), method(), "here:"+here));
+    resp.getWriter().println(json(here.draw(), here.method(), "here:"+here));
   }
 
   @Override
