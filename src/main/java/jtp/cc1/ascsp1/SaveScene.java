@@ -20,7 +20,7 @@ public class SaveScene extends Scene implements Serializable {
     } else if (input.contains(" ")) {
       localExitState = "fail";
     } else {
-      String id = insert(input, g.getSnapshot());
+      String id = insert(input.toLowerCase(), g.getSnapshot());
       localExitState = "success";
     }
     switch (localExitState) {

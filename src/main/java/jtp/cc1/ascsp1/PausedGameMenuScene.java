@@ -14,7 +14,7 @@ public class PausedGameMenuScene extends Scene implements Serializable {
   }
   
   public Scene whereToNext(String input) {
-    switch (input) {
+    switch (input.toLowerCase()) {
       case "1":
         return back;
       case "2":

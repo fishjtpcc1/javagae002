@@ -14,7 +14,7 @@ public class MenuScene extends Scene implements Serializable {
   }
   
   public Scene whereToNext(String input) {
-    switch (input) {
+    switch (input.toLowerCase()) {
       case "1":
         g.restart();
         return new GameScene(this);
