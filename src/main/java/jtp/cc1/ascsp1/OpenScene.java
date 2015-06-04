@@ -23,9 +23,9 @@ public class OpenScene extends Scene implements Serializable {
     if (datastore != null) {
       for (int i=0; i<datastore.size(); i++ ) {
         if (datastore.get(i) != null) {
-          if (datastore.get(i).name == n) {
+          //if (datastore.get(i).name == n) {
             return datastore.get(i);
-          }
+          //}
         }
       }
     }
