@@ -3,7 +3,7 @@ package jtp.cc1.ascsp1;
 import java.io.Serializable;
 import java.util.Random;
 
-/** to save complex data in the session class
+/** to save complex about in the session class
  * must implement Serializable or runtime error happens
  * must not be a nested class otherwise silent error accessing deserialized members
  */
@@ -13,16 +13,12 @@ public class Game implements Serializable {
   private static final int BOARD_COLS = 7;
   private static final int TRAPS = 2;
   private static final Random rand = new Random();
-  private int i;
+  private int moves;
   private char[][] board = new char[BOARD_ROWS][BOARD_COLS];
-  private GridRC userPos;
-  private GridRC monsterPos;
-  private GridRC goalPos;
-  private GridRC[] traps = new GridRC[TRAPS];
-  private Boolean monsterIsAwake;
+  private data = new GameSnapshot();
   private String oneTimeMsg = "";
 
-  public String data;
+  public String about;
   public String method = "read";
   
   public Boolean matches(GridRC[] a, GridRC p) {
@@ -40,13 +36,13 @@ public class Game implements Serializable {
       String row = "<br>|";
       for (int j=0; j<board[i].length; j++) {
         GridRC p = new GridRC(i,j);
-        if (userPos.equals(p)) {
+        if (data.userPos.equals(p)) {
           row += 'U';
-        } else if (monsterPos.equals(p)) {
+        } else if (data.monsterPos.equals(p)) {
           row += 'M';
-        } else if (goalPos.equals(p)) {
+        } else if (data.goalPos.equals(p)) {
           row += 'G';
-        } else if (matches(traps, p)) {
+        } else if (data.matches(traps, p)) {
           row += 'T';
         } else {
           row += '-';
@@ -59,92 +55,97 @@ public class Game implements Serializable {
   }
   
   public void restart() {
-    i = 0;
-    data = "recycled (but still wonderful) ";
-    userPos = new GridRC(0,0);
-    monsterPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
-    goalPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
+    data.userPos = new GridRC(0,0);
+    data.monsterPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
+    data.goalPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
+    data.traps = new GridRC[TRAPS];
     for (int i=0; i<traps.length; i++) {
       GridRC trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
       while (trapPos.equals(monsterPos) || trapPos.equals(goalPos)) {
         trapPos = new GridRC(1+rand.nextInt(BOARD_ROWS-1),1+rand.nextInt(BOARD_COLS-1));
       }
-      traps[i] = trapPos;
+      data.traps[i] = trapPos;
     }
-    monsterIsAwake = false;
+    data.monsterIsAwake = false;
+
+    moves = 0;
+    about = "recycled (but still wonderful) ";
     oneTimeMsg = "<br>GO!!";
   }
   
   public void restartPreset() {
-    i = 0;
-    data = "preset";
-    userPos = new GridRC(0,0);
-    monsterPos = new GridRC(0,2);
-    goalPos = new GridRC(0,1);
-    traps[0] = new GridRC(3,3);
-    traps[1] = new GridRC(1,1);
-    monsterIsAwake = true;
+    data.userPos = new GridRC(0,0);
+    data.monsterPos = new GridRC(0,2);
+    data.goalPos = new GridRC(0,1);
+    data.traps = new GridRC[TRAPS];
+    data.traps[0] = new GridRC(3,3);
+    data.traps[1] = new GridRC(1,1);
+    data.monsterIsAwake = true;
+
+    moves = 0;
+    about = "preset";
     oneTimeMsg = "<br>GO!!";
   }
   
   public GameSnapshot getSnapshot() {
     GameSnapshot s = new GameSnapshot();
     // do not use simple object ref assignment otherwise snapshots share memory
-    s.userPos = new GridRC(userPos);
-    s.monsterPos = new GridRC(monsterPos);
-    s.goalPos = new GridRC(goalPos);
+    s.userPos = new GridRC(data.userPos);
+    s.monsterPos = new GridRC(data.monsterPos);
+    s.goalPos = new GridRC(data.goalPos);
     // need to deep clone traps so array.clone() is no good
-    s.traps = new GridRC[traps.length];
-    for (int i=0; i<traps.length; i++) {
-      s.traps[i] = traps[i].clone();
+    s.traps = new GridRC[data.traps.length];
+    for (int i=0; i<data.traps.length; i++) {
+      s.traps[i] = data.traps[i].clone();
     }
-    s.monsterIsAwake = monsterIsAwake;
+    s.monsterIsAwake = data.monsterIsAwake;
     return s;
   }
   
   public void restartSnapshot(GameSnapshot s) {
-    i = 0;
-    data = "snapshot";
-    userPos = s.userPos.clone();
-    monsterPos = s.monsterPos.clone();
-    goalPos = s.goalPos.clone();
+    data.userPos = s.userPos.clone();
+    data.monsterPos = s.monsterPos.clone();
+    data.goalPos = s.goalPos.clone();
     // need to deep clone traps so array.clone() is no good
-    traps = new GridRC[s.traps.length];
+    data.traps = new GridRC[s.traps.length];
     for (int i=0; i<traps.length; i++) {
-      traps[i] = s.traps[i].clone();
+      data.traps[i] = s.traps[i].clone();
     }
-    monsterIsAwake = s.monsterIsAwake;
+    data.monsterIsAwake = s.monsterIsAwake;
+
+    moves = 0;
+    about = "snapshot";
     oneTimeMsg = "<br>" + s.name + "...";
   }
   
   public Boolean isLost() {
-    return (userPos.equals(monsterPos));
+    return (data.userPos.equals(data.monsterPos));
   }
 
   public Boolean isWon() {
-    return (userPos.equals(goalPos));
+    return (data.userPos.equals(data.goalPos));
   }
 
   private void makeUserMove(String input) {
     switch (input) {
       case "n":
-        if (userPos.row > 0) {
-          userPos.row--;
+        if (data.userPos.row > 0) {
+          data.userPos.row--;
         }
         break;
       case "s":
-        if (userPos.row < BOARD_ROWS-1) {
-          userPos.row++;
+        if (data.userPos.row < BOARD_ROWS-1) {
+          data.userPos.row++;
         }
         break;
       case "e":
-        if (userPos.col < BOARD_COLS-1) {
-          userPos.col++;
+        if (data.userPos.col < BOARD_COLS-1) {
+          data.userPos.col++;
         }
         break;
       case "w":
-        if (userPos.col > 0) {
-          userPos.col--;
+        if (data.userPos.col > 0) {
+          data.userPos.col--;
         }
         break;
     }
@@ -152,19 +153,19 @@ public class Game implements Serializable {
   
   // move only one square h or v
   private void makeMonsterMove() {
-    GridRC m0 = new GridRC(monsterPos.row,monsterPos.col);;
-    if (userPos.row < monsterPos.row) {
-        monsterPos.row--;
-    } else if (userPos.row > monsterPos.row) {
-        monsterPos.row++;
-    } else if (userPos.col < monsterPos.col) {
-        monsterPos.col--;
-     } else if (userPos.col > monsterPos.col) {
-        monsterPos.col++;
+    GridRC m0 = new GridRC(data.monsterPos.row,data.monsterPos.col);;
+    if (data.userPos.row < data.monsterPos.row) {
+        data.monsterPos.row--;
+    } else if (data.userPos.row > data.monsterPos.row) {
+        data.monsterPos.row++;
+    } else if (data.userPos.col < data.monsterPos.col) {
+        data.monsterPos.col--;
+     } else if (data.userPos.col > data.monsterPos.col) {
+        data.monsterPos.col++;
     }
     // swap goal
-    if (monsterPos.equals(goalPos)) {
-      goalPos = m0;
+    if (data.monsterPos.equals(data.goalPos)) {
+      data.goalPos = m0;
     }
   }
   
@@ -180,17 +181,16 @@ public class Game implements Serializable {
           makeUserMove(input);
           if(!isWon()) {
             if (matches(traps, userPos)) {
-              if (!monsterIsAwake) {
+              if (!data.monsterIsAwake) {
                 oneTimeMsg = "<br>MONSTER IS AWAKE!!";
               }
-              monsterIsAwake = true;
+              data.monsterIsAwake = true;
             }
-            if (monsterIsAwake) {
+            if (data.monsterIsAwake) {
               makeMonsterMove();
             }
           }
-          data += input + ": ";
-          i ++;
+          moves ++;
           newState = "isinplay";
           break;
         case "/":
@@ -205,8 +205,8 @@ public class Game implements Serializable {
   }
   
   public Game() {
-    i = 0;
-    data = "fresh of the press ";
+    moves = 0;
+    about = "fresh of the press";
   }
   
 }
