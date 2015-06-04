@@ -39,7 +39,7 @@ public class OpenScene extends Scene implements Serializable {
       localExitState = "back";
     } else {
       s = getGameSnapshotByName(input, datastore);
-      if (snapshot == null) {
+      if (s == null) {
         localExitState = "fail";
       } else {
         localExitState = "success";
