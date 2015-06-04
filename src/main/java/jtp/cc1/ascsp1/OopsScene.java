@@ -17,4 +17,8 @@ public class OopsScene extends Scene implements Serializable {
     return back.whereToNext(input);
   }
   
+  OopsScene(Scene b) {
+    super(b);
+  }
+
 }
