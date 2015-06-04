@@ -9,14 +9,13 @@ public class SaveScene extends Scene implements Serializable {
   
   public Scene back;
   private Game pausedGame;
-  //public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String method() {
     return "readln";
   }
   
   public String draw() {
-    return "<br><br>PAUSED" + drawFiles(datastore) + "<br>Enter filename: ";
+    return "<br><br>PAUSED" + drawFiles() + "<br>Enter filename: ";
   }
   
   public Scene whereToNext(String input) {

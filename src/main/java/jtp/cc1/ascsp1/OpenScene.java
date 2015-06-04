@@ -9,14 +9,13 @@ public class OpenScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
   public Scene back;
-  //public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String method() {
     return "readln";
   }
   
   public String draw() {
-    return "<br>" + drawFiles(datastore) + "<br>Enter filename: ";
+    return "<br>" + drawFiles() + "<br>Enter filename: ";
   }
   
   private GameSnapshot getGameSnapshotByName(String n, ArrayList<GameSnapshot> datastore) {

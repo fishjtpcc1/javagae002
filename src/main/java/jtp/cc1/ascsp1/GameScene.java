@@ -8,7 +8,6 @@ public class GameScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public Game g = new Game(); // canot be static otherwise all users play the same game!!
-  //public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
   public String method() {
     return g.method;
@@ -20,7 +19,7 @@ public class GameScene extends Scene implements Serializable {
     } else if (g.isLost()) {
       return "<br><br>" + g.draw() + "<br>LOOSER!!!!<br>Press any key to continue: ";
     } else {
-      return "<br><br>" + drawFiles(datastore) + "<br>" + g.draw() + "<br>Enter NSEWP: ";
+      return "<br><br>" + g.draw() + "<br>Enter NSEWP: ";
     }
   }
   

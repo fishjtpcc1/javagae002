@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/* must be serializable to rebuild fields to be inherited by children */
 public class Scene implements Serializable {
 
   protected static String json(String screen, String method, String other) {
@@ -13,7 +14,7 @@ public class Scene implements Serializable {
 
   public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
 
-  protected String drawFiles(ArrayList<GameSnapshot> datastore) {
+  protected String drawFiles() {
     String rows = "";
     if (datastore != null) {
       for (int i=0; i<datastore.size(); i++ ) {
@@ -60,7 +61,7 @@ public class Scene implements Serializable {
     mySession.setAttribute("here", next);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(json(next.draw(), next.method(), "sid:"+mySession.getId()+" here:"+next));
+    resp.getWriter().println(json(next.draw(), next.method(), "sid:"+mySession.getId()+" here:"+next+"files:"+drawFiles()));
   }
   
 }

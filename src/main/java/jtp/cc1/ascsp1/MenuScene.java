@@ -7,14 +7,12 @@ import java.util.ArrayList;
 public class MenuScene extends Scene implements Serializable {
   private static final long serialVersionUID = 1L;
   
-  //public ArrayList<GameSnapshot> datastore; // dirty: sim datastore
-
   public String method() {
     return "read";
   }
   
   public String draw() {
-    return "<br><br>" + drawFiles(datastore) + "<br>1. New game<br>2. Training game<br>3. Open game<br>Enter choice: ";
+    return "<br><br>1. New game<br>2. Training game<br>3. Open game<br>Enter choice: ";
   }
   
   public Scene whereToNext(String input) {
