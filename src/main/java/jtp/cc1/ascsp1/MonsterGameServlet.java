@@ -4,14 +4,6 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import javax.servlet.http.*;
 
-interface SceneI {
-  //public String method(Game g);
-  //public String draw(Game g, Game[] savedGames);
-  //public SceneI whereToNext(Game g, String input);
-  //public void doGet(HttpServletRequest req, HttpServletResponse resp);
-  
-}
-    
 /**
  * MonsterGameServlet
  * Based on Julian's fish and chicken restaurant
@@ -54,7 +46,7 @@ public class MonsterGameServlet extends HttpServlet {
     reuseCount++;
     log.info("server reuseCount:"+reuseCount+" session id:"+mySession.getId()+" is new:"+mySession.isNew());
     // hand off to initial Scene
-    MenuScene here = new MenuScene(); // no where to go back to
+    MenuScene here = new MenuScene(); // nowhere to go back to
     // save state
     mySession.setAttribute("here", here);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
