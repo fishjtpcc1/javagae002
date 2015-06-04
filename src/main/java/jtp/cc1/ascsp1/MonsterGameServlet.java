@@ -54,7 +54,7 @@ public class MonsterGameServlet extends HttpServlet {
     reuseCount++;
     log.info("server reuseCount:"+reuseCount+" session id:"+mySession.getId()+" is new:"+mySession.isNew());
     // hand off to initial Scene
-    MenuScene here = new MenuScene();
+    MenuScene here = new MenuScene(null);
     // save state
     mySession.setAttribute("here", here);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
