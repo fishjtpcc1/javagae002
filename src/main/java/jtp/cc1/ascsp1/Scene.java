@@ -52,15 +52,12 @@ public class Scene implements Serializable {
   /* no input yet: sets up session data of current SceneI = this, sends screen image to tier1
    */
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
-    // fresh start
-    HttpSession oldSession = req.getSession();
-    oldSession.invalidate();
     // save state
     HttpSession mySession = req.getSession(true);
     mySession.setAttribute("here", this);
     // hand back to tier1 to present the initial user state and service access (user can enter his data)
     resp.setContentType("text/plain");
-    resp.getWriter().println(json(draw(), method(), "sid:"+mySession.getId()+"s.isnew:"+mySession.isNew()));
+    resp.getWriter().println(json(draw(), method(), "here:"+this));
   }
   
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {

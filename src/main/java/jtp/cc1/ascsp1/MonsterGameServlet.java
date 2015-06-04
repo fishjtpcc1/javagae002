@@ -43,6 +43,12 @@ public class MonsterGameServlet extends HttpServlet {
   
   @Override // to help me prevent stupid polymorphic mistakes, the @Override annotation is used here to assert to compiler that this method is present in the superclass
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws java.io.IOException {
+    // fresh start
+    HttpSession oldSession = req.getSession();
+    oldSession.invalidate();
+    HttpSession mySession = req.getSession(true);
+    reuseCount++;
+    log.info("server reuseCount:"+reuseCount+" session id:"+mySession.getId()+" is new:"+mySession.isNew())
     // hand off to initial Scene
     MenuScene here = new MenuScene();
     here.doGet(req,resp);
@@ -54,22 +60,6 @@ public class MonsterGameServlet extends HttpServlet {
     HttpSession mySession = req.getSession(false);
     Scene here = (Scene)mySession.getAttribute("here"); // know: casting IS required tho implied in assignment
     here.doPost(req,resp);
-/*
-    Game[] savedGames = (Game[])mySession.getAttribute("savedGames");
-    int currentGameIndex = (int)mySession.getAttribute("currentGameIndex");
-    Game g = savedGames[currentGameIndex];
-    // proceed with this use event
-    String input = req.getParameter("input");
-    here = here.whereToNext(g, input); // strictly controlled polymorphism in action
-    // save state
-    mySession.setAttribute("here", here);
-    mySession.setAttribute("savedGames", savedGames);
-    mySession.setAttribute("currentGameIndex", currentGameIndex);
-    // hand back to tier1 to present the new user state
-    resp.setContentType("text/plain");
-    resp.getWriter().println(MonsterGameServlet.json(here.draw(g,savedGames), here.method(g), "here:"+here+", thegame:"+g+", input:"+input));
-*/
-
   }
 
 }
