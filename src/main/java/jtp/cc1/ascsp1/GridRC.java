@@ -14,7 +14,8 @@ public class GridRC implements Serializable, Cloneable {
   }
   
   public GridRC clone() {
-    GridRC minime = (GridRC)super.clone(); // know: shallow copy but thats aok as fileds are all primitives
+    // know: shallow copy but that's aok as fileds are all primitives
+    GridRC minime = new GridRC(this);
     return minime;
   }
   
