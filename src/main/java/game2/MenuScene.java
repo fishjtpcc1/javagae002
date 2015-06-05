@@ -20,7 +20,7 @@ public class MenuScene extends Scene implements Serializable {
   }
   
   public String draw() {
-    if (upper = 0) {
+    if (upper == 0) {
       return "<br><br>How far to count?<br>1-999: ";
     } else {
       return "<br><br>" + drawResult();
@@ -29,7 +29,7 @@ public class MenuScene extends Scene implements Serializable {
   
   public Scene whereToNext(String input) {
     try {
-      upper = String.parseInt(input);
+      upper = Integer.parseInt(input);
     } catch (java.lang.NumberFormatException e) {
       return new OopsScene(this); // know: casting back is not required as is obviously valid in inheritance structure
     }
