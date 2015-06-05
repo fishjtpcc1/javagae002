@@ -29,11 +29,11 @@ import javax.servlet.http.*;
 public class MonsterServlet extends HttpServlet {
   
   // statics are class variables and are not cloned in objects - eg only one logger is used by all instances
-  private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
-  private static final Logger log = Logger.getLogger(MonsterServlet.class.getName());
-  private static int reuseCount = 0; // to prove server class reuse behaviour
+  static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
+  static final Logger log = Logger.getLogger(MonsterServlet.class.getName());
+  static int reuseCount = 0; // to prove server class reuse behaviour
   
-  private static String json(String screen, String method, String other) {
+  static String json(String screen, String method, String other) {
     return "{ \"screen\": \"" + screen + "\", \"method\": \"" + method + "\", \"other\": \"" + other + "\" }";
   }
 

@@ -3,7 +3,7 @@ package me.jtp.swdev.monster;
 import java.io.Serializable;
 
 public class GameScene extends Scene implements Serializable {
-  private static final long serialVersionUID = 1L;
+  static final long serialVersionUID = 1L;
 
   public String method() {
     return g.method;

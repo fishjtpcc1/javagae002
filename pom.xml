@@ -22,15 +22,15 @@
   <modelVersion>4.0.0</modelVersion><!-- maven pom dtd version - required always by maven -->
 
   <!-- know: ${x} is only effective within this pom -->
-  <groupId>me.jtp.swdev</groupId><!-- try to make consistent with lifecycle and package producer naming -->
+  
+  <groupId>me.jtp.swdev</groupId><!-- used my maven to link poms only - try to make consistent with lifecycle and package producer naming -->
+  <!-- name definition of built package to-be -->
   <artifactId>javagae002</artifactId><!-- lifecycle[-fork ref] try to make consistent with repo naming -->
   <version>1-SNAPSHOT</version><!-- built package version NOT my app-in-runner version as shown in gae versions!! -->
 
   <packaging>war</packaging><!-- what kind of output package maven is to build -->
 
   <properties>
-    <appengine.app>overridden</appengine.app><!-- my app-in-runner projectid as shown in gae - overidden in deploy-->
-    <appengine.app.version>overridden</appengine.app.version><!-- my app-in-runner version as shown in gae versions - overridden in deploy-->
     <appengine.target.version>1.9.18</appengine.target.version><!-- appengine plugin version NOT my app version!! -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

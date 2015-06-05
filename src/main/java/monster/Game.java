@@ -8,15 +8,15 @@ import java.util.Random;
  * must not be a nested class otherwise silent error accessing deserialized members
  */
 public class Game implements Serializable {
-  private static final long serialVersionUID = 1L;
-  private static final int BOARD_ROWS = 5;
-  private static final int BOARD_COLS = 7;
-  private static final int TRAPS = 2;
-  private static final Random rand = new Random();
-  private int moves;
-  private char[][] board = new char[BOARD_ROWS][BOARD_COLS];
-  private GameSnapshot data = new GameSnapshot();
-  private String oneTimeMsg = "";
+  static final long serialVersionUID = 1L;
+  static final int BOARD_ROWS = 5;
+  static final int BOARD_COLS = 7;
+  static final int TRAPS = 2;
+  static final Random rand = new Random();
+  int moves;
+  char[][] board = new char[BOARD_ROWS][BOARD_COLS];
+  GameSnapshot data = new GameSnapshot();
+  String oneTimeMsg = "";
 
   public String about;
   public String method = "read";
@@ -126,7 +126,7 @@ public class Game implements Serializable {
     return (data.userPos.equals(data.goalPos));
   }
 
-  private void makeUserMove(String input) {
+  void makeUserMove(String input) {
     switch (input) {
       case "n":
         if (data.userPos.row > 0) {
@@ -152,7 +152,7 @@ public class Game implements Serializable {
   }
   
   // move only one square h or v
-  private void makeMonsterMove() {
+  void makeMonsterMove() {
     GridRC m0 = new GridRC(data.monsterPos.row,data.monsterPos.col);;
     if (data.userPos.row < data.monsterPos.row) {
         data.monsterPos.row--;

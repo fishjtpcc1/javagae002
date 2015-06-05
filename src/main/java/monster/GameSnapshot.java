@@ -7,7 +7,7 @@ import java.io.Serializable;
  * must not be a nested class otherwise silent error accessing deserialized members
  */
 public class GameSnapshot implements Serializable {
-  private static final long serialVersionUID = 1L;
+  static final long serialVersionUID = 1L;
   
   public GridRC userPos;
   public GridRC monsterPos;
