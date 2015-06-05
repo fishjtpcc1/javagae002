@@ -24,10 +24,11 @@
   <version>1-SNAPSHOT</version><!-- built package version NOT my app-in-runner version as shown in gae versions!! -->
 
   <groupId>jtp</groupId><!-- try to make consistent with lifecycle producer naming -->
-  <artifactId>https://github.com/fishjtpcc1/javagae002</artifactId><!-- lifecycle[-fork ref] try to make consistent with repo naming -->
+  <artifactId>javagae002</artifactId><!-- lifecycle[-fork ref] try to make consistent with repo naming -->
 
   <properties>
     <lifecycle>javagae002</lifecycle><!-- used for repo naming and index title -->
+    <about-url>https://github.com/fishjtpcc1/${lifecycle}</about-url>
     <appengine.app>overridden</appengine.app><!-- my app-in-runner projectid as shown in gae - overidden in deploy-->
     <appengine.app.version>overridden</appengine.app.version><!-- my app-in-runner version as shown in gae versions - overridden in deploy-->
     <appengine.target.version>1.9.18</appengine.target.version><!-- appengine plugin version NOT my app version!! -->
