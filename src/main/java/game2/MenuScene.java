@@ -16,7 +16,7 @@ public class MenuScene extends Scene implements Serializable {
   }
   
   public String method() {
-    return "read";
+    return "readln";
   }
   
   public String draw() {
