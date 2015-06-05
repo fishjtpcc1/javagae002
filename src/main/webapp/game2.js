@@ -41,6 +41,6 @@ $(document).ready(function() {
     $.post('/game2', {input:input}, function(data, status) {handle(data,status);}, "json");
   }
   
-  $.get('/monster', function(data, status) {handle(data,status);}, "json");
+  $.get('/game2', function(data, status) {handle(data,status);}, "json");
   
 });
