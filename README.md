@@ -45,11 +45,7 @@ as found
 ## style guide
 
 * consistent, visual, and purpose-oriented naming:
-
-    full java origin in package name prefixes orgkind.orgid.divisionid
-    
+*   full java origin in package name prefixes orgkind.orgid.divisionid
 * zero code:
-
-    min rpt config values -- strip out of src eg index.html links shall be permalinks only, not invalidated when forked
-    least java words -- eg no private
-
+*   min rpt config values -- strip out of src eg index.html links shall be permalinks only, not invalidated when forked
+*   least java words -- eg no private
