@@ -10,7 +10,13 @@ public class MenuScene extends Scene implements Serializable {
   String drawResult() {
     String rows = "";
     for (int i=1; i<=upper; i++) {
-      rows += "<br>" + i;
+      if (i%3 == 0) {
+        rows += "<br>fizz";
+      } else if (i%5 == 0) {
+        rows += "<br>buzz";
+      } else {
+        rows += "<br>" + i;
+      }
     }
     return rows;
   }
