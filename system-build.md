@@ -46,7 +46,8 @@ human method:
     in local-terminal:
         delete template to prepare for clean local dev next
     via librarian:
-        update library card from vision eg description
+        update library card from vision eg description, blame
+        replace manual copies of vision values eg blame links in index.html (as far as possible, hard-coded rpt values are best avoided)
         commence dev with a test that the vision performs as defined
 
 
@@ -88,7 +89,7 @@ jenkins-vm completion script:
 jenkins-vm-BRANCH-build completion script:
 
     name: BRANCH-build
-    desc: continuously build and deploy from master to gae-project
+    desc: continuously build and deploy from BRANCH to gae version=BRANCH
     from template: freestyle project
     jenkins toolset (run restriction) = cloud-dev-java
     source manager: git
@@ -96,7 +97,7 @@ jenkins-vm-BRANCH-build completion script:
     branch: */BRANCH
     source credentials: blank
     build trigger: poll H/5 * * * *
-    build, test, and deploy execution steps (exe shell): mvn gcloud:deploy // ie all in one go for java+maven
+    build, test, and deploy execution steps (exe shell): mvn gcloud:deploy -Dgcloud.version=BRANCH // ie all in one go for java+maven
   	
 
 References:
