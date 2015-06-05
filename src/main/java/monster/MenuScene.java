@@ -1,4 +1,4 @@
-package jtpcc1.java.monster;
+package me.jtp.swdev.monster;
 
 import java.io.Serializable;
 

@@ -46,7 +46,8 @@ human method:
     in local-terminal:
         delete template to prepare for clean local dev next
     via librarian:
-        update library card from vision eg description
+        update library card from vision eg description, blame
+        replace manual copies of vision values eg blame links in index.html (as far as possible, hard-coded rpt values are best avoided)
         commence dev with a test that the vision performs as defined
 
 

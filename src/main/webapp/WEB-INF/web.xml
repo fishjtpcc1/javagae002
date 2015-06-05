@@ -6,7 +6,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
     <servlet>
         <servlet-name>monster</servlet-name>
-        <servlet-class>jtpcc1.java.monster.MonsterServlet</servlet-class>
+        <servlet-class>me.jtp.swdev.monster.MonsterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>monster</servlet-name>

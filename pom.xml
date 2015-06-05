@@ -19,16 +19,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-  <packaging>war</packaging>
+  <modelVersion>4.0.0</modelVersion><!-- maven pom dtd version - required always by maven -->
+
+  <!-- know: ${x} is only effective within this pom -->
+  <groupId>me.jtp.swdev</groupId><!-- try to make consistent with lifecycle and package producer naming -->
+  <artifactId>javagae002</artifactId><!-- lifecycle[-fork ref] try to make consistent with repo naming -->
   <version>1-SNAPSHOT</version><!-- built package version NOT my app-in-runner version as shown in gae versions!! -->
 
-  <groupId>jtp</groupId><!-- try to make consistent with lifecycle producer naming -->
-  <artifactId>javagae002</artifactId><!-- lifecycle[-fork ref] try to make consistent with repo naming -->
+  <packaging>war</packaging><!-- what kind of output package maven is to build -->
 
   <properties>
-    <lifecycle>javagae002</lifecycle><!-- used for repo naming and index title -->
-    <about-url>https://github.com/fishjtpcc1/${lifecycle}</about-url>
     <appengine.app>overridden</appengine.app><!-- my app-in-runner projectid as shown in gae - overidden in deploy-->
     <appengine.app.version>overridden</appengine.app.version><!-- my app-in-runner version as shown in gae versions - overridden in deploy-->
     <appengine.target.version>1.9.18</appengine.target.version><!-- appengine plugin version NOT my app version!! -->
@@ -63,7 +63,7 @@
 
   <build>
     <!-- needed for enabling compile/reload on save in mordern IDEs...-->
-    <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory> 
+    <outputDirectory>target/${artifactId}-${version}/WEB-INF/classes</outputDirectory> 
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

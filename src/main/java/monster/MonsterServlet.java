@@ -1,4 +1,4 @@
-package jtpcc1.java.monster;
+package me.jtp.swdev.monster;
 
 import java.util.logging.Logger;
 import java.io.IOException;
