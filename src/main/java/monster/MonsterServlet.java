@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.*;
 
 /**
- * GameServlet
+ * MonsterServlet
  * Based on Julian's fish and chicken restaurant
  * Receives i/o from tier1 html consolesim via ajax
  * uses session to store running game
@@ -26,11 +26,11 @@ import javax.servlet.http.*;
  *  win: menu
  *  lost: menu
  */
-public class GameServlet extends HttpServlet {
+public class MonsterServlet extends HttpServlet {
   
   // statics are class variables and are not cloned in objects - eg only one logger is used by all instances
   private static final long serialVersionUID = 1L; // know: because HttpServlet is serializable
-  private static final Logger log = Logger.getLogger(GameServlet.class.getName());
+  private static final Logger log = Logger.getLogger(MonsterServlet.class.getName());
   private static int reuseCount = 0; // to prove server class reuse behaviour
   
   private static String json(String screen, String method, String other) {

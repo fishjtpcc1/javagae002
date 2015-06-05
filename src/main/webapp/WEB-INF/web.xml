@@ -5,14 +5,14 @@
 
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
     <servlet>
-        <servlet-name>tier2</servlet-name>
-        <servlet-class>jtpcc1.java.monster.GameServlet</servlet-class>
+        <servlet-name>monster</servlet-name>
+        <servlet-class>jtpcc1.java.monster.MonsterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>tier2</servlet-name>
-        <url-pattern>/tier2</url-pattern>
+        <servlet-name>monster</servlet-name>
+        <url-pattern>/monster</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>MonsterGame.html</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 </web-app>

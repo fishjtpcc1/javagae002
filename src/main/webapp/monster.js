@@ -38,9 +38,9 @@ $(document).ready(function() {
   }
 
   function post(input) {
-    $.post('/tier2', {input:input}, function(data, status) {handle(data,status);}, "json");
+    $.post('/monster', {input:input}, function(data, status) {handle(data,status);}, "json");
   }
   
-  $.get('/tier2', function(data, status) {handle(data,status);}, "json");
+  $.get('/monster', function(data, status) {handle(data,status);}, "json");
   
 });
