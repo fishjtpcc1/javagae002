@@ -8,7 +8,7 @@ public class MenuScene extends Scene implements Serializable {
   int upper = 0;
   
   String drawResult() {
-    String rows;
+    String rows = "";
     for (int i=1; i<=upper; i++) {
       rows += "<br>" + i;
     }
@@ -33,6 +33,7 @@ public class MenuScene extends Scene implements Serializable {
     } catch (java.lang.NumberFormatException e) {
       return new OopsScene(this); // know: casting back is not required as is obviously valid in inheritance structure
     }
+    return this;
   }
   
   MenuScene() {
