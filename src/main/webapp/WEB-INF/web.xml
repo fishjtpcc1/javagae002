@@ -12,6 +12,14 @@
         <servlet-name>monster</servlet-name>
         <url-pattern>/monster</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>game2</servlet-name>
+        <servlet-class>me.jtp.swdev.monster.Game2Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>game2</servlet-name>
+        <url-pattern>/game2</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
