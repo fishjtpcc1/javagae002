@@ -3,7 +3,9 @@ package me.jtp.swdev.monster;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/* must be serializable to rebuild fields to be inherited by children */
+/* this parent is needed to enable polymorphic access to retrieved child scenes on post (instead of using runtime reflection, url query switch, or session state switch)
+ * know: must be serializable to rebuild fields to be inherited by children
+ */
 public class Scene implements Serializable {
 
   public Scene back;
